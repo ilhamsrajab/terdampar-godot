@@ -8,7 +8,7 @@ Pembuat : Kelompok 6 <br>
          - Ilham Syahidatul Rajab	(1806043) <br>
          - Asep Kurniawan	(1806044) <br>
          - Muhammad Ihsan Riyadhi	(1806046) <br>
-         - Ghina Ambarrona Rosita	(1806071) <br>
+         - Ghina Ambarrona Rosita	(1806071) <br> <br>
 Mata Kuliah : Pengembangan Aplikasi Game <br>
 Dosen Pengampu : Dewi Tresnawati, S.Pt., M.T. <br>
 
