@@ -12,13 +12,25 @@ script = ExtResource( 2 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 shape = SubResource( 1 )
 
-[node name="MeshInstance" type="MeshInstance" parent="."]
+[node name="body" type="MeshInstance" parent="."]
 mesh = ExtResource( 1 )
 material/0 = null
-
-[node name="tw_m" type="Tween" parent="."]
 
 [node name="ray1" type="RayCast" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 2 )
 enabled = true
 cast_to = Vector3( 0, -2, 0 )
+
+[node name="ray2" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 4 )
+enabled = true
+cast_to = Vector3( 0, -2, 0 )
+
+[node name="ray3" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 6 )
+enabled = true
+cast_to = Vector3( 0, -2, 0 )
+
+[node name="tw_m" type="Tween" parent="."]
+
+[node name="tw_r" type="Tween" parent="."]
