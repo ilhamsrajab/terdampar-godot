@@ -1,0 +1,16 @@
+[remap]
+
+importer="MagicaVoxel.With.Extensions"
+type="Mesh"
+path="res://.import/pl.vox-e5281a879d508a6228c0d98a9570b556.mesh"
+
+[deps]
+
+source_file="res://assets/hutan/pl.vox"
+dest_files=[ "res://.import/pl.vox-e5281a879d508a6228c0d98a9570b556.mesh" ]
+
+[params]
+
+Scale=0.1
+GreedyMeshGenerator=true
+SnapToGround=false

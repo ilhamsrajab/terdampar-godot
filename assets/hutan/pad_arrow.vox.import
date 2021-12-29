@@ -1,0 +1,16 @@
+[remap]
+
+importer="MagicaVoxel.With.Extensions"
+type="Mesh"
+path="res://.import/pad_arrow.vox-d4abec0877eb1a12a1510eb9eff223b1.mesh"
+
+[deps]
+
+source_file="res://assets/hutan/pad_arrow.vox"
+dest_files=[ "res://.import/pad_arrow.vox-d4abec0877eb1a12a1510eb9eff223b1.mesh" ]
+
+[params]
+
+Scale=0.1
+GreedyMeshGenerator=true
+SnapToGround=false
