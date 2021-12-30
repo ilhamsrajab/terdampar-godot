@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="Terdampar"
-run/main_scene="res://prepa/scene0.tscn"
+run/main_scene="res://levels/scene0.tscn"
 config/icon="res://icon.png"
 
 [editor_plugins]

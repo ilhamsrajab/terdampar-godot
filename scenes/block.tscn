@@ -17,3 +17,7 @@ mesh = ExtResource( 1 )
 material/0 = null
 
 [node name="tw_m" type="Tween" parent="."]
+
+[node name="ray_down" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+enabled = true

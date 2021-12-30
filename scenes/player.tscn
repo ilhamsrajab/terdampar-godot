@@ -119,42 +119,6 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Vector3( 1, 1, 1 ), Vector3( 1.1, 0.9, 1.1 ), Vector3( 1, 1, 1 ) ]
 }
-tracks/3/type = "value"
-tracks/3/path = NodePath("pivot:translation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0 ) ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("pivot:rotation_degrees")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0 ) ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("pivot:scale")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( 1, 1, 1 ) ]
-}
 
 [sub_resource type="Animation" id=4]
 resource_name = "jalan"
@@ -363,7 +327,7 @@ nodes/transisi/node = SubResource( 16 )
 nodes/transisi/position = Vector2( 720, 440 )
 node_connections = [ "output", 0, "transisi", "jalan", 0, "idle_time", "jalan", 1, "Animation 2", "luka", 0, "jalan", "luka", 1, "luka_time", "idle_time", 0, "Animation", "transisi", 0, "luka", "transisi", 1, "Animation 4", "luka_time", 0, "Animation 3" ]
 
-[node name="player" type="StaticBody"]
+[node name="player" type="StaticBody" groups=["player"]]
 script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]

@@ -21,4 +21,11 @@ func movement(vec:Vector3):
 		
 		yield($tw_m, "tween_all_completed")
 		dir = Vector3.ZERO
+		
+		if $ray_down.is_colliding() == false:
+			var c = b + Vector3.DOWN * 2
+			$tw_m.interpolate_property(self, "translation", b, c, 0.1, Tween.TRANS_EXPO, Tween.EASE_OUT)
+			$tw_m.start()
+			$MeshInstance.translation.y += 0.4
+		
 		is_moving = false
