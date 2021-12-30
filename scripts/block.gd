@@ -3,7 +3,7 @@ extends StaticBody
 var dir = Vector3.ZERO
 var is_moving = false
 
-func _process(delta):
+func _process(_delta):
 	if dir != Vector3.ZERO:
 		movement(dir)
 

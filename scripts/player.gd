@@ -1,5 +1,6 @@
 extends StaticBody
 
+var ext_dir = Vector3.ZERO
 var dir = Vector3.ZERO
 var old_dir = Vector3.ZERO
 
@@ -22,13 +23,20 @@ func _ready():
 	$AnimationTree.active = true
 	pass # Replace with function body.
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	dir = Vector3.ZERO
 	
 	if Input.is_action_just_pressed("ui_up"): dir = Vector3.BACK
 	if Input.is_action_just_pressed("ui_down"): dir = Vector3.FORWARD
 	if Input.is_action_just_pressed("ui_left"): dir = Vector3.RIGHT
 	if Input.is_action_just_pressed("ui_right"): dir = Vector3.LEFT
+	
+	if ext_dir != Vector3.ZERO:
+		dir = ext_dir
+		ext_dir = Vector3.ZERO
+	
+	if dir != Vector3.ZERO:
+		print("Vector3" + str(dir) + ",")
 	
 	match dir:
 		Vector3.BACK: rot_y = 0
@@ -118,3 +126,6 @@ func movement(vec:Vector3):
 			var _err = get_tree().reload_current_scene()
 		
 		is_moving = false
+
+func external_dir(vec:Vector3):
+	ext_dir = vec

@@ -11,7 +11,7 @@ func _ready():
 	$air.visible = true
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	$air.translation.y = lerp($air.translation.y, ketinggian_air, 0.15)
 	$kamera/Camera.rotation_degrees.z = lerp($kamera/Camera.rotation_degrees.z, 0.0, 0.15)
 
@@ -29,6 +29,6 @@ func add_apel():
 	if apel_added == apel:
 		var file = File.new()
 		if file.file_exists("res://levels/scene" + str(next_level) +".tscn"):
-			get_tree().change_scene("res://levels/scene" + str(next_level) +".tscn")
+			var _err = get_tree().change_scene("res://levels/scene" + str(next_level) +".tscn")
 		else:
 			print("Game Over")
