@@ -12,7 +12,7 @@ Pembuat : Kelompok 6 <br>
 Mata Kuliah : Pengembangan Aplikasi Game <br>
 Dosen Pengampu : Dewi Tresnawati, S.Pt., M.T. <br>
 
-<img align="center" src="addons/github-integration/screenshots/banner.png">
+<img align="center" src="assets/images/debug.png">
 
 ## What is this?
 Deskripi
