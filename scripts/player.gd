@@ -19,6 +19,7 @@ var old_rot_y = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$AnimationTree.active = true
 	pass # Replace with function body.
 
 func _physics_process(delta):
@@ -68,10 +69,13 @@ func _physics_process(delta):
 		# block
 		if is_wall1: 
 			get_parent().shake()
+			$AnimationTree.set("parameters/luka/active", true)
 		elif is_push1 and is_wall2:
 			get_parent().shake()
+			$AnimationTree.set("parameters/luka/active", true)
 		elif is_push1 and is_push2 and is_wall3:
 			get_parent().shake()
+			$AnimationTree.set("parameters/luka/active", true)
 		
 		# pergerakan
 		elif not is_push1 and not is_wall1:
@@ -86,7 +90,8 @@ func _physics_process(delta):
 		
 	if rot_y != old_rot_y and not is_rotating:
 		is_rotating = true
-		$tw_r.interpolate_property($body, "rotation_degrees:y", old_rot_y, rot_y, 0.1, Tween.TRANS_EXPO, Tween.EASE_OUT)
+		$AnimationTree.set("parameters/jalan/active", true)
+		$tw_r.interpolate_property($pivot, "rotation_degrees:y", old_rot_y, rot_y, 0.1, Tween.TRANS_EXPO, Tween.EASE_OUT)
 		$tw_r.start()
 		yield($tw_r, "tween_all_completed")
 		old_rot_y = rot_y
@@ -95,6 +100,7 @@ func _physics_process(delta):
 func movement(vec:Vector3):
 	if is_moving == false:
 		is_moving = true
+		$AnimationTree.set("parameters/jalan/active", true)
 		var a = translation
 		var b = a + vec * 2
 		

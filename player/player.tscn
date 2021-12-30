@@ -1,9 +1,205 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/hutan/pl.vox" type="ArrayMesh" id=1]
 [ext_resource path="res://scripts/player.gd" type="Script" id=2]
 
 [sub_resource type="BoxShape" id=1]
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/body:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("pivot/body:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("pivot/body:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "idle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/body:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("pivot/body:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("pivot/body:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 1.1, 0.9, 1.1 ), Vector3( 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "jalan"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/body:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 1, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("pivot/body:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( -15, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("pivot/body:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "luka"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/body:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("pivot/body:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 15, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("pivot/body:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "jalan"
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "luka"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "idle"
+
+[sub_resource type="AnimationNodeTimeScale" id=9]
+
+[sub_resource type="AnimationNodeOneShot" id=10]
+
+[sub_resource type="AnimationNodeOneShot" id=11]
+
+[sub_resource type="AnimationNodeTimeScale" id=12]
+
+[sub_resource type="AnimationNodeBlendTree" id=13]
+graph_offset = Vector2( -415, 70.8095 )
+nodes/Animation/node = SubResource( 8 )
+nodes/Animation/position = Vector2( -360, 180 )
+"nodes/Animation 2/node" = SubResource( 6 )
+"nodes/Animation 2/position" = Vector2( -220, 320 )
+"nodes/Animation 3/node" = SubResource( 7 )
+"nodes/Animation 3/position" = Vector2( 40, 460 )
+nodes/idle_time/node = SubResource( 9 )
+nodes/idle_time/position = Vector2( -160, 180 )
+nodes/jalan/node = SubResource( 10 )
+nodes/jalan/position = Vector2( 40, 260 )
+nodes/luka/node = SubResource( 11 )
+nodes/luka/position = Vector2( 440, 280 )
+nodes/luka_time/node = SubResource( 12 )
+nodes/luka_time/position = Vector2( 260, 460 )
+nodes/output/position = Vector2( 660, 300 )
+node_connections = [ "output", 0, "luka", "jalan", 0, "idle_time", "jalan", 1, "Animation 2", "luka", 0, "jalan", "luka", 1, "luka_time", "idle_time", 0, "Animation", "luka_time", 0, "Animation 3" ]
 
 [node name="player" type="StaticBody"]
 script = ExtResource( 2 )
@@ -11,10 +207,6 @@ script = ExtResource( 2 )
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 shape = SubResource( 1 )
-
-[node name="body" type="MeshInstance" parent="."]
-mesh = ExtResource( 1 )
-material/0 = null
 
 [node name="ray1" type="RayCast" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 2 )
@@ -34,3 +226,24 @@ cast_to = Vector3( 0, -2, 0 )
 [node name="tw_m" type="Tween" parent="."]
 
 [node name="tw_r" type="Tween" parent="."]
+
+[node name="pivot" type="Spatial" parent="."]
+
+[node name="body" type="MeshInstance" parent="pivot"]
+mesh = ExtResource( 1 )
+skeleton = NodePath("../..")
+material/0 = null
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
+anims/idle = SubResource( 3 )
+anims/jalan = SubResource( 4 )
+anims/luka = SubResource( 5 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 13 )
+anim_player = NodePath("../AnimationPlayer")
+parameters/idle_time/scale = 1.5
+parameters/jalan/active = false
+parameters/luka/active = false
+parameters/luka_time/scale = 1.0
