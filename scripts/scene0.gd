@@ -13,7 +13,7 @@ func _process(delta):
 
 func _on_Timer_timeout():
 	randomize()
-	ketinggian_air = rand_range(1.5, 2.0)
+	ketinggian_air = rand_range(2.0, 2.7)
 	$Timer.wait_time = rand_range(0.1, 0.6)
 	pass # Replace with function body.
 
