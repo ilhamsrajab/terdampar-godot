@@ -6,14 +6,17 @@ var apel_added = 0
 
 var ketinggian_air = 1.5
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$air.visible = true
+
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	$air.translation.y = lerp($air.translation.y, ketinggian_air, 0.15)
 	$kamera/Camera.rotation_degrees.z = lerp($kamera/Camera.rotation_degrees.z, 0.0, 0.15)
+
 
 func _on_Timer_timeout():
 	randomize()
@@ -21,8 +24,10 @@ func _on_Timer_timeout():
 	$Timer.wait_time = rand_range(0.1, 0.6)
 	pass # Replace with function body.
 
+
 func shake():
 	$kamera/Camera.rotation_degrees.z = -3
+
 
 func add_apel():
 	apel_added += 1
@@ -32,3 +37,11 @@ func add_apel():
 			var _err = get_tree().change_scene("res://levels/scene" + str(next_level) +".tscn")
 		else:
 			print("Game Over")
+
+
+func _on_btn_home_pressed():
+	var _err = get_tree().change_scene("res://levels/menu.tscn")
+
+
+func _on_btn_retry_pressed():
+	var _err = get_tree().reload_current_scene()

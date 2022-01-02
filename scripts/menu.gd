@@ -24,7 +24,13 @@ var ketinggian_air = 1.5
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	var ratio = get_viewport().size.x / get_viewport().size.y
+	var shader = $CanvasLayer/fade.material
+	shader.set_shader_param("aspect_ratio", ratio)
+	 
 	$air.visible = true
+	$CanvasLayer/fade.visible = true
+	$CanvasLayer/fade/AnimationPlayer.play("to_zero")
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -41,6 +47,8 @@ func shake():
 	$kamera/Camera.rotation_degrees.z = -3
 
 func _on_btn_new_pressed():
+	$CanvasLayer/fade/AnimationPlayer.play("to_black")
+	yield($CanvasLayer/fade/AnimationPlayer, "animation_finished")
 	var _err = get_tree().change_scene("res://levels/scene0.tscn")
 
 func _on_btn_exit_pressed():

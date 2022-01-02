@@ -3,6 +3,7 @@ extends StaticBody
 var ext_dir = Vector3.ZERO
 var dir = Vector3.ZERO
 var old_dir = Vector3.ZERO
+var pos1 = Vector2.ZERO
 
 var is_moving = false
 var is_rotating = false
@@ -23,6 +24,32 @@ func _ready():
 	$AnimationTree.active = true
 	pass # Replace with function body.
 
+
+func _input(event):
+	if event is InputEventMouseButton or event is InputEventScreenTouch:
+		if event.pressed:
+			pos1 = event.position
+		else: 
+			calcul_swipe(event.position)
+			pass
+
+
+func calcul_swipe(pos2:Vector2):
+	var pos = pos2 - pos1
+	
+	if pos.length() > 100:
+		var a = rad2deg(pos.angle()) + 180
+		var i = int(a / 90)
+		
+		match i:
+			0:self.external_dir(Vector3.BACK)
+			1:self.external_dir(Vector3.LEFT)
+			2:self.external_dir(Vector3.FORWARD)
+			3:self.external_dir(Vector3.RIGHT)
+		
+		print(i)
+
+
 func _physics_process(_delta):
 	dir = Vector3.ZERO
 	
@@ -35,8 +62,8 @@ func _physics_process(_delta):
 		dir = ext_dir
 		ext_dir = Vector3.ZERO
 	
-	if dir != Vector3.ZERO:
-		print("Vector3" + str(dir) + ",")
+#	if dir != Vector3.ZERO:
+#		print("Vector3" + str(dir) + ",")
 	
 	match dir:
 		Vector3.BACK: rot_y = 0
