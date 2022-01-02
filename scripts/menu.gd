@@ -30,11 +30,11 @@ func _ready():
 	 
 	$air.visible = true
 	$CanvasLayer/fade.visible = true
-	$CanvasLayer/fade/AnimationPlayer.play("to_zero")
+	$CanvasLayer/anim.play("to_zero")
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	$air.translation.y = lerp($air.translation.y, ketinggian_air, 0.15)
+	$air.translation.y = lerp($air.translation.y, ketinggian_air, 0.015)
 	$kamera/Camera.rotation_degrees.z = lerp($kamera/Camera.rotation_degrees.z, 0.0, 0.15)
 
 func _on_Timer_timeout():
@@ -47,11 +47,13 @@ func shake():
 	$kamera/Camera.rotation_degrees.z = -3
 
 func _on_btn_new_pressed():
-	$CanvasLayer/fade/AnimationPlayer.play("to_black")
-	yield($CanvasLayer/fade/AnimationPlayer, "animation_finished")
+	$CanvasLayer/anim.play("to_black")
+	yield($CanvasLayer/anim, "animation_finished")
 	var _err = get_tree().change_scene("res://levels/scene0.tscn")
 
 func _on_btn_exit_pressed():
+	$CanvasLayer/anim.play("to_black")
+	yield($CanvasLayer/anim, "animation_finished")
 	get_tree().quit()
 	pass # Replace with function body.
 

@@ -24,7 +24,7 @@ size = Vector2( 200, 200 )
 size = 20
 font_data = ExtResource( 9 )
 
-[sub_resource type="Shader" id=5]
+[sub_resource type="Shader" id=17]
 code = "shader_type canvas_item;
 uniform float factor = 0.5;
 uniform float aspect_ratio = 1.7;
@@ -41,13 +41,13 @@ void fragment() {
 	COLOR = color;  
 }"
 
-[sub_resource type="ShaderMaterial" id=6]
-shader = SubResource( 5 )
+[sub_resource type="ShaderMaterial" id=13]
+shader = SubResource( 17 )
 shader_param/factor = 0.0
 shader_param/aspect_ratio = 1.7
 shader_param/fade_color = null
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=14]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("CanvasLayer/fade:material:shader_param/factor")
@@ -62,7 +62,7 @@ tracks/0/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=15]
 resource_name = "to_black"
 length = 0.6
 tracks/0/type = "value"
@@ -78,7 +78,7 @@ tracks/0/keys = {
 "values": [ 1.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=16]
 resource_name = "to_zero"
 length = 0.6
 tracks/0/type = "value"
@@ -165,7 +165,7 @@ texture_normal = ExtResource( 7 )
 
 [node name="Control" type="Control" parent="CanvasLayer/HBoxContainer"]
 margin_left = 36.0
-margin_right = 452.0
+margin_right = 455.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
 __meta__ = {
@@ -173,16 +173,16 @@ __meta__ = {
 }
 
 [node name="label_level" type="Label" parent="CanvasLayer/HBoxContainer"]
-margin_left = 456.0
+margin_left = 459.0
 margin_top = 6.0
-margin_right = 537.0
+margin_right = 535.0
 margin_bottom = 26.0
 custom_fonts/font = SubResource( 4 )
-text = "Level - x"
+text = "Level - 1"
 align = 1
 
 [node name="Control2" type="Control" parent="CanvasLayer/HBoxContainer"]
-margin_left = 541.0
+margin_left = 539.0
 margin_right = 958.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
@@ -197,7 +197,8 @@ margin_bottom = 32.0
 texture_normal = ExtResource( 8 )
 
 [node name="fade" type="ColorRect" parent="CanvasLayer"]
-material = SubResource( 6 )
+visible = false
+material = SubResource( 13 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -206,11 +207,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/fade"]
-root_node = NodePath("../../..")
-anims/RESET = SubResource( 7 )
-anims/to_black = SubResource( 8 )
-anims/to_zero = SubResource( 9 )
+[node name="anim" type="AnimationPlayer" parent="CanvasLayer"]
+root_node = NodePath("../..")
+anims/RESET = SubResource( 14 )
+anims/to_black = SubResource( 15 )
+anims/to_zero = SubResource( 16 )
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/btn_home" to="." method="_on_btn_home_pressed"]

@@ -11,8 +11,12 @@ config_version=4
 [application]
 
 config/name="Terdampar"
-run/main_scene="res://levels/scene0.tscn"
+run/main_scene="res://levels/menu.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Global="*res://scripts/global.gd"
 
 [display]
 

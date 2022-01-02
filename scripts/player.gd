@@ -22,6 +22,9 @@ var old_rot_y = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$AnimationTree.active = true
+	var shader = $CanvasLayer/fade.material
+	$CanvasLayer/fade.visible = true
+	$CanvasLayer/anim.play("to_zero")
 	pass # Replace with function body.
 
 
@@ -47,12 +50,11 @@ func calcul_swipe(pos2:Vector2):
 			2:self.external_dir(Vector3.FORWARD)
 			3:self.external_dir(Vector3.RIGHT)
 		
-		print(i)
+#		print(i)
 
 
 func _physics_process(_delta):
 	dir = Vector3.ZERO
-	
 	if Input.is_action_just_pressed("ui_up"): dir = Vector3.BACK
 	if Input.is_action_just_pressed("ui_down"): dir = Vector3.FORWARD
 	if Input.is_action_just_pressed("ui_left"): dir = Vector3.RIGHT
@@ -150,6 +152,9 @@ func movement(vec:Vector3):
 			$tw_m.interpolate_property(self, "translation", b, c, 0.1, Tween.TRANS_EXPO, Tween.EASE_OUT)
 			$tw_m.start()
 			yield(get_tree().create_timer(1.5), "timeout")
+			
+			$CanvasLayer/anim.play("to_black")
+			yield($CanvasLayer/anim, "animation_finished")
 			var _err = get_tree().reload_current_scene()
 		
 		is_moving = false

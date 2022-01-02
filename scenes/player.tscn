@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://assets/hutan/pl.vox" type="ArrayMesh" id=1]
 [ext_resource path="res://scripts/player.gd" type="Script" id=2]
@@ -325,7 +325,77 @@ nodes/luka_time/position = Vector2( 260, 460 )
 nodes/output/position = Vector2( 920, 320 )
 nodes/transisi/node = SubResource( 16 )
 nodes/transisi/position = Vector2( 720, 440 )
-node_connections = [ "output", 0, "transisi", "jalan", 0, "idle_time", "jalan", 1, "Animation 2", "luka", 0, "jalan", "luka", 1, "luka_time", "idle_time", 0, "Animation", "transisi", 0, "luka", "transisi", 1, "Animation 4", "luka_time", 0, "Animation 3" ]
+node_connections = [ "output", 0, "transisi", "luka", 0, "jalan", "luka", 1, "luka_time", "jalan", 0, "idle_time", "jalan", 1, "Animation 2", "transisi", 0, "luka", "transisi", 1, "Animation 4", "idle_time", 0, "Animation", "luka_time", 0, "Animation 3" ]
+
+[sub_resource type="Animation" id=19]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("player/CanvasLayer/fade:material:shader_param/factor")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+
+[sub_resource type="Animation" id=20]
+resource_name = "to_black"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("player/CanvasLayer/fade:material:shader_param/factor")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 3.61, 3.61 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=21]
+resource_name = "to_zero"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("player/CanvasLayer/fade:material:shader_param/factor")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 3.61, 3.61 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[sub_resource type="Shader" id=22]
+code = "shader_type canvas_item;
+uniform float factor = 0.5;
+uniform float aspect_ratio = 1.7;
+uniform vec4 fade_color:hint_color;
+
+void fragment() {
+	vec2 uv_mod = UV;
+	uv_mod.x = mix(0.5, uv_mod.x, aspect_ratio);
+	vec4 color;
+	
+	float d = length(uv_mod - 0.5);
+	if (d < factor) color = vec4(0.); 
+	else color = fade_color;
+	COLOR = color;  
+}"
+
+[sub_resource type="ShaderMaterial" id=23]
+shader = SubResource( 22 )
+shader_param/factor = 1.0
+shader_param/aspect_ratio = 1.7
+shader_param/fade_color = null
 
 [node name="player" type="StaticBody" groups=["player"]]
 script = ExtResource( 2 )
@@ -380,3 +450,21 @@ parameters/transisi/current = 0
 [node name="ray_down" type="RayCast" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
 enabled = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="anim" type="AnimationPlayer" parent="CanvasLayer"]
+root_node = NodePath("../../..")
+anims/RESET = SubResource( 19 )
+anims/to_black = SubResource( 20 )
+anims/to_zero = SubResource( 21 )
+
+[node name="fade" type="ColorRect" parent="CanvasLayer"]
+material = SubResource( 23 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 1, 1, 1, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
