@@ -22,9 +22,9 @@ var old_rot_y = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$AnimationTree.active = true
-	var shader = $CanvasLayer/fade.material
-	$CanvasLayer/fade.visible = true
-	$CanvasLayer/anim.play("to_zero")
+	var _shader = $fade/fade.material
+	$fade/fade.visible = true
+	$fade/anim.play("to_zero")
 	pass # Replace with function body.
 
 
@@ -153,8 +153,8 @@ func movement(vec:Vector3):
 			$tw_m.start()
 			yield(get_tree().create_timer(1.5), "timeout")
 			
-			$CanvasLayer/anim.play("to_black")
-			yield($CanvasLayer/anim, "animation_finished")
+			$fade/anim.play("to_black")
+			yield($fade/anim, "animation_finished")
 			var _err = get_tree().reload_current_scene()
 		
 		is_moving = false

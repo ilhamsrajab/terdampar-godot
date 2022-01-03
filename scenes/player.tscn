@@ -330,7 +330,7 @@ node_connections = [ "output", 0, "transisi", "luka", 0, "jalan", "luka", 1, "lu
 [sub_resource type="Animation" id=19]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("player/CanvasLayer/fade:material:shader_param/factor")
+tracks/0/path = NodePath("player/fade/fade:material:shader_param/factor")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -346,7 +346,7 @@ tracks/0/keys = {
 resource_name = "to_black"
 length = 0.6
 tracks/0/type = "value"
-tracks/0/path = NodePath("player/CanvasLayer/fade:material:shader_param/factor")
+tracks/0/path = NodePath("player/fade/fade:material:shader_param/factor")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -362,7 +362,7 @@ tracks/0/keys = {
 resource_name = "to_zero"
 length = 0.6
 tracks/0/type = "value"
-tracks/0/path = NodePath("player/CanvasLayer/fade:material:shader_param/factor")
+tracks/0/path = NodePath("player/fade/fade:material:shader_param/factor")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -451,15 +451,15 @@ parameters/transisi/current = 0
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
 enabled = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="fade" type="CanvasLayer" parent="."]
 
-[node name="anim" type="AnimationPlayer" parent="CanvasLayer"]
+[node name="anim" type="AnimationPlayer" parent="fade"]
 root_node = NodePath("../../..")
 anims/RESET = SubResource( 19 )
 anims/to_black = SubResource( 20 )
 anims/to_zero = SubResource( 21 )
 
-[node name="fade" type="ColorRect" parent="CanvasLayer"]
+[node name="fade" type="ColorRect" parent="fade"]
 material = SubResource( 23 )
 anchor_right = 1.0
 anchor_bottom = 1.0
