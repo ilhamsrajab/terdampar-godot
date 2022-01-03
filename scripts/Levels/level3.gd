@@ -2,7 +2,7 @@ extends "res://scripts/level.gd"
 
 
 export(int) var next_level = 4
-export(int) var apel = 1
+export(int) var apel = 4
 
 
 func add_apel():

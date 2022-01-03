@@ -32,6 +32,8 @@ func _ready():
 	$UI/fade.visible = true
 	$UI/anim.play("to_zero")
 	
+	MusicController.play_music_hutan()
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	$Map/air.translation.y = lerp($Map/air.translation.y, ketinggian_air, 0.015)
