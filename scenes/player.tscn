@@ -305,7 +305,7 @@ input_1/name = "jatuh"
 input_1/auto_advance = false
 
 [sub_resource type="AnimationNodeBlendTree" id=13]
-graph_offset = Vector2( -524.537, -73.6149 )
+graph_offset = Vector2( -524.537, 43.1934 )
 nodes/Animation/node = SubResource( 8 )
 nodes/Animation/position = Vector2( -360, 180 )
 "nodes/Animation 2/node" = SubResource( 6 )
@@ -426,6 +426,7 @@ cast_to = Vector3( 0, -2, 0 )
 [node name="pivot" type="Spatial" parent="."]
 
 [node name="body" type="MeshInstance" parent="pivot"]
+transform = Transform( 1.02329, 0, 0, 0, 0.976713, 0, 0, 0, 1.02329, 0, 0, 0 )
 mesh = ExtResource( 1 )
 skeleton = NodePath("../..")
 material/0 = null
