@@ -1,6 +1,6 @@
 [gd_scene load_steps=24 format=2]
 
-[ext_resource path="res://assets/hutan/pl.vox" type="ArrayMesh" id=1]
+[ext_resource path="res://assets/hutan/player.vox" type="ArrayMesh" id=1]
 [ext_resource path="res://scripts/player.gd" type="Script" id=2]
 
 [sub_resource type="BoxShape" id=1]
@@ -117,7 +117,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.5, 1 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector3( 1, 1, 1 ), Vector3( 1.1, 0.9, 1.1 ), Vector3( 1, 1, 1 ) ]
+"values": [ Vector3( 0.9, 0.9, 0.9 ), Vector3( 1, 0.8, 1 ), Vector3( 0.9, 0.9, 0.9 ) ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -157,7 +157,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( 1, 1, 1 ) ]
+"values": [ Vector3( 0.9, 0.9, 0.9 ) ]
 }
 
 [sub_resource type="Animation" id=14]
@@ -233,7 +233,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( 1, 1, 1 ) ]
+"values": [ Vector3( 0.9, 0.9, 0.9 ) ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -274,7 +274,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( 1, 1, 1 ) ]
+"values": [ Vector3( 0.9, 0.9, 0.9 ) ]
 }
 
 [sub_resource type="AnimationNodeAnimation" id=6]
@@ -325,7 +325,7 @@ nodes/luka_time/position = Vector2( 260, 460 )
 nodes/output/position = Vector2( 920, 320 )
 nodes/transisi/node = SubResource( 16 )
 nodes/transisi/position = Vector2( 720, 440 )
-node_connections = [ "output", 0, "transisi", "luka", 0, "jalan", "luka", 1, "luka_time", "jalan", 0, "idle_time", "jalan", 1, "Animation 2", "transisi", 0, "luka", "transisi", 1, "Animation 4", "idle_time", 0, "Animation", "luka_time", 0, "Animation 3" ]
+node_connections = [ "output", 0, "transisi", "jalan", 0, "idle_time", "jalan", 1, "Animation 2", "idle_time", 0, "Animation", "transisi", 0, "luka", "transisi", 1, "Animation 4", "luka", 0, "jalan", "luka", 1, "luka_time", "luka_time", 0, "Animation 3" ]
 
 [sub_resource type="Animation" id=19]
 length = 0.001
@@ -426,7 +426,6 @@ cast_to = Vector3( 0, -2, 0 )
 [node name="pivot" type="Spatial" parent="."]
 
 [node name="body" type="MeshInstance" parent="pivot"]
-transform = Transform( 1.02329, 0, 0, 0, 0.976713, 0, 0, 0, 1.02329, 0, 0, 0 )
 mesh = ExtResource( 1 )
 skeleton = NodePath("../..")
 material/0 = null
@@ -441,7 +440,6 @@ anims/luka = SubResource( 5 )
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 13 )
 anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/idle_time/scale = 1.5
 parameters/jalan/active = false
 parameters/luka/active = false

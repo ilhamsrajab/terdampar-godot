@@ -1,0 +1,251 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://mesh/mesh0.meshlib" type="MeshLibrary" id=1]
+[ext_resource path="res://scenes/apel.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/block.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://terdampar_env.tres" type="Environment" id=5]
+[ext_resource path="res://scripts/Levels/level3.gd" type="Script" id=6]
+[ext_resource path="res://assets/fonts/superstar_memesbruh03.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://assets/icons/home (1).png" type="Texture" id=8]
+[ext_resource path="res://assets/icons/rotate-right.png" type="Texture" id=9]
+
+[sub_resource type="SpatialMaterial" id=1]
+flags_transparent = true
+albedo_color = Color( 0.054902, 0.494118, 0.729412, 0.784314 )
+
+[sub_resource type="PlaneMesh" id=2]
+material = SubResource( 1 )
+size = Vector2( 200, 200 )
+
+[sub_resource type="CapsuleMesh" id=3]
+
+[sub_resource type="DynamicFont" id=4]
+size = 20
+font_data = ExtResource( 7 )
+
+[sub_resource type="Shader" id=17]
+code = "shader_type canvas_item;
+uniform float factor = 0.5;
+uniform float aspect_ratio = 1.7;
+uniform vec4 fade_color:hint_color;
+
+void fragment() {
+	vec2 uv_mod = UV;
+	uv_mod.x = mix(0.5, uv_mod.x, aspect_ratio);
+	vec4 color;
+	
+	float d = length(uv_mod - 0.5);
+	if (d < factor) color = vec4(0.); 
+	else color = fade_color;
+	COLOR = color;  
+}"
+
+[sub_resource type="ShaderMaterial" id=13]
+shader = SubResource( 17 )
+shader_param/factor = 0.0
+shader_param/aspect_ratio = 1.7
+shader_param/fade_color = null
+
+[sub_resource type="Animation" id=14]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("UI/fade:material:shader_param/factor")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "to_black"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("UI/fade:material:shader_param/factor")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 3.605, 3.605 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "to_zero"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("UI/fade:material:shader_param/factor")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 3.6, 3.6 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[node name="level3" type="Spatial"]
+script = ExtResource( 6 )
+
+[node name="Map" type="Spatial" parent="."]
+
+[node name="GridMap" type="GridMap" parent="Map" groups=["wall"]]
+mesh_library = ExtResource( 1 )
+data = {
+"cells": PoolIntArray( 0, 0, 2, 1, 0, 2, 2, 0, 2, 4, 0, 2, 5, 0, 2, 6, 0, 2, 65534, 0, 2, 2, 1, 2, 4, 1, 2, 6, 1, 2, 65535, 1, 2, 0, 2, 2, 1, 2, 2, 2, 2, 2, 3, 2, 1, 4, 2, 2, 5, 2, 2, 6, 2, 2, 65535, 2, 2, 2, 3, 2, 5, 3, 1, 6, 3, 0, 4, 4, 2, 5, 4, 2, 6, 4, 2, 2, 5, 2, 5, 5, 2, 2, 6, 2, 3, 6, 2, 6, 6, 2, 3, 7, 2, 4, 7, 2, 5, 7, 2, 6, 7, 2, 7, 7, 2 )
+}
+__meta__ = {
+"_editor_clip_": 0
+}
+
+[node name="air" type="MeshInstance" parent="Map"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+visible = false
+mesh = SubResource( 2 )
+skeleton = NodePath("../..")
+material/0 = null
+
+[node name="Timer" type="Timer" parent="Map"]
+wait_time = 0.5
+autostart = true
+
+[node name="DirectionalLight" type="DirectionalLight" parent="Map"]
+transform = Transform( 0.0794593, 0.948574, -0.306421, 0.5, 0.228002, 0.835473, 0.862372, -0.219597, -0.45617, 0, 12, 0 )
+
+[node name="block" type="Spatial" parent="."]
+
+[node name="block3" parent="block" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 3, 11.124 )
+
+[node name="block4" parent="block" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.94577, 3, 2.82179 )
+
+[node name="block8" parent="block" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.965126, 3, 3.0891 )
+
+[node name="block6" parent="block" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.03487, 3, 7.26731 )
+
+[node name="block7" parent="block" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.03487, 3, 11.2673 )
+
+[node name="block5" parent="block" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.9555, 3, 13.1579 )
+
+[node name="kamera" type="Spatial" parent="."]
+transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 8.98026, 0, -3.74767 )
+
+[node name="target" type="MeshInstance" parent="kamera"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 9, 2, 9 )
+visible = false
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="Camera" type="Camera" parent="kamera"]
+transform = Transform( -1, -8.9407e-08, 8.9407e-08, 0, 0.707107, 0.707107, -1.49012e-07, 0.707107, -0.707106, 9, 12, -1 )
+environment = ExtResource( 5 )
+projection = 1
+size = 20.0
+
+[node name="player" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.01936, 3, 9.11815 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI"]
+anchor_right = 1.0
+margin_left = 15.0
+margin_top = 15.0
+margin_right = -15.0
+margin_bottom = 32.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="btn_home" type="TextureButton" parent="UI/HBoxContainer"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture_normal = ExtResource( 8 )
+
+[node name="Control" type="Control" parent="UI/HBoxContainer"]
+margin_left = 36.0
+margin_right = 452.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label_level" type="Label" parent="UI/HBoxContainer"]
+margin_left = 456.0
+margin_top = 6.0
+margin_right = 537.0
+margin_bottom = 26.0
+custom_fonts/font = SubResource( 4 )
+text = "Level - 3"
+align = 1
+
+[node name="Control2" type="Control" parent="UI/HBoxContainer"]
+margin_left = 541.0
+margin_right = 958.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="btn_retry" type="TextureButton" parent="UI/HBoxContainer"]
+margin_left = 962.0
+margin_right = 994.0
+margin_bottom = 32.0
+texture_normal = ExtResource( 9 )
+
+[node name="fade" type="ColorRect" parent="UI"]
+visible = false
+material = SubResource( 13 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 1, 1, 1, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="anim" type="AnimationPlayer" parent="UI"]
+root_node = NodePath("../..")
+anims/RESET = SubResource( 14 )
+anims/to_black = SubResource( 15 )
+anims/to_zero = SubResource( 16 )
+
+[node name="HealthBar" type="ProgressBar" parent="UI"]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="UI/HealthBar"]
+
+[node name="apel" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.124, 3, 13.1085 )
+
+[node name="apel2" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3, 5 )
+
+[node name="apel3" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.9254, 3, 14.9603 )
+
+[node name="apel4" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3, 13 )
+
+[connection signal="timeout" from="Map/Timer" to="." method="_on_Timer_timeout"]
+[connection signal="pressed" from="UI/HBoxContainer/btn_home" to="." method="_on_btn_home_pressed"]
+[connection signal="pressed" from="UI/HBoxContainer/btn_retry" to="." method="_on_btn_retry_pressed"]
