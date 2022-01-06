@@ -106,15 +106,15 @@ func _physics_process(_delta):
 		# block
 		if is_wall1: 
 			get_parent().shake()
-			MusicController.play_suara_nabrak()
+			MusicController.play_suara_langkah()
 			$AnimationTree.set("parameters/luka/active", true)
 		elif is_push1 and is_wall2:
 			get_parent().shake()
-			MusicController.play_suara_nabrak()
+			MusicController.play_suara_langkah()
 			$AnimationTree.set("parameters/luka/active", true)
 		elif is_push1 and is_push2 and is_wall3:
 			get_parent().shake()
-			MusicController.play_suara_nabrak()
+			MusicController.play_suara_langkah()
 			$AnimationTree.set("parameters/luka/active", true)
 		
 		# pergerakan
@@ -144,7 +144,7 @@ func movement(vec:Vector3):
 		var a = translation
 		var b = a + vec * 2
 	
-		MusicController.play_suara_langkah()	
+		MusicController.play_suara_langkah_alt()	
 		$tw_m.interpolate_property(self, "translation", a, b, 0.15, Tween.TRANS_EXPO, Tween.EASE_OUT)
 		$tw_m.start()
 		
@@ -155,6 +155,7 @@ func movement(vec:Vector3):
 			$AnimationTree.set("parameters/transisi/current", 1)
 			$tw_m.interpolate_property(self, "translation", b, c, 0.15, Tween.TRANS_EXPO, Tween.EASE_OUT)
 			$tw_m.start()
+			MusicController.play_suara_jatuh_air()
 			yield(get_tree().create_timer(1.5), "timeout")
 			
 			MusicController.play_suara_game_over()

@@ -27,7 +27,7 @@ func movement(vec:Vector3):
 		if $ray_down.is_colliding() == false:
 			var c = b + Vector3.DOWN * 2
 			
-			MusicController.play_suara_block()
+			MusicController.play_suara_jatuh_air()
 			
 			
 			$tw_m.interpolate_property(self, "translation", b, c, 0.15, Tween.TRANS_EXPO, Tween.EASE_OUT)
