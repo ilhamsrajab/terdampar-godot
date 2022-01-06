@@ -32,7 +32,7 @@ func _ready():
 	$UI/fade.visible = true
 	$UI/anim.play("to_zero")
 	
-	MusicController.play_music_hutan()
+#	MusicController.play_music_hutan()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -51,7 +51,7 @@ func shake():
 func _on_btn_new_pressed():
 	$UI/anim.play("to_black")
 	yield($UI/anim, "animation_finished")
-	var _err = get_tree().change_scene("res://levels/level1.tscn")
+	var _err = get_tree().change_scene("res://scenes/levels/level1.tscn")
 
 func _on_btn_exit_pressed():
 	$UI/anim.play("to_black")

@@ -106,12 +106,15 @@ func _physics_process(_delta):
 		# block
 		if is_wall1: 
 			get_parent().shake()
+			MusicController.play_suara_nabrak()
 			$AnimationTree.set("parameters/luka/active", true)
 		elif is_push1 and is_wall2:
 			get_parent().shake()
+			MusicController.play_suara_nabrak()
 			$AnimationTree.set("parameters/luka/active", true)
 		elif is_push1 and is_push2 and is_wall3:
 			get_parent().shake()
+			MusicController.play_suara_nabrak()
 			$AnimationTree.set("parameters/luka/active", true)
 		
 		# pergerakan
@@ -128,7 +131,7 @@ func _physics_process(_delta):
 	if rot_y != old_rot_y and not is_rotating:
 		is_rotating = true
 		$AnimationTree.set("parameters/jalan/active", true)
-		$tw_r.interpolate_property($pivot, "rotation_degrees:y", old_rot_y, rot_y, 0.1, Tween.TRANS_EXPO, Tween.EASE_OUT)
+		$tw_r.interpolate_property($pivot, "rotation_degrees:y", old_rot_y, rot_y, 0.2, Tween.TRANS_EXPO, Tween.EASE_OUT)
 		$tw_r.start()
 		yield($tw_r, "tween_all_completed")
 		old_rot_y = rot_y
@@ -140,8 +143,9 @@ func movement(vec:Vector3):
 		$AnimationTree.set("parameters/jalan/active", true)
 		var a = translation
 		var b = a + vec * 2
-		
-		$tw_m.interpolate_property(self, "translation", a, b, 0.1, Tween.TRANS_EXPO, Tween.EASE_OUT)
+	
+		MusicController.play_suara_langkah()	
+		$tw_m.interpolate_property(self, "translation", a, b, 0.15, Tween.TRANS_EXPO, Tween.EASE_OUT)
 		$tw_m.start()
 		
 		yield($tw_m, "tween_all_completed")
@@ -149,10 +153,11 @@ func movement(vec:Vector3):
 		if $ray_down.is_colliding() == false:
 			var c = b + Vector3.DOWN * 2
 			$AnimationTree.set("parameters/transisi/current", 1)
-			$tw_m.interpolate_property(self, "translation", b, c, 0.1, Tween.TRANS_EXPO, Tween.EASE_OUT)
+			$tw_m.interpolate_property(self, "translation", b, c, 0.15, Tween.TRANS_EXPO, Tween.EASE_OUT)
 			$tw_m.start()
 			yield(get_tree().create_timer(1.5), "timeout")
 			
+			MusicController.play_suara_game_over()
 			$fade/anim.play("to_black")
 			yield($fade/anim, "animation_finished")
 			var _err = get_tree().reload_current_scene()

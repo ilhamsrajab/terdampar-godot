@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="Terdampar"
-run/main_scene="res://levels/menu.tscn"
+run/main_scene="res://scenes/levels/menu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -22,6 +22,7 @@ MusicController="*res://scenes/MusicController.tscn"
 [display]
 
 window/size/resizable=false
+window/size/always_on_top=true
 
 [editor_plugins]
 
@@ -38,4 +39,6 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+quality/directional_shadow/size=2048
+quality/shadow_atlas/size=2048
 environment/default_environment="res://default_env.tres"

@@ -16,7 +16,9 @@ func movement(vec:Vector3):
 		var a = translation
 		var b = a + vec * 2
 		
-		$tw_m.interpolate_property(self, "translation", a, b, 0.01, Tween.TRANS_EXPO, Tween.EASE_OUT)
+		MusicController.play_suara_block()
+		
+		$tw_m.interpolate_property(self, "translation", a, b, 0.1, Tween.TRANS_EXPO, Tween.EASE_OUT)
 		$tw_m.start()
 		
 		yield($tw_m, "tween_all_completed")
@@ -24,7 +26,11 @@ func movement(vec:Vector3):
 		
 		if $ray_down.is_colliding() == false:
 			var c = b + Vector3.DOWN * 2
-			$tw_m.interpolate_property(self, "translation", b, c, 0.1, Tween.TRANS_EXPO, Tween.EASE_OUT)
+			
+			MusicController.play_suara_block()
+			
+			
+			$tw_m.interpolate_property(self, "translation", b, c, 0.15, Tween.TRANS_EXPO, Tween.EASE_OUT)
 			$tw_m.start()
 			$MeshInstance.translation.y += 0.4
 		
