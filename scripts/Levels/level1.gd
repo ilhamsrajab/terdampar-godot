@@ -2,13 +2,13 @@ extends "res://scripts/level.gd"
 
 
 export(int) var next_level = 2
-export(int) var apel = 1
+export(int) var buah = 1
 
 
-func add_apel():
+func add_buah():
 	MusicController.play_suara_buah()
-	apel_added += 1
-	if apel_added == apel:
+	buah_added += 1
+	if buah_added == buah:
 		var file = File.new()
 		if file.file_exists("res://scenes/levels/level" + str(next_level) +".tscn"):
 			MusicController.play_suara_level_complete()

@@ -30,13 +30,13 @@ func play_music_pantai():
 	
 	
 func play_suara_langkah():
-	$effect.stream = suara_langkah
-	$effect.play()
+	$langkah.stream = suara_langkah
+	$langkah.play()
 
 
 func play_suara_langkah_alt():
-	$effect.stream = suara_langkah_alt
-	$effect.play()
+	$langkah.stream = suara_langkah_alt
+	$langkah.play()
 
 
 func play_suara_buah():

@@ -3,7 +3,7 @@ extends Spatial
 #export(int) var next_level = 2
 #export(int) var apel = 1
 
-var apel_added = 0 
+var buah_added = 0 
 
 var ketinggian_air = 1.5
 
