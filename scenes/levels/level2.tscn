@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://mesh/mesh0.meshlib" type="MeshLibrary" id=1]
 [ext_resource path="res://scenes/apel.tscn" type="PackedScene" id=2]
@@ -23,6 +23,30 @@ size = Vector2( 200, 200 )
 [sub_resource type="DynamicFont" id=4]
 size = 20
 font_data = ExtResource( 7 )
+
+[sub_resource type="StyleBoxFlat" id=18]
+bg_color = Color( 0.8, 0.192157, 0.192157, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.8, 0.8, 0.8, 0 )
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id=19]
+bg_color = Color( 1, 1, 1, 0.784314 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 1, 1, 1, 0.784314 )
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
 
 [sub_resource type="Shader" id=17]
 code = "shader_type canvas_item;
@@ -199,6 +223,26 @@ margin_right = 994.0
 margin_bottom = 50.0
 texture_normal = ExtResource( 9 )
 
+[node name="HealthBar" type="ProgressBar" parent="UI"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 350.0
+margin_top = -34.0
+margin_right = -350.0
+margin_bottom = -20.0
+custom_styles/fg = SubResource( 18 )
+custom_styles/bg = SubResource( 19 )
+value = 100.0
+rounded = true
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TimerHealth" type="Timer" parent="UI/HealthBar"]
+autostart = true
+
 [node name="fade" type="ColorRect" parent="UI"]
 visible = false
 material = SubResource( 13 )
@@ -216,13 +260,6 @@ anims/RESET = SubResource( 14 )
 anims/to_black = SubResource( 15 )
 anims/to_zero = SubResource( 16 )
 
-[node name="HealthBar" type="ProgressBar" parent="UI"]
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Timer" type="Timer" parent="UI/HealthBar"]
-
 [node name="apel" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 3, 5 )
 
@@ -230,5 +267,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 3, 5 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 3, 5 )
 
 [connection signal="timeout" from="Map/Timer" to="." method="_on_Timer_timeout"]
+[connection signal="player_health" from="player" to="." method="_on_player_player_health"]
 [connection signal="pressed" from="UI/HBoxContainer/btn_home" to="." method="_on_btn_home_pressed"]
 [connection signal="pressed" from="UI/HBoxContainer/btn_retry" to="." method="_on_btn_retry_pressed"]
+[connection signal="timeout" from="UI/HealthBar/TimerHealth" to="player" method="_on_TimerHealth_timeout"]

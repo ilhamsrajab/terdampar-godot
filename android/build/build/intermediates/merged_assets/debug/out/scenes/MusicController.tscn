@@ -10,3 +10,5 @@ script = ExtResource( 1 )
 [node name="music" type="AudioStreamPlayer" parent="."]
 
 [node name="level" type="AudioStreamPlayer" parent="."]
+
+[node name="langkah" type="AudioStreamPlayer" parent="."]

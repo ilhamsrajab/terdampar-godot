@@ -18,6 +18,12 @@ var is_push3 = false
 var rot_y = 0
 var old_rot_y = 0
 
+var health_maks = 200
+var health = 200
+
+
+signal player_health(value)
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -108,14 +114,35 @@ func _physics_process(_delta):
 			get_parent().shake()
 			MusicController.play_suara_langkah()
 			$AnimationTree.set("parameters/luka/active", true)
+			print("Nabrak")
+			
+			health -= 15 
+			emit_signal("player_health", (float(health) / float(health_maks)) * 100)
+			
+			if health <= 0:
+				mati()
 		elif is_push1 and is_wall2:
 			get_parent().shake()
 			MusicController.play_suara_langkah()
 			$AnimationTree.set("parameters/luka/active", true)
+			print("Nabrak")
+			
+			health -= 15 
+			emit_signal("player_health", (float(health) / float(health_maks)) * 100)
+			
+			if health <= 0:
+				mati()
 		elif is_push1 and is_push2 and is_wall3:
 			get_parent().shake()
 			MusicController.play_suara_langkah()
 			$AnimationTree.set("parameters/luka/active", true)
+			print("Nabrak")
+			
+			health -= 15 
+			emit_signal("player_health", (float(health) / float(health_maks)) * 100)
+			
+			if health <= 0:
+				mati()
 		
 		# pergerakan
 		elif not is_push1 and not is_wall1:
@@ -133,9 +160,19 @@ func _physics_process(_delta):
 		$AnimationTree.set("parameters/jalan/active", true)
 		$tw_r.interpolate_property($pivot, "rotation_degrees:y", old_rot_y, rot_y, 0.2, Tween.TRANS_EXPO, Tween.EASE_OUT)
 		$tw_r.start()
+		
 		yield($tw_r, "tween_all_completed")
 		old_rot_y = rot_y
 		is_rotating = false
+		
+
+func _on_TimerHealth_timeout():
+	health -= 15
+	emit_signal("player_health", (float(health) / float(health_maks)) * 100)
+	
+	if health <= 0:
+		mati()
+		
 
 func movement(vec:Vector3):
 	if is_moving == false:
@@ -155,15 +192,41 @@ func movement(vec:Vector3):
 			$AnimationTree.set("parameters/transisi/current", 1)
 			$tw_m.interpolate_property(self, "translation", b, c, 0.15, Tween.TRANS_EXPO, Tween.EASE_OUT)
 			$tw_m.start()
+			
 			MusicController.play_suara_jatuh_air()
+			health = 0 
+			emit_signal("player_health", (float(health) / float(health_maks)) * 100)
 			yield(get_tree().create_timer(1.5), "timeout")
 			
+			is_moving = true
+			
 			MusicController.play_suara_game_over()
+			print("Game Over")
 			$fade/anim.play("to_black")
 			yield($fade/anim, "animation_finished")
 			var _err = get_tree().reload_current_scene()
 		
 		is_moving = false
 
+func mati():
+	var a = translation
+	is_moving = true
+	
+	$AnimationTree.set("parameters/transisi/current", 2)
+	$tw_m.interpolate_property(self, "translation", a, a, 0.15, Tween.TRANS_EXPO, Tween.EASE_OUT)
+	$tw_m.start()
+	
+	yield($tw_m, "tween_all_completed")
+	
+	MusicController.play_suara_game_over()
+	print("Game Over")
+	
+	$fade/anim.play("to_black")
+	yield($fade/anim, "animation_finished")
+	var _err = get_tree().reload_current_scene()
+
 func external_dir(vec:Vector3):
 	ext_dir = vec
+
+
+

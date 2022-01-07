@@ -7,6 +7,7 @@ var buah_added = 0
 
 var ketinggian_air = 1.5
 
+onready var health_bar = $UI/HealthBar
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -36,14 +37,8 @@ func shake():
 	$kamera/Camera.rotation_degrees.z = -3
 
 
-#func add_apel():
-#	apel_added += 1
-#	if apel_added == apel:
-#		var file = File.new()
-#		if file.file_exists("res://levels/level" + str(next_level) +".tscn"):
-#			var _err = get_tree().change_scene("res://levels/level" + str(next_level) +".tscn")
-#		else:
-#			print("Game Over")
+func _on_player_player_health(value):
+	health_bar.value = value
 
 
 func _on_btn_home_pressed():
@@ -56,3 +51,4 @@ func _on_btn_retry_pressed():
 	$UI/anim.play("to_black")
 	yield($UI/anim, "animation_finished")
 	var _err = get_tree().reload_current_scene()
+

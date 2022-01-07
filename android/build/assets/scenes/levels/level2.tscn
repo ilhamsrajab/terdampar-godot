@@ -121,6 +121,7 @@ autostart = true
 
 [node name="DirectionalLight" type="DirectionalLight" parent="Map"]
 transform = Transform( 0.0794593, 0.948574, -0.306421, 0.5, 0.228002, 0.835473, 0.862372, -0.219597, -0.45617, 0, 12, 0 )
+shadow_enabled = true
 
 [node name="block" type="Spatial" parent="."]
 

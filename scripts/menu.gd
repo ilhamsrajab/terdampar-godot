@@ -52,6 +52,7 @@ func _on_btn_new_pressed():
 	$UI/anim.play("to_black")
 	yield($UI/anim, "animation_finished")
 	var _err = get_tree().change_scene("res://scenes/levels/level1.tscn")
+	print("Pindah ke level 1")
 
 func _on_btn_exit_pressed():
 	$UI/anim.play("to_black")

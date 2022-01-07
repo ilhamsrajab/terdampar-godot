@@ -110,7 +110,7 @@ script = ExtResource( 4 )
 [node name="GridMap" type="GridMap" parent="Map" groups=["wall"]]
 mesh_library = ExtResource( 1 )
 data = {
-"cells": PoolIntArray( 2, 2, 2, 3, 2, 2, 4, 2, 2, 2, 3, 2, 4, 3, 2, 5, 3, 1, 2, 4, 2, 3, 4, 2, 4, 4, 2, 5, 4, 2, 6, 4, 2, 3, 5, 0, 4, 5, 2, 6, 5, 2, 4, 6, 2, 5, 6, 2, 6, 6, 2 )
+"cells": PoolIntArray( 1, 2, 3, 2, 2, 2, 3, 2, 2, 4, 2, 2, 2, 3, 2, 4, 3, 2, 5, 3, 1, 2, 4, 2, 3, 4, 2, 4, 4, 2, 5, 4, 2, 6, 4, 2, 3, 5, 0, 4, 5, 2, 6, 5, 2, 4, 6, 2, 5, 6, 2, 6, 6, 2 )
 }
 __meta__ = {
 "_editor_clip_": 0,
