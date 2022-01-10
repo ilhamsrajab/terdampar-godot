@@ -44,7 +44,7 @@ func _on_player_player_health(value):
 func _on_btn_home_pressed():
 	$UI/anim.play("to_black")
 	yield($UI/anim, "animation_finished")
-	var _err = get_tree().change_scene("res://levels/menu.tscn")
+	var _err = get_tree().change_scene("res://scenes/levels/menu.tscn")
 
 
 func _on_btn_retry_pressed():

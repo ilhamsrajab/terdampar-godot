@@ -59,7 +59,7 @@ material/0 = null
 [node name="StaticBody" type="StaticBody" parent="pohon1"]
 
 [node name="CollisionShape" type="CollisionShape" parent="pohon1/StaticBody"]
-transform = Transform( 1, 0, 0, 0, 3, 0, 0, 0, 1, 0, 3, 0 )
+transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 2, 0 )
 shape = SubResource( 12 )
 
 [node name="pohon2" type="MeshInstance" parent="."]
@@ -70,7 +70,7 @@ material/0 = null
 [node name="StaticBody" type="StaticBody" parent="pohon2"]
 
 [node name="CollisionShape" type="CollisionShape" parent="pohon2/StaticBody"]
-transform = Transform( 1, 0, 0, 0, 3, 0, 0, 0, 1, 0, 3, 0 )
+transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 2, 0 )
 shape = SubResource( 12 )
 
 [node name="pohon3" type="MeshInstance" parent="."]
@@ -81,7 +81,7 @@ material/0 = null
 [node name="StaticBody" type="StaticBody" parent="pohon3"]
 
 [node name="CollisionShape" type="CollisionShape" parent="pohon3/StaticBody"]
-transform = Transform( 1, 0, 0, 0, 3, 0, 0, 0, 1, 0, 3, 0 )
+transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 2, 0 )
 shape = SubResource( 12 )
 
 [node name="tanah+rumput" type="MeshInstance" parent="."]

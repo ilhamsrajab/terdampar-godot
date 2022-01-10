@@ -262,7 +262,7 @@ anims/RESET = SubResource( 14 )
 anims/to_black = SubResource( 15 )
 anims/to_zero = SubResource( 16 )
 
-[node name="buah2" parent="." instance=ExtResource( 2 )]
+[node name="apel2" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 3, 5 )
 
 [connection signal="timeout" from="Map/Timer" to="." method="_on_Timer_timeout"]
@@ -270,4 +270,3 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 3, 5 )
 [connection signal="pressed" from="UI/HBoxContainer/btn_home" to="." method="_on_btn_home_pressed"]
 [connection signal="pressed" from="UI/HBoxContainer/btn_retry" to="." method="_on_btn_retry_pressed"]
 [connection signal="timeout" from="UI/HealthBar/TimerHealth" to="player" method="_on_TimerHealth_timeout"]
-[connection signal="body_entered" from="buah2" to="buah2" method="_on_buah2_body_entered"]
