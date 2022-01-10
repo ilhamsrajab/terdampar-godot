@@ -1,7 +1,7 @@
 [gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://mesh/mesh0.meshlib" type="MeshLibrary" id=1]
-[ext_resource path="res://scenes/apel.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/kelapa.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/block.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://terdampar_env.tres" type="Environment" id=5]
@@ -126,7 +126,7 @@ script = ExtResource( 6 )
 [node name="GridMap" type="GridMap" parent="Map" groups=["wall"]]
 mesh_library = ExtResource( 1 )
 data = {
-"cells": PoolIntArray( 0, 0, 2, 1, 0, 2, 2, 0, 2, 4, 0, 2, 5, 0, 2, 6, 0, 2, 65534, 0, 2, 2, 1, 2, 4, 1, 2, 6, 1, 2, 65535, 1, 2, 0, 2, 2, 1, 2, 2, 2, 2, 2, 3, 2, 1, 4, 2, 2, 5, 2, 2, 6, 2, 2, 65535, 2, 2, 2, 3, 2, 5, 3, 1, 6, 3, 0, 4, 4, 2, 5, 4, 2, 6, 4, 2, 2, 5, 2, 5, 5, 2, 2, 6, 2, 3, 6, 2, 6, 6, 2, 3, 7, 2, 4, 7, 2, 5, 7, 2, 6, 7, 2, 7, 7, 2 )
+"cells": PoolIntArray( 0, 0, 7, 1, 0, 7, 2, 0, 7, 4, 0, 7, 5, 0, 7, 6, 0, 7, 65534, 0, 8, 2, 1, 7, 4, 1, 7, 6, 1, 7, 65535, 1, 7, 0, 2, 7, 1, 2, 7, 2, 2, 7, 3, 2, 9, 4, 2, 7, 5, 2, 7, 6, 2, 7, 65535, 2, 7, 2, 3, 7, 5, 3, 9, 6, 3, 0, 4, 4, 7, 5, 4, 7, 6, 4, 7, 2, 5, 7, 5, 5, 7, 2, 6, 7, 3, 6, 7, 6, 6, 7, 3, 7, 7, 4, 7, 7, 5, 7, 7, 6, 7, 7, 7, 7, 7 )
 }
 __meta__ = {
 "_editor_clip_": 0
@@ -149,22 +149,22 @@ transform = Transform( 0.0794593, 0.948574, -0.306421, 0.5, 0.228002, 0.835473, 
 [node name="block" type="Spatial" parent="."]
 
 [node name="block3" parent="block" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 3, 11.124 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 3, 11 )
 
 [node name="block4" parent="block" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.94577, 3, 2.82179 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3, 3 )
 
 [node name="block8" parent="block" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.965126, 3, 3.0891 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, 3 )
 
 [node name="block6" parent="block" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.03487, 3, 7.26731 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3, 7 )
 
 [node name="block7" parent="block" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.03487, 3, 11.2673 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3, 11 )
 
 [node name="block5" parent="block" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.9555, 3, 13.1579 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 3, 13 )
 
 [node name="kamera" type="Spatial" parent="."]
 transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 8.98026, 0, -3.74767 )
@@ -271,16 +271,16 @@ anims/RESET = SubResource( 14 )
 anims/to_black = SubResource( 15 )
 anims/to_zero = SubResource( 16 )
 
-[node name="apel" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.124, 3, 13.1085 )
+[node name="buah" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 3, 13 )
 
-[node name="apel2" parent="." instance=ExtResource( 2 )]
+[node name="buah2" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3, 5 )
 
-[node name="apel3" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.9254, 3, 14.9603 )
+[node name="buah3" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 3, 15 )
 
-[node name="apel4" parent="." instance=ExtResource( 2 )]
+[node name="buah4" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3, 13 )
 
 [connection signal="timeout" from="Map/Timer" to="." method="_on_Timer_timeout"]

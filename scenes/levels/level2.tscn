@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://mesh/mesh0.meshlib" type="MeshLibrary" id=1]
 [ext_resource path="res://scenes/apel.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/fonts/superstar_memesbruh03.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://assets/icons/1x/home.png" type="Texture" id=8]
 [ext_resource path="res://assets/icons/1x/return.png" type="Texture" id=9]
+[ext_resource path="res://scenes/kelapa.tscn" type="PackedScene" id=10]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_transparent = true
@@ -126,7 +127,7 @@ script = ExtResource( 6 )
 [node name="GridMap" type="GridMap" parent="Map" groups=["wall"]]
 mesh_library = ExtResource( 1 )
 data = {
-"cells": PoolIntArray( 1, 1, 2, 2, 1, 2, 3, 1, 2, 4, 1, 2, 1, 2, 2, 4, 2, 2, 7, 2, 2, 8, 2, 2, 1, 3, 2, 3, 3, 2, 4, 3, 2, 0, 4, 1, 1, 4, 2, 2, 4, 2, 3, 4, 2, 4, 4, 2, 5, 4, 2, 6, 4, 2, 7, 4, 2, 8, 4, 1, 4, 5, 2, 7, 5, 2, 4, 6, 2, 7, 6, 2, 4, 7, 2, 5, 7, 2, 6, 7, 2, 7, 7, 2, 4, 8, 0 )
+"cells": PoolIntArray( 1, 1, 2, 3, 1, 2, 1, 2, 2, 4, 2, 2, 7, 2, 2, 8, 2, 2, 1, 3, 2, 3, 3, 2, 4, 3, 2, 1, 4, 2, 2, 4, 2, 3, 4, 2, 4, 4, 3, 5, 4, 2, 6, 4, 2, 7, 4, 2, 8, 4, 1, 1, 5, 1, 3, 5, 2, 4, 5, 2, 7, 5, 2, 4, 6, 2, 7, 6, 2, 4, 7, 2, 5, 7, 2, 6, 7, 2, 7, 7, 2, 4, 8, 0 )
 }
 __meta__ = {
 "_editor_clip_": 0
@@ -149,11 +150,8 @@ shadow_enabled = true
 
 [node name="block" type="Spatial" parent="."]
 
-[node name="block" parent="block" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3, 9 )
-
 [node name="block3" parent="block" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 3, 15 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 3, 11 )
 
 [node name="kamera" type="Spatial" parent="."]
 transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 8.98026, 0, -3.74767 )
@@ -260,11 +258,11 @@ anims/RESET = SubResource( 14 )
 anims/to_black = SubResource( 15 )
 anims/to_zero = SubResource( 16 )
 
-[node name="apel" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 3, 5 )
-
 [node name="apel2" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 3, 5 )
+
+[node name="buah" parent="." instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3, 15 )
 
 [connection signal="timeout" from="Map/Timer" to="." method="_on_Timer_timeout"]
 [connection signal="player_health" from="player" to="." method="_on_player_player_health"]

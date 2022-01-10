@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://mesh/mesh0.meshlib" type="MeshLibrary" id=1]
 [ext_resource path="res://scenes/apel.tscn" type="PackedScene" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://assets/fonts/superstar_memesbruh03.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://assets/icons/1x/home.png" type="Texture" id=8]
 [ext_resource path="res://assets/icons/1x/return.png" type="Texture" id=9]
-[ext_resource path="res://scenes/kelapa.tscn" type="PackedScene" id=10]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_transparent = true
@@ -262,9 +261,6 @@ root_node = NodePath("../..")
 anims/RESET = SubResource( 14 )
 anims/to_black = SubResource( 15 )
 anims/to_zero = SubResource( 16 )
-
-[node name="buah" parent="." instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.98592, 2.97051, 9.00986 )
 
 [node name="buah2" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 3, 5 )
