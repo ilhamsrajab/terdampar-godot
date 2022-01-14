@@ -64,3 +64,23 @@ func _on_Timer2_timeout():
 	id += 1
 	if id == loop.size():
 		id = 0
+
+
+func _on_btn_main_pressed():
+	$UI/anim.play("to_black")
+	yield($UI/anim, "animation_finished")
+	var _err = get_tree().change_scene("res://scenes/levels/level1.tscn")
+	print("Pindah ke level 1")
+	pass # Replace with function body.
+
+
+func _on_btn_info_pressed():
+	pass # Replace with function body.
+
+
+func _on_btn_keluar_pressed():
+	$UI/anim.play("to_black")
+	yield($UI/anim, "animation_finished")
+	get_tree().quit()
+	pass # Replace with function body.
+	pass # Replace with function body.

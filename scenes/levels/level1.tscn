@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://mesh/mesh0.meshlib" type="MeshLibrary" id=1]
 [ext_resource path="res://scenes/apel.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://assets/UI/load_bar/4.png" type="Texture" id=11]
 [ext_resource path="res://scripts/ProgressBar.gd" type="Script" id=12]
 [ext_resource path="res://assets/fonts/iCielSoupofJustice.ttf" type="DynamicFontData" id=13]
+[ext_resource path="res://assets/UI/you_win/bg.png" type="Texture" id=14]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_transparent = true
@@ -304,6 +305,27 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="CenterContainer" type="CenterContainer" parent="UI"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -150.0
+margin_top = -200.0
+margin_right = 150.0
+margin_bottom = 200.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="UI/CenterContainer"]
+margin_right = 300.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 300, 400 )
+texture = ExtResource( 14 )
+expand = true
 
 [node name="fade" type="ColorRect" parent="UI"]
 visible = false

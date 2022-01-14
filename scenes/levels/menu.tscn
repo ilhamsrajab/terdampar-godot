@@ -1,10 +1,14 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://mesh/mesh0.meshlib" type="MeshLibrary" id=1]
 [ext_resource path="res://terdampar_env.tres" type="Environment" id=2]
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scripts/menu.gd" type="Script" id=4]
 [ext_resource path="res://assets/fonts/superstar_memesbruh03.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://assets/UI/menu/play.png" type="Texture" id=6]
+[ext_resource path="res://assets/UI/menu/about.png" type="Texture" id=7]
+[ext_resource path="res://assets/UI/btn/close.png" type="Texture" id=8]
+[ext_resource path="res://assets/UI/menu/fg_logo.png" type="Texture" id=9]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_transparent = true
@@ -152,7 +156,23 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3, 9 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 
+[node name="Logo" type="TextureRect" parent="UI"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -210.0
+margin_top = 30.0
+margin_right = 210.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 420, 120 )
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Label" type="Label" parent="UI"]
+visible = false
 anchor_right = 1.0
 margin_bottom = 107.0
 custom_fonts/font = SubResource( 4 )
@@ -163,7 +183,56 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="btn_main" type="TextureButton" parent="UI"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -50.0
+margin_top = -150.0
+margin_right = 50.0
+margin_bottom = -50.0
+rect_min_size = Vector2( 100, 100 )
+texture_normal = ExtResource( 6 )
+expand = true
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="btn_info" type="TextureButton" parent="UI"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 30.0
+margin_top = -110.0
+margin_bottom = -30.0
+rect_min_size = Vector2( 80, 80 )
+texture_normal = ExtResource( 7 )
+expand = true
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="btn_keluar" type="TextureButton" parent="UI"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -110.0
+margin_top = -110.0
+margin_right = -30.0
+margin_bottom = -30.0
+rect_min_size = Vector2( 80, 80 )
+texture_normal = ExtResource( 8 )
+expand = true
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+visible = false
 anchor_bottom = 1.0
 margin_right = 225.0
 __meta__ = {
@@ -231,6 +300,7 @@ margin_bottom = 600.0
 size_flags_vertical = 3
 
 [node name="fade" type="ColorRect" parent="UI"]
+visible = false
 material = SubResource( 8 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -251,6 +321,9 @@ wait_time = 0.5
 autostart = true
 
 [connection signal="timeout" from="Map/Timer" to="." method="_on_Timer_timeout"]
+[connection signal="pressed" from="UI/btn_main" to="." method="_on_btn_main_pressed"]
+[connection signal="pressed" from="UI/btn_info" to="." method="_on_btn_info_pressed"]
+[connection signal="pressed" from="UI/btn_keluar" to="." method="_on_btn_keluar_pressed"]
 [connection signal="pressed" from="UI/VBoxContainer/btn_new" to="." method="_on_btn_new_pressed"]
 [connection signal="pressed" from="UI/VBoxContainer/btn_exit" to="." method="_on_btn_exit_pressed"]
 [connection signal="timeout" from="Timer2" to="." method="_on_Timer2_timeout"]
