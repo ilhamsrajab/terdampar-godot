@@ -9,6 +9,7 @@ var ketinggian_air = 1.5
 
 onready var health_bar = $UI/HealthBar/ProgressBar
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var ratio = get_viewport().size.x / get_viewport().size.y
