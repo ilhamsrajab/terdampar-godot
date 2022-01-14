@@ -22,6 +22,8 @@ var loop = [
 var id = 0
 var ketinggian_air = 1.5
 
+signal btn_info()
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var ratio = get_viewport().size.x / get_viewport().size.y
@@ -75,7 +77,7 @@ func _on_btn_main_pressed():
 
 
 func _on_btn_info_pressed():
-	pass # Replace with function body.
+	emit_signal("btn_info")
 
 
 func _on_btn_keluar_pressed():
