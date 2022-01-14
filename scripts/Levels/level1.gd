@@ -17,10 +17,16 @@ func add_buah():
 	if buah_added == buah:
 		var file = File.new()
 		if file.file_exists("res://scenes/levels/level" + str(next_level) +".tscn"):
+			
 			MusicController.play_suara_level_complete()
-			var _err = get_tree().change_scene("res://scenes/levels/level" + str(next_level) +".tscn")
 			print("Pindah ke level " + str(next_level))
+			
+			emit_signal("player_menang")
+			
 		else:
 			MusicController.play_suara_game_over()
 			print("Game Over")
 
+func _on_btn_next_pressed():
+	var _err = get_tree().change_scene("res://scenes/levels/level" + str(next_level) +".tscn")
+	

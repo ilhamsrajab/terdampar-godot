@@ -12,9 +12,9 @@
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_transparent = true
-albedo_color = Color( 0.172549, 0.427451, 0.756863, 0.784314 )
+albedo_color = Color( 0.054902, 0.494118, 0.729412, 0.784314 )
 
-[sub_resource type="PlaneMesh" id=2]
+[sub_resource type="PlaneMesh" id=12]
 material = SubResource( 1 )
 size = Vector2( 200, 200 )
 
@@ -124,7 +124,7 @@ __meta__ = {
 [node name="air" type="MeshInstance" parent="Map"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 visible = false
-mesh = SubResource( 2 )
+mesh = SubResource( 12 )
 skeleton = NodePath("../..")
 material/0 = null
 

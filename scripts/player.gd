@@ -24,7 +24,6 @@ var health = 200
 
 signal player_health(value)
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$AnimationTree.active = true
@@ -198,19 +197,19 @@ func movement(vec:Vector3):
 			emit_signal("player_health", (float(health) / float(health_maks)) * 100)
 			yield(get_tree().create_timer(1.5), "timeout")
 			
-			is_moving = true
-			
 			MusicController.play_suara_game_over()
 			print("Game Over")
-			$fade/anim.play("to_black")
-			yield($fade/anim, "animation_finished")
-			var _err = get_tree().reload_current_scene()
+			
+			get_parent().emit_signal("player_mati")
+			
+#			$fade/anim.play("to_black")
+#			yield($fade/anim, "animation_finished")
+#			var _err = get_tree().reload_current_scene()
 		
 		is_moving = false
 
 func mati():
 	var a = translation
-	is_moving = true
 	
 	$AnimationTree.set("parameters/transisi/current", 2)
 	$tw_m.interpolate_property(self, "translation", a, a, 0.15, Tween.TRANS_EXPO, Tween.EASE_OUT)
@@ -221,12 +220,16 @@ func mati():
 	MusicController.play_suara_game_over()
 	print("Game Over")
 	
-	$fade/anim.play("to_black")
-	yield($fade/anim, "animation_finished")
-	var _err = get_tree().reload_current_scene()
+	get_parent().emit_signal("player_mati")
+	
+#	$fade/anim.play("to_black")
+#	yield($fade/anim, "animation_finished")
+#	var _err = get_tree().reload_current_scene()
+
 
 func external_dir(vec:Vector3):
 	ext_dir = vec
 
 
-
+func _on_level1_player_menang():
+	get_parent().get_node("UI/HealthBar/TimerHealth").stop()

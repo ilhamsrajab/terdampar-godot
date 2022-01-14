@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://mesh/mesh0.meshlib" type="MeshLibrary" id=1]
 [ext_resource path="res://scenes/apel.tscn" type="PackedScene" id=2]
@@ -14,29 +14,37 @@
 [ext_resource path="res://scripts/ProgressBar.gd" type="Script" id=12]
 [ext_resource path="res://assets/fonts/iCielSoupofJustice.ttf" type="DynamicFontData" id=13]
 [ext_resource path="res://assets/UI/you_win/bg.png" type="Texture" id=14]
+[ext_resource path="res://assets/UI/btn/close.png" type="Texture" id=15]
+[ext_resource path="res://scripts/PopupKalah.gd" type="Script" id=16]
+[ext_resource path="res://scripts/PopupMenang.gd" type="Script" id=17]
+[ext_resource path="res://assets/UI/btn/next.png" type="Texture" id=18]
 
-[sub_resource type="SpatialMaterial" id=1]
+[sub_resource type="SpatialMaterial" id=27]
 flags_transparent = true
 albedo_color = Color( 0.054902, 0.494118, 0.729412, 0.784314 )
 
 [sub_resource type="PlaneMesh" id=2]
-material = SubResource( 1 )
+material = SubResource( 27 )
 size = Vector2( 200, 200 )
 
 [sub_resource type="CapsuleMesh" id=3]
 
-[sub_resource type="DynamicFontData" id=22]
+[sub_resource type="DynamicFontData" id=24]
 font_path = "res://assets/fonts/iCielSoupofJustice.ttf"
 
 [sub_resource type="DynamicFont" id=4]
 size = 24
-font_data = SubResource( 22 )
+font_data = SubResource( 24 )
 
 [sub_resource type="DynamicFont" id=23]
 size = 40
 font_data = ExtResource( 13 )
 
-[sub_resource type="Shader" id=17]
+[sub_resource type="DynamicFont" id=25]
+size = 28
+font_data = ExtResource( 13 )
+
+[sub_resource type="Shader" id=26]
 code = "shader_type canvas_item;
 uniform float factor = 0.5;
 uniform float aspect_ratio = 1.7;
@@ -54,7 +62,7 @@ void fragment() {
 }"
 
 [sub_resource type="ShaderMaterial" id=18]
-shader = SubResource( 17 )
+shader = SubResource( 26 )
 shader_param/factor = 0.0
 shader_param/aspect_ratio = 1.7
 shader_param/fade_color = null
@@ -306,26 +314,173 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CenterContainer" type="CenterContainer" parent="UI"]
-visible = false
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -150.0
-margin_top = -200.0
-margin_right = 150.0
-margin_bottom = 200.0
+[node name="PopupKalah" type="CenterContainer" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -600.0
+margin_bottom = -600.0
+script = ExtResource( 16 )
 __meta__ = {
+"_edit_group_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="UI/CenterContainer"]
-margin_right = 300.0
+[node name="TextureRect" type="TextureRect" parent="UI/PopupKalah"]
+margin_left = 362.0
+margin_top = 200.0
+margin_right = 662.0
 margin_bottom = 400.0
-rect_min_size = Vector2( 300, 400 )
+rect_min_size = Vector2( 300, 200 )
 texture = ExtResource( 14 )
 expand = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PopupKalah"]
+margin_left = 413.0
+margin_top = 247.0
+margin_right = 611.0
+margin_bottom = 353.0
+
+[node name="Label" type="Label" parent="UI/PopupKalah/VBoxContainer"]
+margin_right = 198.0
+margin_bottom = 18.0
+custom_colors/font_color = Color( 0.964706, 0.937255, 0.839216, 1 )
+custom_fonts/font = SubResource( 25 )
+text = "Yah, Game Over"
+
+[node name="Control" type="Control" parent="UI/PopupKalah/VBoxContainer"]
+margin_top = 22.0
+margin_right = 198.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 0, 30 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/PopupKalah/VBoxContainer"]
+margin_top = 56.0
+margin_right = 198.0
+margin_bottom = 106.0
+
+[node name="Control2" type="Control" parent="UI/PopupKalah/VBoxContainer/HBoxContainer"]
+margin_right = 27.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="btn_restart" type="TextureButton" parent="UI/PopupKalah/VBoxContainer/HBoxContainer"]
+margin_left = 31.0
+margin_right = 81.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+texture_normal = ExtResource( 7 )
+expand = true
+
+[node name="Control4" type="Control" parent="UI/PopupKalah/VBoxContainer/HBoxContainer"]
+margin_left = 85.0
+margin_right = 112.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="btn_keluar" type="TextureButton" parent="UI/PopupKalah/VBoxContainer/HBoxContainer"]
+margin_left = 116.0
+margin_right = 166.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+texture_normal = ExtResource( 15 )
+expand = true
+
+[node name="Control3" type="Control" parent="UI/PopupKalah/VBoxContainer/HBoxContainer"]
+margin_left = 170.0
+margin_right = 198.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Tween" type="Tween" parent="UI/PopupKalah"]
+
+[node name="PopupMenang" type="CenterContainer" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -600.0
+margin_bottom = -600.0
+script = ExtResource( 17 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="UI/PopupMenang"]
+margin_left = 362.0
+margin_top = 200.0
+margin_right = 662.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 300, 200 )
+texture = ExtResource( 14 )
+expand = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PopupMenang"]
+margin_left = 419.0
+margin_top = 247.0
+margin_right = 604.0
+margin_bottom = 353.0
+
+[node name="Label" type="Label" parent="UI/PopupMenang/VBoxContainer"]
+margin_right = 185.0
+margin_bottom = 18.0
+custom_colors/font_color = Color( 0.964706, 0.937255, 0.839216, 1 )
+custom_fonts/font = SubResource( 25 )
+text = "Yeay, Berhasil"
+
+[node name="Control" type="Control" parent="UI/PopupMenang/VBoxContainer"]
+margin_top = 22.0
+margin_right = 185.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 0, 30 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/PopupMenang/VBoxContainer"]
+margin_top = 56.0
+margin_right = 185.0
+margin_bottom = 106.0
+
+[node name="Control2" type="Control" parent="UI/PopupMenang/VBoxContainer/HBoxContainer"]
+margin_right = 23.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="btn_restart" type="TextureButton" parent="UI/PopupMenang/VBoxContainer/HBoxContainer"]
+margin_left = 27.0
+margin_right = 77.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+texture_normal = ExtResource( 7 )
+expand = true
+
+[node name="Control4" type="Control" parent="UI/PopupMenang/VBoxContainer/HBoxContainer"]
+margin_left = 81.0
+margin_right = 104.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="btn_next" type="TextureButton" parent="UI/PopupMenang/VBoxContainer/HBoxContainer"]
+margin_left = 108.0
+margin_right = 158.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+texture_normal = ExtResource( 18 )
+expand = true
+
+[node name="Control3" type="Control" parent="UI/PopupMenang/VBoxContainer/HBoxContainer"]
+margin_left = 162.0
+margin_right = 185.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Tween" type="Tween" parent="UI/PopupMenang"]
 
 [node name="fade" type="ColorRect" parent="UI"]
 visible = false
@@ -347,8 +502,15 @@ anims/to_zero = SubResource( 21 )
 [node name="apel2" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 3, 5 )
 
+[connection signal="player_mati" from="." to="UI/PopupKalah" method="_on_level1_player_mati"]
+[connection signal="player_menang" from="." to="player" method="_on_level1_player_menang"]
+[connection signal="player_menang" from="." to="UI/PopupMenang" method="_on_level1_player_menang"]
 [connection signal="timeout" from="Map/Timer" to="." method="_on_Timer_timeout"]
 [connection signal="player_health" from="player" to="." method="_on_player_player_health"]
 [connection signal="pressed" from="UI/Button/btn_home" to="." method="_on_btn_home_pressed"]
 [connection signal="pressed" from="UI/Button/btn_retry" to="." method="_on_btn_retry_pressed"]
 [connection signal="timeout" from="UI/HealthBar/TimerHealth" to="player" method="_on_TimerHealth_timeout"]
+[connection signal="pressed" from="UI/PopupKalah/VBoxContainer/HBoxContainer/btn_restart" to="UI/PopupKalah" method="_on_btn_restart_pressed"]
+[connection signal="pressed" from="UI/PopupKalah/VBoxContainer/HBoxContainer/btn_keluar" to="UI/PopupKalah" method="_on_btn_keluar_pressed"]
+[connection signal="pressed" from="UI/PopupMenang/VBoxContainer/HBoxContainer/btn_restart" to="UI/PopupMenang" method="_on_btn_restart_pressed"]
+[connection signal="pressed" from="UI/PopupMenang/VBoxContainer/HBoxContainer/btn_next" to="." method="_on_btn_next_pressed"]

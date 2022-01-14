@@ -9,6 +9,8 @@ var ketinggian_air = 1.5
 
 onready var health_bar = $UI/HealthBar/ProgressBar
 
+signal player_menang()
+signal player_mati()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -54,4 +56,3 @@ func _on_btn_retry_pressed():
 	$UI/anim.play("to_black")
 	yield($UI/anim, "animation_finished")
 	var _err = get_tree().reload_current_scene()
-
