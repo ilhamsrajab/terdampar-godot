@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://mesh/mesh0.meshlib" type="MeshLibrary" id=1]
 [ext_resource path="res://scenes/apel.tscn" type="PackedScene" id=2]
@@ -6,9 +6,15 @@
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://terdampar_env.tres" type="Environment" id=5]
 [ext_resource path="res://scripts/Levels/level2.gd" type="Script" id=6]
-[ext_resource path="res://assets/fonts/superstar_memesbruh03.ttf" type="DynamicFontData" id=7]
-[ext_resource path="res://assets/icons/1x/home.png" type="Texture" id=8]
-[ext_resource path="res://assets/icons/1x/return.png" type="Texture" id=9]
+[ext_resource path="res://scripts/ProgressBar.gd" type="Script" id=7]
+[ext_resource path="res://assets/UI/btn/restart.png" type="Texture" id=8]
+[ext_resource path="res://assets/UI/btn/home.png" type="Texture" id=9]
+[ext_resource path="res://scenes/kelapa.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/UI/load_bar/bg.png" type="Texture" id=11]
+[ext_resource path="res://assets/UI/you_win/bg.png" type="Texture" id=12]
+[ext_resource path="res://assets/UI/load_bar/4.png" type="Texture" id=13]
+[ext_resource path="res://assets/UI/bubble/apel.png" type="Texture" id=14]
+[ext_resource path="res://assets/fonts/iCielSoupofJustice.ttf" type="DynamicFontData" id=15]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_transparent = true
@@ -20,9 +26,16 @@ size = Vector2( 200, 200 )
 
 [sub_resource type="CapsuleMesh" id=3]
 
-[sub_resource type="DynamicFont" id=4]
-size = 20
-font_data = ExtResource( 7 )
+[sub_resource type="DynamicFontData" id=22]
+font_path = "res://assets/fonts/iCielSoupofJustice.ttf"
+
+[sub_resource type="DynamicFont" id=23]
+size = 24
+font_data = SubResource( 22 )
+
+[sub_resource type="DynamicFont" id=24]
+size = 40
+font_data = ExtResource( 15 )
 
 [sub_resource type="Shader" id=17]
 code = "shader_type canvas_item;
@@ -41,13 +54,13 @@ void fragment() {
 	COLOR = color;  
 }"
 
-[sub_resource type="ShaderMaterial" id=13]
+[sub_resource type="ShaderMaterial" id=25]
 shader = SubResource( 17 )
 shader_param/factor = 0.0
 shader_param/aspect_ratio = 1.7
 shader_param/fade_color = null
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=26]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("UI/fade:material:shader_param/factor")
@@ -62,7 +75,7 @@ tracks/0/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=27]
 resource_name = "to_black"
 length = 0.6
 tracks/0/type = "value"
@@ -78,7 +91,7 @@ tracks/0/keys = {
 "values": [ 1.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=28]
 resource_name = "to_zero"
 length = 0.6
 tracks/0/type = "value"
@@ -102,7 +115,7 @@ script = ExtResource( 6 )
 [node name="GridMap" type="GridMap" parent="Map" groups=["wall"]]
 mesh_library = ExtResource( 1 )
 data = {
-"cells": PoolIntArray( 1, 1, 2, 2, 1, 2, 3, 1, 2, 4, 1, 2, 1, 2, 2, 4, 2, 2, 7, 2, 2, 8, 2, 2, 1, 3, 2, 3, 3, 2, 4, 3, 2, 0, 4, 1, 1, 4, 2, 2, 4, 2, 3, 4, 2, 4, 4, 2, 5, 4, 2, 6, 4, 2, 7, 4, 2, 8, 4, 1, 4, 5, 2, 7, 5, 2, 4, 6, 2, 7, 6, 2, 4, 7, 2, 5, 7, 2, 6, 7, 2, 7, 7, 2, 4, 8, 0 )
+"cells": PoolIntArray( 1, 1, 2, 3, 1, 2, 1, 2, 2, 4, 2, 2, 7, 2, 2, 8, 2, 2, 1, 3, 2, 3, 3, 2, 4, 3, 2, 1, 4, 2, 2, 4, 2, 3, 4, 2, 4, 4, 3, 5, 4, 2, 6, 4, 2, 7, 4, 2, 8, 4, 1, 1, 5, 1, 3, 5, 2, 4, 5, 2, 7, 5, 2, 4, 6, 2, 7, 6, 2, 4, 7, 2, 5, 7, 2, 6, 7, 2, 7, 7, 2, 4, 8, 0 )
 }
 __meta__ = {
 "_editor_clip_": 0
@@ -125,11 +138,8 @@ shadow_enabled = true
 
 [node name="block" type="Spatial" parent="."]
 
-[node name="block" parent="block" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3, 9 )
-
 [node name="block3" parent="block" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 3, 15 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 3, 11 )
 
 [node name="kamera" type="Spatial" parent="."]
 transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 8.98026, 0, -3.74767 )
@@ -149,9 +159,15 @@ size = 20.0
 [node name="player" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3, 3 )
 
+[node name="apel2" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 3, 5 )
+
+[node name="buah" parent="." instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3, 15 )
+
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI"]
+[node name="Button" type="HBoxContainer" parent="UI"]
 anchor_right = 1.0
 margin_left = 15.0
 margin_top = 15.0
@@ -161,47 +177,161 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="btn_home" type="TextureButton" parent="UI/HBoxContainer"]
+[node name="btn_home" type="TextureButton" parent="UI/Button"]
 margin_right = 50.0
 margin_bottom = 50.0
-texture_normal = ExtResource( 8 )
+rect_min_size = Vector2( 50, 50 )
+texture_normal = ExtResource( 9 )
+texture_pressed = ExtResource( 9 )
+expand = true
+stretch_mode = 4
 
-[node name="Control" type="Control" parent="UI/HBoxContainer"]
+[node name="Control" type="Control" parent="UI/Button"]
 margin_left = 54.0
-margin_right = 452.0
+margin_right = 450.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="label_level" type="Label" parent="UI/HBoxContainer"]
-margin_left = 456.0
-margin_top = 15.0
-margin_right = 537.0
-margin_bottom = 35.0
-custom_fonts/font = SubResource( 4 )
-text = "Level - 2"
+[node name="label_level" type="Label" parent="UI/Button"]
+margin_left = 454.0
+margin_top = 17.0
+margin_right = 540.0
+margin_bottom = 33.0
+custom_fonts/font = SubResource( 23 )
+text = "Level - 1"
 align = 1
 
-[node name="Control2" type="Control" parent="UI/HBoxContainer"]
-margin_left = 541.0
+[node name="Control2" type="Control" parent="UI/Button"]
+margin_left = 544.0
 margin_right = 940.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
+
+[node name="btn_retry" type="TextureButton" parent="UI/Button"]
+margin_left = 944.0
+margin_right = 994.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 8 )
+expand = true
+stretch_mode = 4
+
+[node name="HealthBar" type="Control" parent="UI"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -110.0
+margin_top = -32.0
+margin_right = 110.0
+margin_bottom = -20.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="btn_retry" type="TextureButton" parent="UI/HBoxContainer"]
-margin_left = 944.0
-margin_right = 994.0
-margin_bottom = 50.0
-texture_normal = ExtResource( 9 )
+[node name="TextureRect" type="TextureRect" parent="UI/HealthBar"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -110.0
+margin_top = -6.0
+margin_right = 110.0
+margin_bottom = 6.0
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProgressBar" type="TextureProgress" parent="UI/HealthBar"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -102.0
+margin_top = -4.0
+margin_right = 102.0
+margin_bottom = 4.0
+rounded = true
+texture_progress = ExtResource( 13 )
+nine_patch_stretch = true
+stretch_margin_left = 100
+stretch_margin_right = 100
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TimerHealth" type="Timer" parent="UI/HealthBar"]
+autostart = true
+
+[node name="BuahBar" type="Control" parent="UI"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -136.0
+margin_top = -88.0
+margin_right = -24.0
+margin_bottom = -24.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="UI/BuahBar"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 24.0
+margin_top = -32.0
+margin_right = 88.0
+margin_bottom = 32.0
+texture = ExtResource( 14 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label_buah" type="Label" parent="UI/BuahBar"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 88.0
+margin_top = -5.0
+margin_right = 109.0
+margin_bottom = 21.0
+custom_fonts/font = SubResource( 24 )
+text = "0"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UI"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -150.0
+margin_top = -200.0
+margin_right = 150.0
+margin_bottom = 200.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="UI/CenterContainer"]
+margin_right = 300.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 300, 400 )
+texture = ExtResource( 12 )
+expand = true
 
 [node name="fade" type="ColorRect" parent="UI"]
 visible = false
-material = SubResource( 13 )
+material = SubResource( 25 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -212,23 +342,9 @@ __meta__ = {
 
 [node name="anim" type="AnimationPlayer" parent="UI"]
 root_node = NodePath("../..")
-anims/RESET = SubResource( 14 )
-anims/to_black = SubResource( 15 )
-anims/to_zero = SubResource( 16 )
-
-[node name="HealthBar" type="ProgressBar" parent="UI"]
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Timer" type="Timer" parent="UI/HealthBar"]
-
-[node name="apel" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 3, 5 )
-
-[node name="apel2" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 3, 5 )
+anims/RESET = SubResource( 26 )
+anims/to_black = SubResource( 27 )
+anims/to_zero = SubResource( 28 )
 
 [connection signal="timeout" from="Map/Timer" to="." method="_on_Timer_timeout"]
-[connection signal="pressed" from="UI/HBoxContainer/btn_home" to="." method="_on_btn_home_pressed"]
-[connection signal="pressed" from="UI/HBoxContainer/btn_retry" to="." method="_on_btn_retry_pressed"]
+[connection signal="player_health" from="player" to="." method="_on_player_player_health"]

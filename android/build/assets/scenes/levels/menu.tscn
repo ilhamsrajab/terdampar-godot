@@ -1,16 +1,24 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://mesh/mesh0.meshlib" type="MeshLibrary" id=1]
 [ext_resource path="res://terdampar_env.tres" type="Environment" id=2]
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scripts/menu.gd" type="Script" id=4]
 [ext_resource path="res://assets/fonts/superstar_memesbruh03.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://assets/UI/menu/play.png" type="Texture" id=6]
+[ext_resource path="res://assets/UI/menu/about.png" type="Texture" id=7]
+[ext_resource path="res://assets/UI/btn/close.png" type="Texture" id=8]
+[ext_resource path="res://assets/UI/menu/fg_logo.png" type="Texture" id=9]
+[ext_resource path="res://assets/UI/you_win/bg.png" type="Texture" id=10]
+[ext_resource path="res://assets/fonts/iCielSoupofJustice.ttf" type="DynamicFontData" id=11]
+[ext_resource path="res://assets/UI/btn/close_2.png" type="Texture" id=12]
+[ext_resource path="res://scripts/PopupInfo.gd" type="Script" id=13]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_transparent = true
-albedo_color = Color( 0.172549, 0.427451, 0.756863, 0.784314 )
+albedo_color = Color( 0.054902, 0.494118, 0.729412, 0.784314 )
 
-[sub_resource type="PlaneMesh" id=2]
+[sub_resource type="PlaneMesh" id=12]
 material = SubResource( 1 )
 size = Vector2( 200, 200 )
 
@@ -32,7 +40,7 @@ border_width_right = 10
 border_width_bottom = 10
 border_color = Color( 0.8, 0.8, 0.8, 0.0392157 )
 
-[sub_resource type="Shader" id=12]
+[sub_resource type="Shader" id=7]
 code = "shader_type canvas_item;
 uniform float factor = 0.5;
 uniform float aspect_ratio = 1.7;
@@ -50,7 +58,7 @@ void fragment() {
 }"
 
 [sub_resource type="ShaderMaterial" id=8]
-shader = SubResource( 12 )
+shader = SubResource( 7 )
 shader_param/factor = 0.0
 shader_param/aspect_ratio = 1.7
 shader_param/fade_color = null
@@ -102,6 +110,10 @@ tracks/0/keys = {
 "values": [ 0.0, 1.0 ]
 }
 
+[sub_resource type="DynamicFont" id=13]
+size = 22
+font_data = ExtResource( 11 )
+
 [node name="menu" type="Spatial"]
 script = ExtResource( 4 )
 
@@ -120,7 +132,7 @@ __meta__ = {
 [node name="air" type="MeshInstance" parent="Map"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 visible = false
-mesh = SubResource( 2 )
+mesh = SubResource( 12 )
 skeleton = NodePath("../..")
 material/0 = null
 
@@ -152,7 +164,23 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3, 9 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 
+[node name="Logo" type="TextureRect" parent="UI"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -210.0
+margin_top = 30.0
+margin_right = 210.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 420, 120 )
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Label" type="Label" parent="UI"]
+visible = false
 anchor_right = 1.0
 margin_bottom = 107.0
 custom_fonts/font = SubResource( 4 )
@@ -163,7 +191,56 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="btn_main" type="TextureButton" parent="UI"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -50.0
+margin_top = -150.0
+margin_right = 50.0
+margin_bottom = -50.0
+rect_min_size = Vector2( 100, 100 )
+texture_normal = ExtResource( 6 )
+expand = true
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="btn_info" type="TextureButton" parent="UI"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 30.0
+margin_top = -110.0
+margin_bottom = -30.0
+rect_min_size = Vector2( 80, 80 )
+texture_normal = ExtResource( 7 )
+expand = true
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="btn_keluar" type="TextureButton" parent="UI"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -110.0
+margin_top = -110.0
+margin_right = -30.0
+margin_bottom = -30.0
+rect_min_size = Vector2( 80, 80 )
+texture_normal = ExtResource( 8 )
+expand = true
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+visible = false
 anchor_bottom = 1.0
 margin_right = 225.0
 __meta__ = {
@@ -231,6 +308,7 @@ margin_bottom = 600.0
 size_flags_vertical = 3
 
 [node name="fade" type="ColorRect" parent="UI"]
+visible = false
 material = SubResource( 8 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -246,11 +324,142 @@ anims/RESET = SubResource( 9 )
 anims/to_black = SubResource( 10 )
 anims/to_zero = SubResource( 11 )
 
+[node name="PopupInfo" type="CenterContainer" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -600.0
+margin_bottom = -600.0
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="UI/PopupInfo"]
+margin_left = 262.0
+margin_top = 50.0
+margin_right = 762.0
+margin_bottom = 550.0
+rect_min_size = Vector2( 500, 500 )
+texture = ExtResource( 10 )
+expand = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PopupInfo"]
+margin_left = 337.0
+margin_top = 121.0
+margin_right = 686.0
+margin_bottom = 479.0
+
+[node name="Label" type="Label" parent="UI/PopupInfo/VBoxContainer"]
+margin_right = 349.0
+margin_bottom = 15.0
+custom_colors/font_color = Color( 0.964706, 0.937255, 0.839216, 1 )
+custom_fonts/font = SubResource( 13 )
+text = "Tentang Kami"
+align = 1
+
+[node name="Control2" type="Control" parent="UI/PopupInfo/VBoxContainer"]
+margin_top = 19.0
+margin_right = 349.0
+margin_bottom = 34.0
+rect_min_size = Vector2( 0, 15 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label2" type="Label" parent="UI/PopupInfo/VBoxContainer"]
+margin_top = 38.0
+margin_right = 349.0
+margin_bottom = 125.0
+custom_colors/font_color = Color( 0.964706, 0.937255, 0.839216, 1 )
+custom_fonts/font = SubResource( 13 )
+text = "Ridwan Muhammad Daud (1506103)
+Ilham Syahidatul Rajab (1806043)
+Asep Kurniawan (1806044)
+Muhammad Ihsan Riyadhi (1806046)
+Ghina Ambarrona Rosita (1806071)"
+
+[node name="Control3" type="Control" parent="UI/PopupInfo/VBoxContainer"]
+margin_top = 129.0
+margin_right = 349.0
+margin_bottom = 159.0
+rect_min_size = Vector2( 0, 30 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label4" type="Label" parent="UI/PopupInfo/VBoxContainer"]
+margin_top = 163.0
+margin_right = 349.0
+margin_bottom = 178.0
+custom_colors/font_color = Color( 0.964706, 0.937255, 0.839216, 1 )
+custom_fonts/font = SubResource( 13 )
+text = "Assets"
+align = 1
+
+[node name="Control4" type="Control" parent="UI/PopupInfo/VBoxContainer"]
+margin_top = 182.0
+margin_right = 349.0
+margin_bottom = 197.0
+rect_min_size = Vector2( 0, 15 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label3" type="Label" parent="UI/PopupInfo/VBoxContainer"]
+margin_top = 201.0
+margin_right = 349.0
+margin_bottom = 270.0
+custom_colors/font_color = Color( 0.964706, 0.937255, 0.839216, 1 )
+custom_fonts/font = SubResource( 13 )
+text = "RGS_Dev, SoloCode, Kyrise, 
+Odd1ln, PabloGameDev, Free Game 
+Assets, Memesbruh03, Mixkit, 
+Freepik"
+
+[node name="Control" type="Control" parent="UI/PopupInfo/VBoxContainer"]
+margin_top = 274.0
+margin_right = 349.0
+margin_bottom = 304.0
+rect_min_size = Vector2( 0, 30 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/PopupInfo/VBoxContainer"]
+margin_top = 308.0
+margin_right = 349.0
+margin_bottom = 358.0
+
+[node name="Control2" type="Control" parent="UI/PopupInfo/VBoxContainer/HBoxContainer"]
+margin_right = 145.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="btn_next" type="TextureButton" parent="UI/PopupInfo/VBoxContainer/HBoxContainer"]
+margin_left = 149.0
+margin_right = 199.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+texture_normal = ExtResource( 12 )
+expand = true
+
+[node name="Control3" type="Control" parent="UI/PopupInfo/VBoxContainer/HBoxContainer"]
+margin_left = 203.0
+margin_right = 349.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Tween" type="Tween" parent="UI/PopupInfo"]
+
 [node name="Timer2" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
 
+[connection signal="btn_info" from="." to="UI/PopupInfo" method="_on_menu_btn_info"]
 [connection signal="timeout" from="Map/Timer" to="." method="_on_Timer_timeout"]
+[connection signal="pressed" from="UI/btn_main" to="." method="_on_btn_main_pressed"]
+[connection signal="pressed" from="UI/btn_info" to="." method="_on_btn_info_pressed"]
+[connection signal="pressed" from="UI/btn_keluar" to="." method="_on_btn_keluar_pressed"]
 [connection signal="pressed" from="UI/VBoxContainer/btn_new" to="." method="_on_btn_new_pressed"]
 [connection signal="pressed" from="UI/VBoxContainer/btn_exit" to="." method="_on_btn_exit_pressed"]
+[connection signal="pressed" from="UI/PopupInfo/VBoxContainer/HBoxContainer/btn_next" to="UI/PopupInfo" method="_on_btn_next_pressed"]
 [connection signal="timeout" from="Timer2" to="." method="_on_Timer2_timeout"]
