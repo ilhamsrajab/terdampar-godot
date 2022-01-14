@@ -7,7 +7,7 @@ var buah_added = 0
 
 var ketinggian_air = 1.5
 
-onready var health_bar = $UI/HealthBar
+onready var health_bar = $UI/HealthBar/ProgressBar
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,6 +15,8 @@ func _ready():
 	var shader = $UI/fade.material
 	shader.set_shader_param("aspect_ratio", ratio)
 	 
+	health_bar.value = 100
+	
 	$Map/air.visible = true
 	$UI/fade.visible = true
 	$UI/anim.play("to_zero")

@@ -49,7 +49,7 @@ corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
-[sub_resource type="Shader" id=17]
+[sub_resource type="Shader" id=20]
 code = "shader_type canvas_item;
 uniform float factor = 0.5;
 uniform float aspect_ratio = 1.7;
@@ -67,7 +67,7 @@ void fragment() {
 }"
 
 [sub_resource type="ShaderMaterial" id=13]
-shader = SubResource( 17 )
+shader = SubResource( 20 )
 shader_param/factor = 0.0
 shader_param/aspect_ratio = 1.7
 shader_param/fade_color = null
@@ -242,7 +242,6 @@ __meta__ = {
 autostart = true
 
 [node name="fade" type="ColorRect" parent="UI"]
-visible = false
 material = SubResource( 13 )
 anchor_right = 1.0
 anchor_bottom = 1.0

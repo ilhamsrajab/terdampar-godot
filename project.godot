@@ -19,11 +19,6 @@ config/icon="res://icon.png"
 Global="*res://scripts/global.gd"
 MusicController="*res://scenes/MusicController.tscn"
 
-[display]
-
-window/size/resizable=false
-window/size/always_on_top=true
-
 [editor_plugins]
 
 enabled=PoolStringArray( "res://addons/MagicaVoxel_Importer_with_Extensions/plugin.cfg" )
