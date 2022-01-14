@@ -1,0 +1,518 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://assets/level design/hutan/player.vox" type="ArrayMesh" id=1]
+[ext_resource path="res://scripts/player.gd" type="Script" id=2]
+
+[sub_resource type="BoxShape" id=1]
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/body:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("pivot/body:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("pivot/body:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("pivot:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("pivot:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("pivot:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "idle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/body:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("pivot/body:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("pivot/body:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.9, 0.9, 0.9 ), Vector3( 1, 0.8, 1 ), Vector3( 0.9, 0.9, 0.9 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "jalan"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/body:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 1, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("pivot/body:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( -15, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("pivot/body:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0.9, 0.9, 0.9 ) ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "jatuh"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 1, 0 ), Vector3( 0, 1, 0 ), Vector3( 0, 1.2, 0 ), Vector3( 0, 1, 0 ), Vector3( 0, 1.15, 0 ), Vector3( 0, 1, 0 ), Vector3( 0, 1.1, 0 ), Vector3( 0, 1, 0 ), Vector3( 0, 1.05, 0 ), Vector3( 0, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("pivot:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( -180, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("pivot:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("pivot/body:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, -1, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("pivot/body:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("pivot/body:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0.9, 0.9, 0.9 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "luka"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/body:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("pivot/body:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 15, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("pivot/body:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0.9, 0.9, 0.9 ) ]
+}
+
+[sub_resource type="Animation" id=24]
+resource_name = "mati"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/body:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0.485423, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("pivot/body:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( -90, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("pivot/body:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "jalan"
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "luka"
+
+[sub_resource type="AnimationNodeAnimation" id=15]
+animation = "jatuh"
+
+[sub_resource type="AnimationNodeAnimation" id=25]
+animation = "mati"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "idle"
+
+[sub_resource type="AnimationNodeTimeScale" id=9]
+
+[sub_resource type="AnimationNodeOneShot" id=10]
+
+[sub_resource type="AnimationNodeOneShot" id=11]
+
+[sub_resource type="AnimationNodeTimeScale" id=12]
+
+[sub_resource type="AnimationNodeTransition" id=16]
+input_count = 3
+input_0/name = "idle"
+input_0/auto_advance = false
+input_1/name = "jatuh"
+input_1/auto_advance = false
+input_2/name = "mati"
+input_2/auto_advance = false
+
+[sub_resource type="AnimationNodeBlendTree" id=13]
+graph_offset = Vector2( 106.875, 346.881 )
+nodes/Animation/node = SubResource( 8 )
+nodes/Animation/position = Vector2( -360, 180 )
+"nodes/Animation 2/node" = SubResource( 6 )
+"nodes/Animation 2/position" = Vector2( -200, 400 )
+"nodes/Animation 3/node" = SubResource( 7 )
+"nodes/Animation 3/position" = Vector2( 40, 460 )
+"nodes/Animation 4/node" = SubResource( 15 )
+"nodes/Animation 4/position" = Vector2( 480, 480 )
+"nodes/Animation 5/node" = SubResource( 25 )
+"nodes/Animation 5/position" = Vector2( 480, 640 )
+nodes/idle_time/node = SubResource( 9 )
+nodes/idle_time/position = Vector2( -160, 180 )
+nodes/jalan/node = SubResource( 10 )
+nodes/jalan/position = Vector2( 40, 260 )
+nodes/luka/node = SubResource( 11 )
+nodes/luka/position = Vector2( 420, 260 )
+nodes/luka_time/node = SubResource( 12 )
+nodes/luka_time/position = Vector2( 260, 460 )
+nodes/output/position = Vector2( 920, 320 )
+nodes/transisi/node = SubResource( 16 )
+nodes/transisi/position = Vector2( 740, 340 )
+node_connections = [ "output", 0, "transisi", "jalan", 0, "idle_time", "jalan", 1, "Animation 2", "luka", 0, "jalan", "luka", 1, "luka_time", "transisi", 0, "luka", "transisi", 1, "Animation 4", "transisi", 2, "Animation 5", "idle_time", 0, "Animation", "luka_time", 0, "Animation 3" ]
+
+[sub_resource type="Animation" id=19]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("player/fade/fade:material:shader_param/factor")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+
+[sub_resource type="Animation" id=20]
+resource_name = "to_black"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("player/fade/fade:material:shader_param/factor")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 3.61, 3.61 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=21]
+resource_name = "to_zero"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("player/fade/fade:material:shader_param/factor")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 3.61, 3.61 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[sub_resource type="Shader" id=22]
+code = "shader_type canvas_item;
+uniform float factor = 0.5;
+uniform float aspect_ratio = 1.7;
+uniform vec4 fade_color:hint_color;
+
+void fragment() {
+	vec2 uv_mod = UV;
+	uv_mod.x = mix(0.5, uv_mod.x, aspect_ratio);
+	vec4 color;
+	
+	float d = length(uv_mod - 0.5);
+	if (d < factor) color = vec4(0.); 
+	else color = fade_color;
+	COLOR = color;  
+}"
+
+[sub_resource type="ShaderMaterial" id=23]
+shader = SubResource( 22 )
+shader_param/factor = 1.0
+shader_param/aspect_ratio = 1.7
+shader_param/fade_color = null
+
+[node name="player" type="StaticBody" groups=["player"]]
+script = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+shape = SubResource( 1 )
+
+[node name="ray1" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 2 )
+enabled = true
+cast_to = Vector3( 0, -2, 0 )
+
+[node name="ray2" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 4 )
+enabled = true
+cast_to = Vector3( 0, -2, 0 )
+
+[node name="ray3" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 6 )
+enabled = true
+cast_to = Vector3( 0, -2, 0 )
+
+[node name="tw_m" type="Tween" parent="."]
+
+[node name="tw_r" type="Tween" parent="."]
+
+[node name="pivot" type="Spatial" parent="."]
+
+[node name="body" type="MeshInstance" parent="pivot"]
+mesh = ExtResource( 1 )
+skeleton = NodePath("../..")
+material/0 = null
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
+anims/idle = SubResource( 3 )
+anims/jalan = SubResource( 4 )
+anims/jatuh = SubResource( 14 )
+anims/luka = SubResource( 5 )
+anims/mati = SubResource( 24 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 13 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/idle_time/scale = 1.5
+parameters/jalan/active = false
+parameters/luka/active = false
+parameters/luka_time/scale = 1.0
+parameters/transisi/current = 0
+
+[node name="ray_down" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+enabled = true
+
+[node name="fade" type="CanvasLayer" parent="."]
+
+[node name="anim" type="AnimationPlayer" parent="fade"]
+root_node = NodePath("../../..")
+anims/RESET = SubResource( 19 )
+anims/to_black = SubResource( 20 )
+anims/to_zero = SubResource( 21 )
+
+[node name="fade" type="ColorRect" parent="fade"]
+material = SubResource( 23 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 1, 1, 1, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

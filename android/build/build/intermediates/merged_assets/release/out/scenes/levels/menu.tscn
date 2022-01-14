@@ -1,0 +1,465 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://mesh/mesh0.meshlib" type="MeshLibrary" id=1]
+[ext_resource path="res://terdampar_env.tres" type="Environment" id=2]
+[ext_resource path="res://scenes/player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scripts/menu.gd" type="Script" id=4]
+[ext_resource path="res://assets/fonts/superstar_memesbruh03.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://assets/UI/menu/play.png" type="Texture" id=6]
+[ext_resource path="res://assets/UI/menu/about.png" type="Texture" id=7]
+[ext_resource path="res://assets/UI/btn/close.png" type="Texture" id=8]
+[ext_resource path="res://assets/UI/menu/fg_logo.png" type="Texture" id=9]
+[ext_resource path="res://assets/UI/you_win/bg.png" type="Texture" id=10]
+[ext_resource path="res://assets/fonts/iCielSoupofJustice.ttf" type="DynamicFontData" id=11]
+[ext_resource path="res://assets/UI/btn/close_2.png" type="Texture" id=12]
+[ext_resource path="res://scripts/PopupInfo.gd" type="Script" id=13]
+
+[sub_resource type="SpatialMaterial" id=1]
+flags_transparent = true
+albedo_color = Color( 0.054902, 0.494118, 0.729412, 0.784314 )
+
+[sub_resource type="PlaneMesh" id=12]
+material = SubResource( 1 )
+size = Vector2( 200, 200 )
+
+[sub_resource type="CapsuleMesh" id=3]
+
+[sub_resource type="DynamicFont" id=4]
+size = 64
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 22
+font_data = ExtResource( 5 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color( 0.8, 0.8, 0.8, 0.0392157 )
+
+[sub_resource type="Shader" id=7]
+code = "shader_type canvas_item;
+uniform float factor = 0.5;
+uniform float aspect_ratio = 1.7;
+uniform vec4 fade_color:hint_color;
+
+void fragment() {
+	vec2 uv_mod = UV;
+	uv_mod.x = mix(0.5, uv_mod.x, aspect_ratio);
+	vec4 color;
+	
+	float d = length(uv_mod - 0.5);
+	if (d < factor) color = vec4(0.); 
+	else color = fade_color;
+	COLOR = color;  
+}"
+
+[sub_resource type="ShaderMaterial" id=8]
+shader = SubResource( 7 )
+shader_param/factor = 0.0
+shader_param/aspect_ratio = 1.7
+shader_param/fade_color = null
+
+[sub_resource type="Animation" id=9]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("UI/fade:material:shader_param/factor")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "to_black"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("UI/fade:material:shader_param/factor")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 3.605, 3.605 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "to_zero"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("UI/fade:material:shader_param/factor")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 3.6, 3.6 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[sub_resource type="DynamicFont" id=13]
+size = 22
+font_data = ExtResource( 11 )
+
+[node name="menu" type="Spatial"]
+script = ExtResource( 4 )
+
+[node name="Map" type="Spatial" parent="."]
+
+[node name="GridMap" type="GridMap" parent="Map" groups=["wall"]]
+mesh_library = ExtResource( 1 )
+data = {
+"cells": PoolIntArray( 1, 2, 3, 2, 2, 2, 3, 2, 2, 4, 2, 2, 2, 3, 2, 4, 3, 2, 5, 3, 1, 2, 4, 2, 3, 4, 2, 4, 4, 2, 5, 4, 2, 6, 4, 2, 3, 5, 0, 4, 5, 2, 6, 5, 2, 4, 6, 2, 5, 6, 2, 6, 6, 2 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 0, 0 )
+}
+
+[node name="air" type="MeshInstance" parent="Map"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+visible = false
+mesh = SubResource( 12 )
+skeleton = NodePath("../..")
+material/0 = null
+
+[node name="Timer" type="Timer" parent="Map"]
+wait_time = 0.5
+autostart = true
+
+[node name="DirectionalLight" type="DirectionalLight" parent="Map"]
+transform = Transform( 0.0794593, 0.948574, -0.306421, 0.5, 0.228002, 0.835473, 0.862372, -0.219597, -0.45617, 0, 12, 0 )
+shadow_enabled = true
+
+[node name="kamera" type="Spatial" parent="."]
+transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 8.98026, 0, -3.74767 )
+
+[node name="target" type="MeshInstance" parent="kamera"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 9, 2, 9 )
+visible = false
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="Camera" type="Camera" parent="kamera"]
+transform = Transform( -1, -8.9407e-08, 8.9407e-08, 0, 0.707107, 0.707107, -1.49012e-07, 0.707107, -0.707106, 9, 12, -1 )
+environment = ExtResource( 2 )
+projection = 1
+size = 20.0
+
+[node name="player" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3, 9 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Logo" type="TextureRect" parent="UI"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -210.0
+margin_top = 30.0
+margin_right = 210.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 420, 120 )
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI"]
+visible = false
+anchor_right = 1.0
+margin_bottom = 107.0
+custom_fonts/font = SubResource( 4 )
+text = "Terdampar"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="btn_main" type="TextureButton" parent="UI"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -50.0
+margin_top = -150.0
+margin_right = 50.0
+margin_bottom = -50.0
+rect_min_size = Vector2( 100, 100 )
+texture_normal = ExtResource( 6 )
+expand = true
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="btn_info" type="TextureButton" parent="UI"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 30.0
+margin_top = -110.0
+margin_bottom = -30.0
+rect_min_size = Vector2( 80, 80 )
+texture_normal = ExtResource( 7 )
+expand = true
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="btn_keluar" type="TextureButton" parent="UI"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -110.0
+margin_top = -110.0
+margin_right = -30.0
+margin_bottom = -30.0
+rect_min_size = Vector2( 80, 80 )
+texture_normal = ExtResource( 8 )
+expand = true
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+visible = false
+anchor_bottom = 1.0
+margin_right = 225.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="UI/VBoxContainer"]
+margin_right = 225.0
+margin_bottom = 204.0
+size_flags_vertical = 3
+
+[node name="btn_new" type="Button" parent="UI/VBoxContainer"]
+margin_top = 208.0
+margin_right = 225.0
+margin_bottom = 251.0
+custom_fonts/font = SubResource( 5 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 6 )
+custom_styles/disabled = SubResource( 6 )
+custom_styles/normal = SubResource( 6 )
+text = "Permainan Baru"
+
+[node name="btn_resume" type="Button" parent="UI/VBoxContainer"]
+margin_top = 255.0
+margin_right = 225.0
+margin_bottom = 298.0
+custom_fonts/font = SubResource( 5 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 6 )
+custom_styles/disabled = SubResource( 6 )
+custom_styles/normal = SubResource( 6 )
+disabled = true
+text = "Lanjutkan"
+
+[node name="btn_help" type="Button" parent="UI/VBoxContainer"]
+margin_top = 302.0
+margin_right = 225.0
+margin_bottom = 345.0
+custom_fonts/font = SubResource( 5 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 6 )
+custom_styles/disabled = SubResource( 6 )
+custom_styles/normal = SubResource( 6 )
+text = "Petunjuk"
+
+[node name="btn_exit" type="Button" parent="UI/VBoxContainer"]
+margin_top = 349.0
+margin_right = 225.0
+margin_bottom = 392.0
+custom_fonts/font = SubResource( 5 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 6 )
+custom_styles/disabled = SubResource( 6 )
+custom_styles/normal = SubResource( 6 )
+text = "Keluar"
+
+[node name="Control2" type="Control" parent="UI/VBoxContainer"]
+margin_top = 396.0
+margin_right = 225.0
+margin_bottom = 600.0
+size_flags_vertical = 3
+
+[node name="fade" type="ColorRect" parent="UI"]
+visible = false
+material = SubResource( 8 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 1, 1, 1, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="anim" type="AnimationPlayer" parent="UI"]
+root_node = NodePath("../..")
+anims/RESET = SubResource( 9 )
+anims/to_black = SubResource( 10 )
+anims/to_zero = SubResource( 11 )
+
+[node name="PopupInfo" type="CenterContainer" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -600.0
+margin_bottom = -600.0
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="UI/PopupInfo"]
+margin_left = 262.0
+margin_top = 50.0
+margin_right = 762.0
+margin_bottom = 550.0
+rect_min_size = Vector2( 500, 500 )
+texture = ExtResource( 10 )
+expand = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PopupInfo"]
+margin_left = 337.0
+margin_top = 121.0
+margin_right = 686.0
+margin_bottom = 479.0
+
+[node name="Label" type="Label" parent="UI/PopupInfo/VBoxContainer"]
+margin_right = 349.0
+margin_bottom = 15.0
+custom_colors/font_color = Color( 0.964706, 0.937255, 0.839216, 1 )
+custom_fonts/font = SubResource( 13 )
+text = "Tentang Kami"
+align = 1
+
+[node name="Control2" type="Control" parent="UI/PopupInfo/VBoxContainer"]
+margin_top = 19.0
+margin_right = 349.0
+margin_bottom = 34.0
+rect_min_size = Vector2( 0, 15 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label2" type="Label" parent="UI/PopupInfo/VBoxContainer"]
+margin_top = 38.0
+margin_right = 349.0
+margin_bottom = 125.0
+custom_colors/font_color = Color( 0.964706, 0.937255, 0.839216, 1 )
+custom_fonts/font = SubResource( 13 )
+text = "Ridwan Muhammad Daud (1506103)
+Ilham Syahidatul Rajab (1806043)
+Asep Kurniawan (1806044)
+Muhammad Ihsan Riyadhi (1806046)
+Ghina Ambarrona Rosita (1806071)"
+
+[node name="Control3" type="Control" parent="UI/PopupInfo/VBoxContainer"]
+margin_top = 129.0
+margin_right = 349.0
+margin_bottom = 159.0
+rect_min_size = Vector2( 0, 30 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label4" type="Label" parent="UI/PopupInfo/VBoxContainer"]
+margin_top = 163.0
+margin_right = 349.0
+margin_bottom = 178.0
+custom_colors/font_color = Color( 0.964706, 0.937255, 0.839216, 1 )
+custom_fonts/font = SubResource( 13 )
+text = "Assets"
+align = 1
+
+[node name="Control4" type="Control" parent="UI/PopupInfo/VBoxContainer"]
+margin_top = 182.0
+margin_right = 349.0
+margin_bottom = 197.0
+rect_min_size = Vector2( 0, 15 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label3" type="Label" parent="UI/PopupInfo/VBoxContainer"]
+margin_top = 201.0
+margin_right = 349.0
+margin_bottom = 270.0
+custom_colors/font_color = Color( 0.964706, 0.937255, 0.839216, 1 )
+custom_fonts/font = SubResource( 13 )
+text = "RGS_Dev, SoloCode, Kyrise, 
+Odd1ln, PabloGameDev, Free Game 
+Assets, Memesbruh03, Mixkit, 
+Freepik"
+
+[node name="Control" type="Control" parent="UI/PopupInfo/VBoxContainer"]
+margin_top = 274.0
+margin_right = 349.0
+margin_bottom = 304.0
+rect_min_size = Vector2( 0, 30 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/PopupInfo/VBoxContainer"]
+margin_top = 308.0
+margin_right = 349.0
+margin_bottom = 358.0
+
+[node name="Control2" type="Control" parent="UI/PopupInfo/VBoxContainer/HBoxContainer"]
+margin_right = 145.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="btn_next" type="TextureButton" parent="UI/PopupInfo/VBoxContainer/HBoxContainer"]
+margin_left = 149.0
+margin_right = 199.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+texture_normal = ExtResource( 12 )
+expand = true
+
+[node name="Control3" type="Control" parent="UI/PopupInfo/VBoxContainer/HBoxContainer"]
+margin_left = 203.0
+margin_right = 349.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Tween" type="Tween" parent="UI/PopupInfo"]
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="btn_info" from="." to="UI/PopupInfo" method="_on_menu_btn_info"]
+[connection signal="timeout" from="Map/Timer" to="." method="_on_Timer_timeout"]
+[connection signal="pressed" from="UI/btn_main" to="." method="_on_btn_main_pressed"]
+[connection signal="pressed" from="UI/btn_info" to="." method="_on_btn_info_pressed"]
+[connection signal="pressed" from="UI/btn_keluar" to="." method="_on_btn_keluar_pressed"]
+[connection signal="pressed" from="UI/VBoxContainer/btn_new" to="." method="_on_btn_new_pressed"]
+[connection signal="pressed" from="UI/VBoxContainer/btn_exit" to="." method="_on_btn_exit_pressed"]
+[connection signal="pressed" from="UI/PopupInfo/VBoxContainer/HBoxContainer/btn_next" to="UI/PopupInfo" method="_on_btn_next_pressed"]
+[connection signal="timeout" from="Timer2" to="." method="_on_Timer2_timeout"]
