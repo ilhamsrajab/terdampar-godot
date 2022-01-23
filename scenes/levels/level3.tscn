@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://mesh/mesh0.meshlib" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/PopupTBC.gd" type="Script" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://assets/UI/load_bar/bg.png" type="Texture" id=11]
 [ext_resource path="res://assets/UI/you_win/bg.png" type="Texture" id=12]
 [ext_resource path="res://assets/UI/load_bar/4.png" type="Texture" id=13]
+[ext_resource path="res://assets/images/white.png" type="Texture" id=14]
 [ext_resource path="res://assets/fonts/iCielSoupofJustice.ttf" type="DynamicFontData" id=15]
 [ext_resource path="res://scripts/PopupKalah.gd" type="Script" id=16]
 [ext_resource path="res://assets/UI/btn/close.png" type="Texture" id=17]
@@ -28,6 +29,51 @@ material = SubResource( 36 )
 size = Vector2( 200, 200 )
 
 [sub_resource type="CapsuleMesh" id=3]
+
+[sub_resource type="Shader" id=40]
+code = "shader_type canvas_item;
+
+uniform float limit: hint_range(0.0,0.5) = 0.2;
+uniform float blur: hint_range(0.0,5.0) = 2.0;
+uniform float intensity: hint_range (0.0, 0.5) = 0.19;
+uniform bool debug = true;
+
+void fragment(){
+	
+ 	if (UV.y<limit){
+			
+		float _step = smoothstep(UV.y,limit,intensity);
+		vec4 color = textureLod(SCREEN_TEXTURE, SCREEN_UV, blur);
+		COLOR = color;
+		
+		if (debug==true){
+			COLOR = vec4(1.0,1.0,1.0,1.0)
+			}
+			
+		COLOR.a = _step;
+		
+	} else if (UV.y > 1.0-limit){
+			
+		float _step = smoothstep(UV.y,1.0-limit,1.0-intensity);
+		vec4 color = textureLod(SCREEN_TEXTURE, SCREEN_UV, blur);
+		COLOR = color;
+		
+		if (debug==true){
+			COLOR = vec4(1.0,1.0,1.0,1.0)
+			}
+		COLOR.a = _step;
+			
+	}else{
+			COLOR.a = 0f; 
+		}
+}"
+
+[sub_resource type="ShaderMaterial" id=41]
+shader = SubResource( 40 )
+shader_param/limit = 0.2
+shader_param/blur = 2.0
+shader_param/intensity = 0.19
+shader_param/debug = false
 
 [sub_resource type="DynamicFontData" id=24]
 font_path = "res://assets/fonts/iCielSoupofJustice.ttf"
@@ -126,7 +172,7 @@ script = ExtResource( 6 )
 [node name="GridMap" type="GridMap" parent="Map" groups=["wall"]]
 mesh_library = ExtResource( 1 )
 data = {
-"cells": PoolIntArray( 2, 0, 7, 5, 1, 9, 0, 2, 0, 2, 2, 7, 4, 2, 10, 5, 2, 7, 2, 3, 10, 4, 3, 7, 5, 3, 10, 2, 4, 7, 4, 4, 7, 5, 4, 7, 4, 5, 7, 2, 6, 7, 3, 6, 7, 4, 6, 10, 5, 6, 7, 6, 6, 9, 4, 7, 7, 6, 8, 0 )
+"cells": PoolIntArray( 2, 0, 7, 5, 1, 9, 9, 1, 10, 0, 2, 0, 2, 2, 7, 4, 2, 10, 5, 2, 7, 2, 3, 10, 4, 3, 7, 5, 3, 10, 2, 4, 7, 4, 4, 7, 5, 4, 7, 4, 5, 7, 10, 5, 7, 65533, 5, 9, 2, 6, 7, 3, 6, 7, 4, 6, 10, 5, 6, 7, 6, 6, 9, 4, 7, 7, 0, 8, 10, 6, 8, 0, 6, 9, 9, 2, 12, 0, 10, 12, 9, 6, 65534, 7 )
 }
 __meta__ = {
 "_editor_clip_": 0,
@@ -186,6 +232,29 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3, 1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3, 13 )
 
 [node name="UI" type="CanvasLayer" parent="."]
+
+[node name="TiltShift" type="Control" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/TiltShift"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="UI/TiltShift/MarginContainer"]
+material = SubResource( 41 )
+margin_right = 1024.0
+margin_bottom = 600.0
+texture = ExtResource( 14 )
+expand = true
 
 [node name="Button" type="HBoxContainer" parent="UI"]
 anchor_right = 1.0
@@ -318,6 +387,7 @@ __meta__ = {
 [node name="Popup" type="Control" parent="UI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }

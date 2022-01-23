@@ -166,7 +166,7 @@ func _physics_process(_delta):
 		
 
 func _on_TimerHealth_timeout():
-	health -= 15
+	health -= 10
 	get_parent().emit_signal("player_health", (float(health) / float(health_maks)) * 100)
 	
 	if health <= 0:

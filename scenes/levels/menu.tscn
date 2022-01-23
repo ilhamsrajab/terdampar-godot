@@ -122,7 +122,7 @@ script = ExtResource( 4 )
 [node name="GridMap" type="GridMap" parent="Map" groups=["wall"]]
 mesh_library = ExtResource( 1 )
 data = {
-"cells": PoolIntArray( 1, 2, 3, 2, 2, 2, 3, 2, 2, 4, 2, 2, 2, 3, 2, 4, 3, 2, 5, 3, 1, 2, 4, 2, 3, 4, 2, 4, 4, 2, 5, 4, 2, 6, 4, 2, 3, 5, 0, 4, 5, 2, 6, 5, 2, 4, 6, 2, 5, 6, 2, 6, 6, 2 )
+"cells": PoolIntArray( 1, 1, 0, 2, 2, 7, 3, 2, 7, 4, 2, 7, 2, 3, 10, 4, 3, 7, 5, 3, 9, 2, 4, 7, 3, 4, 7, 4, 4, 7, 5, 4, 7, 6, 4, 7, 3, 5, 0, 4, 5, 7, 6, 5, 7, 4, 6, 7, 5, 6, 10, 6, 6, 7 )
 }
 __meta__ = {
 "_editor_clip_": 0,
@@ -323,7 +323,15 @@ anims/RESET = SubResource( 9 )
 anims/to_black = SubResource( 10 )
 anims/to_zero = SubResource( 11 )
 
-[node name="PopupInfo" type="CenterContainer" parent="UI"]
+[node name="Control" type="Control" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PopupInfo" type="CenterContainer" parent="UI/Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -600.0
@@ -334,7 +342,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="UI/PopupInfo"]
+[node name="TextureRect" type="TextureRect" parent="UI/Control/PopupInfo"]
 margin_left = 262.0
 margin_top = 50.0
 margin_right = 762.0
@@ -343,13 +351,13 @@ rect_min_size = Vector2( 500, 500 )
 texture = ExtResource( 10 )
 expand = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/PopupInfo"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/PopupInfo"]
 margin_left = 337.0
 margin_top = 121.0
 margin_right = 686.0
 margin_bottom = 479.0
 
-[node name="Label" type="Label" parent="UI/PopupInfo/VBoxContainer"]
+[node name="Label" type="Label" parent="UI/Control/PopupInfo/VBoxContainer"]
 margin_right = 349.0
 margin_bottom = 15.0
 custom_colors/font_color = Color( 0.964706, 0.937255, 0.839216, 1 )
@@ -357,7 +365,7 @@ custom_fonts/font = SubResource( 13 )
 text = "Tentang Kami"
 align = 1
 
-[node name="Control2" type="Control" parent="UI/PopupInfo/VBoxContainer"]
+[node name="Control2" type="Control" parent="UI/Control/PopupInfo/VBoxContainer"]
 margin_top = 19.0
 margin_right = 349.0
 margin_bottom = 34.0
@@ -365,7 +373,7 @@ rect_min_size = Vector2( 0, 15 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Label2" type="Label" parent="UI/PopupInfo/VBoxContainer"]
+[node name="Label2" type="Label" parent="UI/Control/PopupInfo/VBoxContainer"]
 margin_top = 38.0
 margin_right = 349.0
 margin_bottom = 125.0
@@ -377,7 +385,7 @@ Asep Kurniawan (1806044)
 Muhammad Ihsan Riyadhi (1806046)
 Ghina Ambarrona Rosita (1806071)"
 
-[node name="Control3" type="Control" parent="UI/PopupInfo/VBoxContainer"]
+[node name="Control3" type="Control" parent="UI/Control/PopupInfo/VBoxContainer"]
 margin_top = 129.0
 margin_right = 349.0
 margin_bottom = 159.0
@@ -385,7 +393,7 @@ rect_min_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Label4" type="Label" parent="UI/PopupInfo/VBoxContainer"]
+[node name="Label4" type="Label" parent="UI/Control/PopupInfo/VBoxContainer"]
 margin_top = 163.0
 margin_right = 349.0
 margin_bottom = 178.0
@@ -394,7 +402,7 @@ custom_fonts/font = SubResource( 13 )
 text = "Assets"
 align = 1
 
-[node name="Control4" type="Control" parent="UI/PopupInfo/VBoxContainer"]
+[node name="Control4" type="Control" parent="UI/Control/PopupInfo/VBoxContainer"]
 margin_top = 182.0
 margin_right = 349.0
 margin_bottom = 197.0
@@ -402,7 +410,7 @@ rect_min_size = Vector2( 0, 15 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Label3" type="Label" parent="UI/PopupInfo/VBoxContainer"]
+[node name="Label3" type="Label" parent="UI/Control/PopupInfo/VBoxContainer"]
 margin_top = 201.0
 margin_right = 349.0
 margin_bottom = 270.0
@@ -413,7 +421,7 @@ Odd1ln, PabloGameDev, Free Game
 Assets, Memesbruh03, Mixkit, 
 Freepik"
 
-[node name="Control" type="Control" parent="UI/PopupInfo/VBoxContainer"]
+[node name="Control" type="Control" parent="UI/Control/PopupInfo/VBoxContainer"]
 margin_top = 274.0
 margin_right = 349.0
 margin_bottom = 304.0
@@ -421,18 +429,18 @@ rect_min_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/PopupInfo/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Control/PopupInfo/VBoxContainer"]
 margin_top = 308.0
 margin_right = 349.0
 margin_bottom = 358.0
 
-[node name="Control2" type="Control" parent="UI/PopupInfo/VBoxContainer/HBoxContainer"]
+[node name="Control2" type="Control" parent="UI/Control/PopupInfo/VBoxContainer/HBoxContainer"]
 margin_right = 145.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="btn_next" type="TextureButton" parent="UI/PopupInfo/VBoxContainer/HBoxContainer"]
+[node name="btn_next" type="TextureButton" parent="UI/Control/PopupInfo/VBoxContainer/HBoxContainer"]
 margin_left = 149.0
 margin_right = 199.0
 margin_bottom = 50.0
@@ -440,25 +448,25 @@ rect_min_size = Vector2( 50, 50 )
 texture_normal = ExtResource( 12 )
 expand = true
 
-[node name="Control3" type="Control" parent="UI/PopupInfo/VBoxContainer/HBoxContainer"]
+[node name="Control3" type="Control" parent="UI/Control/PopupInfo/VBoxContainer/HBoxContainer"]
 margin_left = 203.0
 margin_right = 349.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Tween" type="Tween" parent="UI/PopupInfo"]
+[node name="Tween" type="Tween" parent="UI/Control/PopupInfo"]
 
 [node name="Timer2" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
 
-[connection signal="btn_info" from="." to="UI/PopupInfo" method="_on_menu_btn_info"]
+[connection signal="btn_info" from="." to="UI/Control/PopupInfo" method="_on_menu_btn_info"]
 [connection signal="timeout" from="Map/Timer" to="." method="_on_Timer_timeout"]
 [connection signal="pressed" from="UI/btn_main" to="." method="_on_btn_main_pressed"]
 [connection signal="pressed" from="UI/btn_info" to="." method="_on_btn_info_pressed"]
 [connection signal="pressed" from="UI/btn_keluar" to="." method="_on_btn_keluar_pressed"]
 [connection signal="pressed" from="UI/VBoxContainer/btn_new" to="." method="_on_btn_new_pressed"]
 [connection signal="pressed" from="UI/VBoxContainer/btn_exit" to="." method="_on_btn_exit_pressed"]
-[connection signal="pressed" from="UI/PopupInfo/VBoxContainer/HBoxContainer/btn_next" to="UI/PopupInfo" method="_on_btn_next_pressed"]
+[connection signal="pressed" from="UI/Control/PopupInfo/VBoxContainer/HBoxContainer/btn_next" to="UI/Control/PopupInfo" method="_on_btn_next_pressed"]
 [connection signal="timeout" from="Timer2" to="." method="_on_Timer2_timeout"]
