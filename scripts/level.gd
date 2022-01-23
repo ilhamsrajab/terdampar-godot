@@ -9,6 +9,7 @@ var ketinggian_air = 1.5
 
 onready var health_bar = $UI/HealthBar/ProgressBar
 
+signal player_health(value)
 signal player_menang()
 signal player_mati()
 signal player_level_tbc()
@@ -43,7 +44,13 @@ func shake():
 	$kamera/Camera.rotation_degrees.z = -3
 
 
-func _on_player_player_health(value):
+func _on_level2_player_health(value):
 	health_bar.value = value
 
 
+#func _on_player_player_health(value):
+#	health_bar.value = value
+
+
+func _on_level_player_health(value):
+	health_bar.value = value

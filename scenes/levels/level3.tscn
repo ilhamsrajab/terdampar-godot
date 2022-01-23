@@ -593,7 +593,6 @@ anims/to_zero = SubResource( 33 )
 [connection signal="player_menang" from="." to="player" method="_on_level2_player_menang"]
 [connection signal="player_menang" from="." to="UI/PopupMenang" method="_on_level2_player_menang"]
 [connection signal="timeout" from="Map/Timer" to="." method="_on_Timer_timeout"]
-[connection signal="player_health" from="player" to="." method="_on_player_player_health"]
 [connection signal="pressed" from="UI/Button/btn_home" to="." method="_on_btn_home_pressed"]
 [connection signal="pressed" from="UI/Button/btn_retry" to="." method="_on_btn_retry_pressed"]
 [connection signal="timeout" from="UI/HealthBar/TimerHealth" to="player" method="_on_TimerHealth_timeout"]

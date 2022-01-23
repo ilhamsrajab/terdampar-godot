@@ -118,7 +118,7 @@ tracks/0/keys = {
 "values": [ 0.0, 1.0 ]
 }
 
-[node name="level1" type="Spatial"]
+[node name="level" type="Spatial"]
 script = ExtResource( 6 )
 
 [node name="Map" type="Spatial" parent="."]
@@ -583,13 +583,22 @@ anims/to_zero = SubResource( 21 )
 [node name="apel2" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 3, 5 )
 
-[connection signal="player_level_tbc" from="." to="player" method="_on_level1_player_level_tbc"]
-[connection signal="player_level_tbc" from="." to="UI/PopupTBC" method="_on_level1_player_level_tbc"]
-[connection signal="player_mati" from="." to="UI/PopupKalah" method="_on_level1_player_mati"]
-[connection signal="player_menang" from="." to="player" method="_on_level1_player_menang"]
-[connection signal="player_menang" from="." to="UI/PopupMenang" method="_on_level1_player_menang"]
+[node name="apel3" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3, 5 )
+
+[node name="apel4" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3, 7 )
+
+[node name="apel5" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3, 9 )
+
+[connection signal="player_health" from="." to="." method="_on_level_player_health"]
+[connection signal="player_level_tbc" from="." to="player" method="_on_level_player_level_tbc"]
+[connection signal="player_level_tbc" from="." to="UI/PopupTBC" method="_on_level_player_level_tbc"]
+[connection signal="player_mati" from="." to="UI/PopupKalah" method="_on_level_player_mati"]
+[connection signal="player_menang" from="." to="player" method="_on_level_player_menang"]
+[connection signal="player_menang" from="." to="UI/PopupMenang" method="_on_level_player_menang"]
 [connection signal="timeout" from="Map/Timer" to="." method="_on_Timer_timeout"]
-[connection signal="player_health" from="player" to="." method="_on_player_player_health"]
 [connection signal="pressed" from="UI/Button/btn_home" to="." method="_on_btn_home_pressed"]
 [connection signal="pressed" from="UI/Button/btn_retry" to="." method="_on_btn_retry_pressed"]
 [connection signal="timeout" from="UI/HealthBar/TimerHealth" to="player" method="_on_TimerHealth_timeout"]

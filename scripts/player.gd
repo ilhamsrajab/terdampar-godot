@@ -19,11 +19,10 @@ var is_push3 = false
 var rot_y = 0
 var old_rot_y = 0
 
-var health_maks = 200
-var health = 200
+export(int) var health_maks = 200
+export(int) var health = 200
 
-
-signal player_health(value)
+# signal player_health(value)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -117,8 +116,8 @@ func _physics_process(_delta):
 			print("Nabrak")
 			
 			health -= 15 
-			emit_signal("player_health", (float(health) / float(health_maks)) * 100)
-			
+			get_parent().emit_signal("player_health", (float(health) / float(health_maks)) * 100)
+
 			if health <= 0:
 				mati()
 		elif is_push1 and is_wall2:
@@ -128,7 +127,7 @@ func _physics_process(_delta):
 			print("Nabrak")
 			
 			health -= 15 
-			emit_signal("player_health", (float(health) / float(health_maks)) * 100)
+			get_parent().emit_signal("player_health", (float(health) / float(health_maks)) * 100)
 			
 			if health <= 0:
 				mati()
@@ -139,7 +138,7 @@ func _physics_process(_delta):
 			print("Nabrak")
 			
 			health -= 15 
-			emit_signal("player_health", (float(health) / float(health_maks)) * 100)
+			get_parent().emit_signal("player_health", (float(health) / float(health_maks)) * 100)
 			
 			if health <= 0:
 				mati()
@@ -168,11 +167,11 @@ func _physics_process(_delta):
 
 func _on_TimerHealth_timeout():
 	health -= 15
-	emit_signal("player_health", (float(health) / float(health_maks)) * 100)
+	get_parent().emit_signal("player_health", (float(health) / float(health_maks)) * 100)
 	
 	if health <= 0:
 		mati()
-		
+
 
 func movement(vec:Vector3):
 	if is_moving == false:
@@ -198,7 +197,7 @@ func movement(vec:Vector3):
 				
 				MusicController.play_suara_jatuh_air()
 				health = 0 
-				emit_signal("player_health", (float(health) / float(health_maks)) * 100)
+				get_parent().emit_signal("player_health", (float(health) / float(health_maks)) * 100)
 				yield(get_tree().create_timer(1.5), "timeout")
 				
 				MusicController.play_suara_game_over()
@@ -211,6 +210,13 @@ func movement(vec:Vector3):
 	#			var _err = get_tree().reload_current_scene()
 		
 		is_moving = false
+
+
+#func add_health():
+#	if get_parent().add_buah() == true:
+#		health += 15
+#		emit_signal("player_health", (float(health) / float(health_maks)) * 100)
+
 
 func mati():
 	if not sudah_mati:
@@ -237,17 +243,9 @@ func external_dir(vec:Vector3):
 	ext_dir = vec
 
 
-func _on_level1_player_menang():
+func _on_level_player_level_tbc():
 	get_parent().get_node("UI/HealthBar/TimerHealth").stop()
 
 
-func _on_level1_player_level_tbc():
-	get_parent().get_node("UI/HealthBar/TimerHealth").stop()
-
-
-func _on_level2_player_menang():
-	get_parent().get_node("UI/HealthBar/TimerHealth").stop()
-
-
-func _on_level2_player_level_tbc():
+func _on_level_player_menang():
 	get_parent().get_node("UI/HealthBar/TimerHealth").stop()

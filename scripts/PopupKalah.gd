@@ -25,14 +25,7 @@ func _on_btn_keluar_pressed():
 	var _err = get_tree().change_scene("res://scenes/levels/menu.tscn")
 
 
-func _on_level1_player_mati():
+func _on_level_player_mati():
 	if not sudah_muncul:
 		sudah_muncul = true
 		muncul()
-
-
-func _on_level2_player_mati():
-	if not sudah_muncul:
-		sudah_muncul = true
-		muncul()
-
