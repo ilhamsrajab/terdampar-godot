@@ -15,8 +15,8 @@ Pembuat : Kelompok 6 <br>
          - Muhammad Ihsan Riyadhi	(1806046) <br>
          - Ghina Ambarrona Rosita	(1806071) <br> <br>
 
-Institut Teknologi Garut
-Tahun Akademik 2021/2022
+Institut Teknologi Garut <br>
+Tahun Akademik 2021/2022<br>
 
 ## Screenshots
 ### Halaman Awal (Scene Home)
