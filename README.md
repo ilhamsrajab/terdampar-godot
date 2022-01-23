@@ -1,7 +1,7 @@
 <img src="icon.png" align="left" width="64" height="64">
 
 # Game Terdampar
-Deskripsi
+Game bergenre puzzle. Dibuat dengan menggunakan Godot Engine.
 
 Pembuat : Kelompok 6 <br>
          - Ridwan Muhammad Daud	(1506103) <br>
@@ -12,10 +12,15 @@ Pembuat : Kelompok 6 <br>
 Mata Kuliah : Pengembangan Aplikasi Game <br>
 Dosen Pengampu : Dewi Tresnawati, S.Pt., M.T. <br>
 
-<img align="center" src="assets/images/debug.png">
+### Halaman Awal (Scene Home)
+<img align="center" src="assets/images/home.png">
 
-## What is this?
-Deskripi
+### Halaman Level (Scene Level)
+<img align="center" src="assets/images/level_1.png">
+
+### Halaman Game Over (Scene Game Over)
+<img align="center" src="assets/images/game_over.png">
+
 
 
 
