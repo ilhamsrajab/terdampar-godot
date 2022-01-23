@@ -24,6 +24,9 @@ Pembuat : Kelompok 6 <br>
 ### Halaman Game Over (Scene Game Over)
 <img align="center" src="assets/images/game_over.png">
 
-
-
+## Assets
+### Graphic #1 - Karakter
+Author : RGS_Dev <br>
+Link : <a href="https://rgsdev.itch.io/animated-voxel-character-for-3d-shooter-games-by-rgsdev" target="_blank">Animated Voxel Character by RGS_Dev (itch.io)</a> <br>
+Dibuat ulang dengan menggunakan software MagicaVoxel karena menghilangkan senjata. <br>
 
