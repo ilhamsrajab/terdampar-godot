@@ -19,12 +19,12 @@
 [ext_resource path="res://scripts/PopupMenang.gd" type="Script" id=18]
 [ext_resource path="res://assets/UI/btn/next.png" type="Texture" id=19]
 
-[sub_resource type="SpatialMaterial" id=1]
+[sub_resource type="SpatialMaterial" id=36]
 flags_transparent = true
 albedo_color = Color( 0.054902, 0.494118, 0.729412, 0.784314 )
 
-[sub_resource type="PlaneMesh" id=2]
-material = SubResource( 1 )
+[sub_resource type="PlaneMesh" id=37]
+material = SubResource( 36 )
 size = Vector2( 200, 200 )
 
 [sub_resource type="CapsuleMesh" id=3]
@@ -40,11 +40,11 @@ font_data = SubResource( 24 )
 size = 24
 font_data = ExtResource( 15 )
 
-[sub_resource type="DynamicFont" id=29]
+[sub_resource type="DynamicFont" id=38]
 size = 28
 font_data = ExtResource( 15 )
 
-[sub_resource type="DynamicFont" id=35]
+[sub_resource type="DynamicFont" id=39]
 size = 28
 font_data = ExtResource( 15 )
 
@@ -135,8 +135,7 @@ __meta__ = {
 
 [node name="air" type="MeshInstance" parent="Map"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
-visible = false
-mesh = SubResource( 2 )
+mesh = SubResource( 37 )
 skeleton = NodePath("../..")
 material/0 = null
 
@@ -307,7 +306,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PopupKalah" type="CenterContainer" parent="UI"]
+[node name="Popup" type="Control" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PopupKalah" type="CenterContainer" parent="UI/Popup"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -600.0
@@ -318,7 +325,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="UI/PopupKalah"]
+[node name="TextureRect" type="TextureRect" parent="UI/Popup/PopupKalah"]
 margin_left = 362.0
 margin_top = 200.0
 margin_right = 662.0
@@ -327,20 +334,20 @@ rect_min_size = Vector2( 300, 200 )
 texture = ExtResource( 12 )
 expand = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/PopupKalah"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Popup/PopupKalah"]
 margin_left = 413.0
 margin_top = 247.0
 margin_right = 611.0
 margin_bottom = 353.0
 
-[node name="Label" type="Label" parent="UI/PopupKalah/VBoxContainer"]
+[node name="Label" type="Label" parent="UI/Popup/PopupKalah/VBoxContainer"]
 margin_right = 198.0
 margin_bottom = 18.0
 custom_colors/font_color = Color( 0.964706, 0.937255, 0.839216, 1 )
-custom_fonts/font = SubResource( 29 )
+custom_fonts/font = SubResource( 38 )
 text = "Yah, Game Over"
 
-[node name="Control" type="Control" parent="UI/PopupKalah/VBoxContainer"]
+[node name="Control" type="Control" parent="UI/Popup/PopupKalah/VBoxContainer"]
 margin_top = 22.0
 margin_right = 198.0
 margin_bottom = 52.0
@@ -348,18 +355,18 @@ rect_min_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/PopupKalah/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Popup/PopupKalah/VBoxContainer"]
 margin_top = 56.0
 margin_right = 198.0
 margin_bottom = 106.0
 
-[node name="Control2" type="Control" parent="UI/PopupKalah/VBoxContainer/HBoxContainer"]
+[node name="Control2" type="Control" parent="UI/Popup/PopupKalah/VBoxContainer/HBoxContainer"]
 margin_right = 27.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="btn_restart" type="TextureButton" parent="UI/PopupKalah/VBoxContainer/HBoxContainer"]
+[node name="btn_restart" type="TextureButton" parent="UI/Popup/PopupKalah/VBoxContainer/HBoxContainer"]
 margin_left = 31.0
 margin_right = 81.0
 margin_bottom = 50.0
@@ -367,14 +374,14 @@ rect_min_size = Vector2( 50, 50 )
 texture_normal = ExtResource( 8 )
 expand = true
 
-[node name="Control4" type="Control" parent="UI/PopupKalah/VBoxContainer/HBoxContainer"]
+[node name="Control4" type="Control" parent="UI/Popup/PopupKalah/VBoxContainer/HBoxContainer"]
 margin_left = 85.0
 margin_right = 112.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="btn_keluar" type="TextureButton" parent="UI/PopupKalah/VBoxContainer/HBoxContainer"]
+[node name="btn_keluar" type="TextureButton" parent="UI/Popup/PopupKalah/VBoxContainer/HBoxContainer"]
 margin_left = 116.0
 margin_right = 166.0
 margin_bottom = 50.0
@@ -382,16 +389,16 @@ rect_min_size = Vector2( 50, 50 )
 texture_normal = ExtResource( 17 )
 expand = true
 
-[node name="Control3" type="Control" parent="UI/PopupKalah/VBoxContainer/HBoxContainer"]
+[node name="Control3" type="Control" parent="UI/Popup/PopupKalah/VBoxContainer/HBoxContainer"]
 margin_left = 170.0
 margin_right = 198.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Tween" type="Tween" parent="UI/PopupKalah"]
+[node name="Tween" type="Tween" parent="UI/Popup/PopupKalah"]
 
-[node name="PopupMenang" type="CenterContainer" parent="UI"]
+[node name="PopupMenang" type="CenterContainer" parent="UI/Popup"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -600.0
@@ -402,7 +409,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="UI/PopupMenang"]
+[node name="TextureRect" type="TextureRect" parent="UI/Popup/PopupMenang"]
 margin_left = 362.0
 margin_top = 200.0
 margin_right = 662.0
@@ -411,20 +418,20 @@ rect_min_size = Vector2( 300, 200 )
 texture = ExtResource( 12 )
 expand = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/PopupMenang"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Popup/PopupMenang"]
 margin_left = 419.0
 margin_top = 247.0
 margin_right = 604.0
 margin_bottom = 353.0
 
-[node name="Label" type="Label" parent="UI/PopupMenang/VBoxContainer"]
+[node name="Label" type="Label" parent="UI/Popup/PopupMenang/VBoxContainer"]
 margin_right = 185.0
 margin_bottom = 18.0
 custom_colors/font_color = Color( 0.964706, 0.937255, 0.839216, 1 )
-custom_fonts/font = SubResource( 29 )
+custom_fonts/font = SubResource( 38 )
 text = "Yeay, Berhasil"
 
-[node name="Control" type="Control" parent="UI/PopupMenang/VBoxContainer"]
+[node name="Control" type="Control" parent="UI/Popup/PopupMenang/VBoxContainer"]
 margin_top = 22.0
 margin_right = 185.0
 margin_bottom = 52.0
@@ -432,18 +439,18 @@ rect_min_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/PopupMenang/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Popup/PopupMenang/VBoxContainer"]
 margin_top = 56.0
 margin_right = 185.0
 margin_bottom = 106.0
 
-[node name="Control2" type="Control" parent="UI/PopupMenang/VBoxContainer/HBoxContainer"]
+[node name="Control2" type="Control" parent="UI/Popup/PopupMenang/VBoxContainer/HBoxContainer"]
 margin_right = 23.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="btn_restart" type="TextureButton" parent="UI/PopupMenang/VBoxContainer/HBoxContainer"]
+[node name="btn_restart" type="TextureButton" parent="UI/Popup/PopupMenang/VBoxContainer/HBoxContainer"]
 margin_left = 27.0
 margin_right = 77.0
 margin_bottom = 50.0
@@ -451,14 +458,14 @@ rect_min_size = Vector2( 50, 50 )
 texture_normal = ExtResource( 8 )
 expand = true
 
-[node name="Control4" type="Control" parent="UI/PopupMenang/VBoxContainer/HBoxContainer"]
+[node name="Control4" type="Control" parent="UI/Popup/PopupMenang/VBoxContainer/HBoxContainer"]
 margin_left = 81.0
 margin_right = 104.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="btn_next" type="TextureButton" parent="UI/PopupMenang/VBoxContainer/HBoxContainer"]
+[node name="btn_next" type="TextureButton" parent="UI/Popup/PopupMenang/VBoxContainer/HBoxContainer"]
 margin_left = 108.0
 margin_right = 158.0
 margin_bottom = 50.0
@@ -466,16 +473,16 @@ rect_min_size = Vector2( 50, 50 )
 texture_normal = ExtResource( 19 )
 expand = true
 
-[node name="Control3" type="Control" parent="UI/PopupMenang/VBoxContainer/HBoxContainer"]
+[node name="Control3" type="Control" parent="UI/Popup/PopupMenang/VBoxContainer/HBoxContainer"]
 margin_left = 162.0
 margin_right = 185.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Tween" type="Tween" parent="UI/PopupMenang"]
+[node name="Tween" type="Tween" parent="UI/Popup/PopupMenang"]
 
-[node name="PopupTBC" type="CenterContainer" parent="UI"]
+[node name="PopupTBC" type="CenterContainer" parent="UI/Popup"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -600.0
@@ -486,7 +493,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="UI/PopupTBC"]
+[node name="TextureRect" type="TextureRect" parent="UI/Popup/PopupTBC"]
 margin_left = 262.0
 margin_top = 200.0
 margin_right = 762.0
@@ -495,22 +502,22 @@ rect_min_size = Vector2( 500, 200 )
 texture = ExtResource( 12 )
 expand = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/PopupTBC"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Popup/PopupTBC"]
 margin_left = 334.0
 margin_top = 236.0
 margin_right = 690.0
 margin_bottom = 363.0
 
-[node name="Label" type="Label" parent="UI/PopupTBC/VBoxContainer"]
+[node name="Label" type="Label" parent="UI/Popup/PopupTBC/VBoxContainer"]
 margin_right = 356.0
 margin_bottom = 39.0
 custom_colors/font_color = Color( 0.964706, 0.937255, 0.839216, 1 )
-custom_fonts/font = SubResource( 35 )
+custom_fonts/font = SubResource( 39 )
 text = "Level Telah Selesai
 Tunggu Update Selanjutnya"
 align = 1
 
-[node name="Control" type="Control" parent="UI/PopupTBC/VBoxContainer"]
+[node name="Control" type="Control" parent="UI/Popup/PopupTBC/VBoxContainer"]
 margin_top = 43.0
 margin_right = 356.0
 margin_bottom = 73.0
@@ -518,18 +525,18 @@ rect_min_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/PopupTBC/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Popup/PopupTBC/VBoxContainer"]
 margin_top = 77.0
 margin_right = 356.0
 margin_bottom = 127.0
 
-[node name="Control2" type="Control" parent="UI/PopupTBC/VBoxContainer/HBoxContainer"]
+[node name="Control2" type="Control" parent="UI/Popup/PopupTBC/VBoxContainer/HBoxContainer"]
 margin_right = 80.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="btn_restart" type="TextureButton" parent="UI/PopupTBC/VBoxContainer/HBoxContainer"]
+[node name="btn_restart" type="TextureButton" parent="UI/Popup/PopupTBC/VBoxContainer/HBoxContainer"]
 margin_left = 84.0
 margin_right = 134.0
 margin_bottom = 50.0
@@ -537,14 +544,14 @@ rect_min_size = Vector2( 50, 50 )
 texture_normal = ExtResource( 8 )
 expand = true
 
-[node name="Control4" type="Control" parent="UI/PopupTBC/VBoxContainer/HBoxContainer"]
+[node name="Control4" type="Control" parent="UI/Popup/PopupTBC/VBoxContainer/HBoxContainer"]
 margin_left = 138.0
 margin_right = 218.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="btn_keluar" type="TextureButton" parent="UI/PopupTBC/VBoxContainer/HBoxContainer"]
+[node name="btn_keluar" type="TextureButton" parent="UI/Popup/PopupTBC/VBoxContainer/HBoxContainer"]
 margin_left = 222.0
 margin_right = 272.0
 margin_bottom = 50.0
@@ -555,14 +562,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Control3" type="Control" parent="UI/PopupTBC/VBoxContainer/HBoxContainer"]
+[node name="Control3" type="Control" parent="UI/Popup/PopupTBC/VBoxContainer/HBoxContainer"]
 margin_left = 276.0
 margin_right = 356.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Tween" type="Tween" parent="UI/PopupTBC"]
+[node name="Tween" type="Tween" parent="UI/Popup/PopupTBC"]
 
 [node name="fade" type="ColorRect" parent="UI"]
 visible = false
@@ -583,17 +590,17 @@ anims/to_zero = SubResource( 33 )
 
 [connection signal="player_health" from="." to="." method="_on_level_player_health"]
 [connection signal="player_level_tbc" from="." to="player" method="_on_level_player_level_tbc"]
-[connection signal="player_level_tbc" from="." to="UI/PopupTBC" method="_on_level_player_level_tbc"]
-[connection signal="player_mati" from="." to="UI/PopupKalah" method="_on_level_player_mati"]
+[connection signal="player_level_tbc" from="." to="UI/Popup/PopupTBC" method="_on_level_player_level_tbc"]
+[connection signal="player_mati" from="." to="UI/Popup/PopupKalah" method="_on_level_player_mati"]
 [connection signal="player_menang" from="." to="player" method="_on_level_player_menang"]
-[connection signal="player_menang" from="." to="UI/PopupMenang" method="_on_level_player_menang"]
+[connection signal="player_menang" from="." to="UI/Popup/PopupMenang" method="_on_level_player_menang"]
 [connection signal="timeout" from="Map/Timer" to="." method="_on_Timer_timeout"]
 [connection signal="pressed" from="UI/Button/btn_home" to="." method="_on_btn_home_pressed"]
 [connection signal="pressed" from="UI/Button/btn_retry" to="." method="_on_btn_retry_pressed"]
 [connection signal="timeout" from="UI/HealthBar/TimerHealth" to="player" method="_on_TimerHealth_timeout"]
-[connection signal="pressed" from="UI/PopupKalah/VBoxContainer/HBoxContainer/btn_restart" to="UI/PopupKalah" method="_on_btn_restart_pressed"]
-[connection signal="pressed" from="UI/PopupKalah/VBoxContainer/HBoxContainer/btn_keluar" to="UI/PopupKalah" method="_on_btn_keluar_pressed"]
-[connection signal="pressed" from="UI/PopupMenang/VBoxContainer/HBoxContainer/btn_restart" to="UI/PopupMenang" method="_on_btn_restart_pressed"]
-[connection signal="pressed" from="UI/PopupMenang/VBoxContainer/HBoxContainer/btn_next" to="." method="_on_btn_next_pressed"]
-[connection signal="pressed" from="UI/PopupTBC/VBoxContainer/HBoxContainer/btn_restart" to="UI/PopupTBC" method="_on_btn_restart_pressed"]
-[connection signal="pressed" from="UI/PopupTBC/VBoxContainer/HBoxContainer/btn_keluar" to="UI/PopupTBC" method="_on_btn_keluar_pressed"]
+[connection signal="pressed" from="UI/Popup/PopupKalah/VBoxContainer/HBoxContainer/btn_restart" to="UI/Popup/PopupKalah" method="_on_btn_restart_pressed"]
+[connection signal="pressed" from="UI/Popup/PopupKalah/VBoxContainer/HBoxContainer/btn_keluar" to="UI/Popup/PopupKalah" method="_on_btn_keluar_pressed"]
+[connection signal="pressed" from="UI/Popup/PopupMenang/VBoxContainer/HBoxContainer/btn_restart" to="UI/Popup/PopupMenang" method="_on_btn_restart_pressed"]
+[connection signal="pressed" from="UI/Popup/PopupMenang/VBoxContainer/HBoxContainer/btn_next" to="." method="_on_btn_next_pressed"]
+[connection signal="pressed" from="UI/Popup/PopupTBC/VBoxContainer/HBoxContainer/btn_restart" to="UI/Popup/PopupTBC" method="_on_btn_restart_pressed"]
+[connection signal="pressed" from="UI/Popup/PopupTBC/VBoxContainer/HBoxContainer/btn_keluar" to="UI/Popup/PopupTBC" method="_on_btn_keluar_pressed"]

@@ -14,13 +14,13 @@ func muncul():
 	yield(tween, "tween_all_completed")
 
 func _on_btn_restart_pressed():
-	get_parent().get_node("anim").play("to_black")
+	get_parent().get_parent().get_node("anim").play("to_black")
 #	$UI/anim.play("to_black")
 	var _err = get_tree().reload_current_scene()
 
 
 func _on_btn_keluar_pressed():
-	get_parent().get_node("anim").play("to_black")
+	get_parent().get_parent().get_node("anim").play("to_black")
 #	$UI/anim.play("to_black")
 	var _err = get_tree().change_scene("res://scenes/levels/menu.tscn")
 

@@ -13,7 +13,7 @@ func muncul():
 
 
 func _on_btn_restart_pressed():
-	get_parent().get_node("anim").play("to_black")
+	get_parent().get_parent().get_node("anim").play("to_black")
 #	$UI/anim.play("to_black")
 	var _err = get_tree().reload_current_scene()
 

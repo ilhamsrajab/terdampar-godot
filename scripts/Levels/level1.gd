@@ -51,6 +51,3 @@ func _on_btn_retry_pressed():
 	$UI/anim.play("to_black")
 	yield($UI/anim, "animation_finished")
 	var _err = get_tree().reload_current_scene()
-
-
-
