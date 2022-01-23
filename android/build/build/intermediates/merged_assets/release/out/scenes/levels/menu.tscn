@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://mesh/mesh0.meshlib" type="MeshLibrary" id=1]
 [ext_resource path="res://terdampar_env.tres" type="Environment" id=2]
@@ -13,16 +13,62 @@
 [ext_resource path="res://assets/fonts/iCielSoupofJustice.ttf" type="DynamicFontData" id=11]
 [ext_resource path="res://assets/UI/btn/close_2.png" type="Texture" id=12]
 [ext_resource path="res://scripts/PopupInfo.gd" type="Script" id=13]
+[ext_resource path="res://assets/images/white.png" type="Texture" id=14]
 
-[sub_resource type="SpatialMaterial" id=1]
+[sub_resource type="SpatialMaterial" id=27]
 flags_transparent = true
 albedo_color = Color( 0.054902, 0.494118, 0.729412, 0.784314 )
 
-[sub_resource type="PlaneMesh" id=12]
-material = SubResource( 1 )
+[sub_resource type="PlaneMesh" id=28]
+material = SubResource( 27 )
 size = Vector2( 200, 200 )
 
 [sub_resource type="CapsuleMesh" id=3]
+
+[sub_resource type="Shader" id=40]
+code = "shader_type canvas_item;
+
+uniform float limit: hint_range(0.0,0.5) = 0.2;
+uniform float blur: hint_range(0.0,5.0) = 2.0;
+uniform float intensity: hint_range (0.0, 0.5) = 0.19;
+uniform bool debug = true;
+
+void fragment(){
+	
+ 	if (UV.y<limit){
+			
+		float _step = smoothstep(UV.y,limit,intensity);
+		vec4 color = textureLod(SCREEN_TEXTURE, SCREEN_UV, blur);
+		COLOR = color;
+		
+		if (debug==true){
+			COLOR = vec4(1.0,1.0,1.0,1.0)
+			}
+			
+		COLOR.a = _step;
+		
+	} else if (UV.y > 1.0-limit){
+			
+		float _step = smoothstep(UV.y,1.0-limit,1.0-intensity);
+		vec4 color = textureLod(SCREEN_TEXTURE, SCREEN_UV, blur);
+		COLOR = color;
+		
+		if (debug==true){
+			COLOR = vec4(1.0,1.0,1.0,1.0)
+			}
+		COLOR.a = _step;
+			
+	}else{
+			COLOR.a = 0f; 
+		}
+}"
+
+[sub_resource type="ShaderMaterial" id=41]
+shader = SubResource( 40 )
+shader_param/limit = 0.2
+shader_param/blur = 2.0
+shader_param/intensity = 0.19
+shader_param/debug = false
 
 [sub_resource type="DynamicFont" id=4]
 size = 64
@@ -111,7 +157,14 @@ tracks/0/keys = {
 }
 
 [sub_resource type="DynamicFont" id=13]
-size = 22
+size = 20
+extra_spacing_top = 2
+extra_spacing_bottom = 2
+font_data = ExtResource( 11 )
+
+[sub_resource type="DynamicFont" id=42]
+extra_spacing_top = 2
+extra_spacing_bottom = 2
 font_data = ExtResource( 11 )
 
 [node name="menu" type="Spatial"]
@@ -122,7 +175,7 @@ script = ExtResource( 4 )
 [node name="GridMap" type="GridMap" parent="Map" groups=["wall"]]
 mesh_library = ExtResource( 1 )
 data = {
-"cells": PoolIntArray( 1, 2, 3, 2, 2, 2, 3, 2, 2, 4, 2, 2, 2, 3, 2, 4, 3, 2, 5, 3, 1, 2, 4, 2, 3, 4, 2, 4, 4, 2, 5, 4, 2, 6, 4, 2, 3, 5, 0, 4, 5, 2, 6, 5, 2, 4, 6, 2, 5, 6, 2, 6, 6, 2 )
+"cells": PoolIntArray( 1, 1, 0, 2, 2, 7, 3, 2, 7, 4, 2, 7, 2, 3, 10, 4, 3, 7, 5, 3, 9, 2, 4, 7, 3, 4, 7, 4, 4, 7, 5, 4, 7, 6, 4, 7, 3, 5, 0, 4, 5, 7, 6, 5, 7, 4, 6, 7, 5, 6, 10, 6, 6, 7 )
 }
 __meta__ = {
 "_editor_clip_": 0,
@@ -131,8 +184,7 @@ __meta__ = {
 
 [node name="air" type="MeshInstance" parent="Map"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
-visible = false
-mesh = SubResource( 12 )
+mesh = SubResource( 28 )
 skeleton = NodePath("../..")
 material/0 = null
 
@@ -163,6 +215,29 @@ size = 20.0
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3, 9 )
 
 [node name="UI" type="CanvasLayer" parent="."]
+
+[node name="TiltShift" type="Control" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/TiltShift"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="UI/TiltShift/MarginContainer"]
+material = SubResource( 41 )
+margin_right = 1024.0
+margin_bottom = 600.0
+texture = ExtResource( 14 )
+expand = true
 
 [node name="Logo" type="TextureRect" parent="UI"]
 anchor_left = 0.5
@@ -324,7 +399,15 @@ anims/RESET = SubResource( 9 )
 anims/to_black = SubResource( 10 )
 anims/to_zero = SubResource( 11 )
 
-[node name="PopupInfo" type="CenterContainer" parent="UI"]
+[node name="Control" type="Control" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PopupInfo" type="CenterContainer" parent="UI/Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -600.0
@@ -335,7 +418,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="UI/PopupInfo"]
+[node name="TextureRect" type="TextureRect" parent="UI/Control/PopupInfo"]
 margin_left = 262.0
 margin_top = 50.0
 margin_right = 762.0
@@ -344,122 +427,122 @@ rect_min_size = Vector2( 500, 500 )
 texture = ExtResource( 10 )
 expand = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/PopupInfo"]
-margin_left = 337.0
-margin_top = 121.0
-margin_right = 686.0
-margin_bottom = 479.0
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/PopupInfo"]
+margin_left = 379.0
+margin_top = 119.0
+margin_right = 645.0
+margin_bottom = 481.0
 
-[node name="Label" type="Label" parent="UI/PopupInfo/VBoxContainer"]
-margin_right = 349.0
-margin_bottom = 15.0
+[node name="Label" type="Label" parent="UI/Control/PopupInfo/VBoxContainer"]
+margin_right = 266.0
+margin_bottom = 17.0
 custom_colors/font_color = Color( 0.964706, 0.937255, 0.839216, 1 )
 custom_fonts/font = SubResource( 13 )
 text = "Tentang Kami"
 align = 1
 
-[node name="Control2" type="Control" parent="UI/PopupInfo/VBoxContainer"]
-margin_top = 19.0
-margin_right = 349.0
-margin_bottom = 34.0
+[node name="Control2" type="Control" parent="UI/Control/PopupInfo/VBoxContainer"]
+margin_top = 21.0
+margin_right = 266.0
+margin_bottom = 36.0
 rect_min_size = Vector2( 0, 15 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Label2" type="Label" parent="UI/PopupInfo/VBoxContainer"]
-margin_top = 38.0
-margin_right = 349.0
-margin_bottom = 125.0
+[node name="Label2" type="Label" parent="UI/Control/PopupInfo/VBoxContainer"]
+margin_top = 40.0
+margin_right = 266.0
+margin_bottom = 127.0
 custom_colors/font_color = Color( 0.964706, 0.937255, 0.839216, 1 )
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 42 )
 text = "Ridwan Muhammad Daud (1506103)
 Ilham Syahidatul Rajab (1806043)
 Asep Kurniawan (1806044)
 Muhammad Ihsan Riyadhi (1806046)
 Ghina Ambarrona Rosita (1806071)"
 
-[node name="Control3" type="Control" parent="UI/PopupInfo/VBoxContainer"]
-margin_top = 129.0
-margin_right = 349.0
-margin_bottom = 159.0
+[node name="Control3" type="Control" parent="UI/Control/PopupInfo/VBoxContainer"]
+margin_top = 131.0
+margin_right = 266.0
+margin_bottom = 161.0
 rect_min_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Label4" type="Label" parent="UI/PopupInfo/VBoxContainer"]
-margin_top = 163.0
-margin_right = 349.0
-margin_bottom = 178.0
+[node name="Label4" type="Label" parent="UI/Control/PopupInfo/VBoxContainer"]
+margin_top = 165.0
+margin_right = 266.0
+margin_bottom = 182.0
 custom_colors/font_color = Color( 0.964706, 0.937255, 0.839216, 1 )
 custom_fonts/font = SubResource( 13 )
 text = "Assets"
 align = 1
 
-[node name="Control4" type="Control" parent="UI/PopupInfo/VBoxContainer"]
-margin_top = 182.0
-margin_right = 349.0
-margin_bottom = 197.0
+[node name="Control4" type="Control" parent="UI/Control/PopupInfo/VBoxContainer"]
+margin_top = 186.0
+margin_right = 266.0
+margin_bottom = 201.0
 rect_min_size = Vector2( 0, 15 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Label3" type="Label" parent="UI/PopupInfo/VBoxContainer"]
-margin_top = 201.0
-margin_right = 349.0
-margin_bottom = 270.0
+[node name="Label5" type="Label" parent="UI/Control/PopupInfo/VBoxContainer"]
+margin_top = 205.0
+margin_right = 266.0
+margin_bottom = 274.0
 custom_colors/font_color = Color( 0.964706, 0.937255, 0.839216, 1 )
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 42 )
 text = "RGS_Dev, SoloCode, Kyrise, 
 Odd1ln, PabloGameDev, Free Game 
 Assets, Memesbruh03, Mixkit, 
 Freepik"
 
-[node name="Control" type="Control" parent="UI/PopupInfo/VBoxContainer"]
-margin_top = 274.0
-margin_right = 349.0
-margin_bottom = 304.0
+[node name="Control" type="Control" parent="UI/Control/PopupInfo/VBoxContainer"]
+margin_top = 278.0
+margin_right = 266.0
+margin_bottom = 308.0
 rect_min_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/PopupInfo/VBoxContainer"]
-margin_top = 308.0
-margin_right = 349.0
-margin_bottom = 358.0
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Control/PopupInfo/VBoxContainer"]
+margin_top = 312.0
+margin_right = 266.0
+margin_bottom = 362.0
 
-[node name="Control2" type="Control" parent="UI/PopupInfo/VBoxContainer/HBoxContainer"]
-margin_right = 145.0
+[node name="Control2" type="Control" parent="UI/Control/PopupInfo/VBoxContainer/HBoxContainer"]
+margin_right = 104.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="btn_next" type="TextureButton" parent="UI/PopupInfo/VBoxContainer/HBoxContainer"]
-margin_left = 149.0
-margin_right = 199.0
+[node name="btn_next" type="TextureButton" parent="UI/Control/PopupInfo/VBoxContainer/HBoxContainer"]
+margin_left = 108.0
+margin_right = 158.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 50, 50 )
 texture_normal = ExtResource( 12 )
 expand = true
 
-[node name="Control3" type="Control" parent="UI/PopupInfo/VBoxContainer/HBoxContainer"]
-margin_left = 203.0
-margin_right = 349.0
+[node name="Control3" type="Control" parent="UI/Control/PopupInfo/VBoxContainer/HBoxContainer"]
+margin_left = 162.0
+margin_right = 266.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Tween" type="Tween" parent="UI/PopupInfo"]
+[node name="Tween" type="Tween" parent="UI/Control/PopupInfo"]
 
 [node name="Timer2" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
 
-[connection signal="btn_info" from="." to="UI/PopupInfo" method="_on_menu_btn_info"]
+[connection signal="btn_info" from="." to="UI/Control/PopupInfo" method="_on_menu_btn_info"]
 [connection signal="timeout" from="Map/Timer" to="." method="_on_Timer_timeout"]
 [connection signal="pressed" from="UI/btn_main" to="." method="_on_btn_main_pressed"]
 [connection signal="pressed" from="UI/btn_info" to="." method="_on_btn_info_pressed"]
 [connection signal="pressed" from="UI/btn_keluar" to="." method="_on_btn_keluar_pressed"]
 [connection signal="pressed" from="UI/VBoxContainer/btn_new" to="." method="_on_btn_new_pressed"]
 [connection signal="pressed" from="UI/VBoxContainer/btn_exit" to="." method="_on_btn_exit_pressed"]
-[connection signal="pressed" from="UI/PopupInfo/VBoxContainer/HBoxContainer/btn_next" to="UI/PopupInfo" method="_on_btn_next_pressed"]
+[connection signal="pressed" from="UI/Control/PopupInfo/VBoxContainer/HBoxContainer/btn_next" to="UI/Control/PopupInfo" method="_on_btn_next_pressed"]
 [connection signal="timeout" from="Timer2" to="." method="_on_Timer2_timeout"]

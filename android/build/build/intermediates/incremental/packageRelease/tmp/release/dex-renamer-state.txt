@@ -1,4 +1,4 @@
-#Sat Jan 15 03:26:58 ICT 2022
+#Mon Jan 24 03:10:10 ICT 2022
 base.0=C\:\\Users\\iamid\\Documents\\terdampar-godot\\android\\build\\build\\intermediates\\dex\\release\\mergeDexRelease\\classes.dex
 renamed.0=classes.dex
 path.0=classes.dex
