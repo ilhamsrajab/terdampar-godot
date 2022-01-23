@@ -11,6 +11,7 @@ var suara_buah = load("res://assets/audio/Sound Effect/Buah.wav")
 var suara_buah_alt = load("res://assets/audio/Sound Effect/buah-alt.wav")
 var suara_jatuh_air = load("res://assets/audio/Sound Effect/jatuh-air.mp3")
 var suara_level_complete = load("res://assets/audio/Sound Effect/Level Complete.wav")
+var suara_final_level = load("res://assets/audio/Sound Effect/mixkit-final-level-bonus-2061.wav")
 var suara_nabrak = load("res://assets/audio/Sound Effect/Nabrak.wav")
 var suara_pindah_scene = load("res://assets/audio/Sound Effect/Pindah Scene.wav")
 var suara_game_over = load("res://assets/audio/Sound Effect/Game Over.wav")
@@ -56,6 +57,11 @@ func play_suara_jatuh_air():
 
 func play_suara_level_complete():
 	$level.stream = suara_level_complete
+	$level.play()
+
+
+func play_suara_final_level():
+	$level.stream = suara_final_level
 	$level.play()
 
 

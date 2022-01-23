@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://mesh/mesh0.meshlib" type="MeshLibrary" id=1]
 [ext_resource path="res://scenes/kelapa.tscn" type="PackedScene" id=2]
@@ -14,7 +14,6 @@
 [ext_resource path="res://scripts/ProgressBar.gd" type="Script" id=12]
 [ext_resource path="res://assets/fonts/iCielSoupofJustice.ttf" type="DynamicFontData" id=13]
 [ext_resource path="res://assets/UI/you_win/bg.png" type="Texture" id=14]
-[ext_resource path="res://assets/UI/btn/close.png" type="Texture" id=15]
 [ext_resource path="res://scripts/PopupKalah.gd" type="Script" id=16]
 [ext_resource path="res://scripts/PopupMenang.gd" type="Script" id=17]
 [ext_resource path="res://assets/UI/btn/next.png" type="Texture" id=18]
@@ -437,12 +436,12 @@ margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="btn_restart" type="TextureButton" parent="UI/Popup/PopupKalah/VBoxContainer/HBoxContainer"]
+[node name="btn_keluar" type="TextureButton" parent="UI/Popup/PopupKalah/VBoxContainer/HBoxContainer"]
 margin_left = 31.0
 margin_right = 81.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 50, 50 )
-texture_normal = ExtResource( 7 )
+texture_normal = ExtResource( 8 )
 expand = true
 
 [node name="Control4" type="Control" parent="UI/Popup/PopupKalah/VBoxContainer/HBoxContainer"]
@@ -452,12 +451,12 @@ margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="btn_keluar" type="TextureButton" parent="UI/Popup/PopupKalah/VBoxContainer/HBoxContainer"]
+[node name="btn_restart" type="TextureButton" parent="UI/Popup/PopupKalah/VBoxContainer/HBoxContainer"]
 margin_left = 116.0
 margin_right = 166.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 50, 50 )
-texture_normal = ExtResource( 15 )
+texture_normal = ExtResource( 7 )
 expand = true
 
 [node name="Control3" type="Control" parent="UI/Popup/PopupKalah/VBoxContainer/HBoxContainer"]
@@ -515,41 +514,42 @@ margin_top = 56.0
 margin_right = 185.0
 margin_bottom = 106.0
 
-[node name="Control2" type="Control" parent="UI/Popup/PopupMenang/VBoxContainer/HBoxContainer"]
-margin_right = 23.0
+[node name="btn_keluar" type="TextureButton" parent="UI/Popup/PopupMenang/VBoxContainer/HBoxContainer"]
+margin_right = 50.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+texture_normal = ExtResource( 8 )
+expand = true
+
+[node name="Control4" type="Control" parent="UI/Popup/PopupMenang/VBoxContainer/HBoxContainer"]
+margin_left = 54.0
+margin_right = 63.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="btn_restart" type="TextureButton" parent="UI/Popup/PopupMenang/VBoxContainer/HBoxContainer"]
-margin_left = 27.0
-margin_right = 77.0
+margin_left = 67.0
+margin_right = 117.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 50, 50 )
 texture_normal = ExtResource( 7 )
 expand = true
 
-[node name="Control4" type="Control" parent="UI/Popup/PopupMenang/VBoxContainer/HBoxContainer"]
-margin_left = 81.0
-margin_right = 104.0
+[node name="Control3" type="Control" parent="UI/Popup/PopupMenang/VBoxContainer/HBoxContainer"]
+margin_left = 121.0
+margin_right = 131.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="btn_next" type="TextureButton" parent="UI/Popup/PopupMenang/VBoxContainer/HBoxContainer"]
-margin_left = 108.0
-margin_right = 158.0
+margin_left = 135.0
+margin_right = 185.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 50, 50 )
 texture_normal = ExtResource( 18 )
 expand = true
-
-[node name="Control3" type="Control" parent="UI/Popup/PopupMenang/VBoxContainer/HBoxContainer"]
-margin_left = 162.0
-margin_right = 185.0
-margin_bottom = 50.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
 
 [node name="Tween" type="Tween" parent="UI/Popup/PopupMenang"]
 
@@ -607,13 +607,16 @@ margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="btn_restart" type="TextureButton" parent="UI/Popup/PopupTBC/VBoxContainer/HBoxContainer"]
+[node name="btn_keluar" type="TextureButton" parent="UI/Popup/PopupTBC/VBoxContainer/HBoxContainer"]
 margin_left = 84.0
 margin_right = 134.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 50, 50 )
-texture_normal = ExtResource( 7 )
+texture_normal = ExtResource( 8 )
 expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Control4" type="Control" parent="UI/Popup/PopupTBC/VBoxContainer/HBoxContainer"]
 margin_left = 138.0
@@ -622,16 +625,13 @@ margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="btn_keluar" type="TextureButton" parent="UI/Popup/PopupTBC/VBoxContainer/HBoxContainer"]
+[node name="btn_restart" type="TextureButton" parent="UI/Popup/PopupTBC/VBoxContainer/HBoxContainer"]
 margin_left = 222.0
 margin_right = 272.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 50, 50 )
-texture_normal = ExtResource( 15 )
+texture_normal = ExtResource( 7 )
 expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Control3" type="Control" parent="UI/Popup/PopupTBC/VBoxContainer/HBoxContainer"]
 margin_left = 276.0
@@ -669,9 +669,10 @@ anims/to_zero = SubResource( 21 )
 [connection signal="pressed" from="UI/Button/btn_home" to="." method="_on_btn_home_pressed"]
 [connection signal="pressed" from="UI/Button/btn_retry" to="." method="_on_btn_retry_pressed"]
 [connection signal="timeout" from="UI/HealthBar/TimerHealth" to="player" method="_on_TimerHealth_timeout"]
-[connection signal="pressed" from="UI/Popup/PopupKalah/VBoxContainer/HBoxContainer/btn_restart" to="UI/Popup/PopupKalah" method="_on_btn_restart_pressed"]
 [connection signal="pressed" from="UI/Popup/PopupKalah/VBoxContainer/HBoxContainer/btn_keluar" to="UI/Popup/PopupKalah" method="_on_btn_keluar_pressed"]
+[connection signal="pressed" from="UI/Popup/PopupKalah/VBoxContainer/HBoxContainer/btn_restart" to="UI/Popup/PopupKalah" method="_on_btn_restart_pressed"]
+[connection signal="pressed" from="UI/Popup/PopupMenang/VBoxContainer/HBoxContainer/btn_keluar" to="UI/Popup/PopupKalah" method="_on_btn_keluar_pressed"]
 [connection signal="pressed" from="UI/Popup/PopupMenang/VBoxContainer/HBoxContainer/btn_restart" to="UI/Popup/PopupMenang" method="_on_btn_restart_pressed"]
 [connection signal="pressed" from="UI/Popup/PopupMenang/VBoxContainer/HBoxContainer/btn_next" to="." method="_on_btn_next_pressed"]
-[connection signal="pressed" from="UI/Popup/PopupTBC/VBoxContainer/HBoxContainer/btn_restart" to="UI/Popup/PopupTBC" method="_on_btn_restart_pressed"]
 [connection signal="pressed" from="UI/Popup/PopupTBC/VBoxContainer/HBoxContainer/btn_keluar" to="UI/Popup/PopupTBC" method="_on_btn_keluar_pressed"]
+[connection signal="pressed" from="UI/Popup/PopupTBC/VBoxContainer/HBoxContainer/btn_restart" to="UI/Popup/PopupTBC" method="_on_btn_restart_pressed"]

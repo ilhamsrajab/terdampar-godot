@@ -1,7 +1,7 @@
 extends "res://scripts/level.gd"
 
-export(int) var level = 4
-export(int) var buah = 3
+export(int) var level = 10
+export(int) var buah = 1
 
 onready var buah_bar = $UI/BuahBar/label_buah
 onready var angka_level = $UI/Button/label_level

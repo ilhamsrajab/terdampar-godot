@@ -5,11 +5,11 @@
 [ext_resource path="res://scenes/block.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://terdampar_env.tres" type="Environment" id=5]
-[ext_resource path="res://scripts/Levels/level4.gd" type="Script" id=6]
+[ext_resource path="res://scripts/Levels/level8.gd" type="Script" id=6]
 [ext_resource path="res://scripts/ProgressBar.gd" type="Script" id=7]
 [ext_resource path="res://assets/UI/btn/restart.png" type="Texture" id=8]
 [ext_resource path="res://assets/UI/btn/home.png" type="Texture" id=9]
-[ext_resource path="res://scenes/kelapa.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/apel.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/UI/load_bar/bg.png" type="Texture" id=11]
 [ext_resource path="res://assets/UI/you_win/bg.png" type="Texture" id=12]
 [ext_resource path="res://assets/UI/load_bar/4.png" type="Texture" id=13]
@@ -29,7 +29,7 @@ size = Vector2( 200, 200 )
 
 [sub_resource type="CapsuleMesh" id=3]
 
-[sub_resource type="Shader" id=40]
+[sub_resource type="Shader" id=44]
 code = "shader_type canvas_item;
 
 uniform float limit: hint_range(0.0,0.5) = 0.2;
@@ -68,7 +68,7 @@ void fragment(){
 }"
 
 [sub_resource type="ShaderMaterial" id=41]
-shader = SubResource( 40 )
+shader = SubResource( 44 )
 shader_param/limit = 0.2
 shader_param/blur = 2.0
 shader_param/intensity = 0.19
@@ -171,7 +171,7 @@ script = ExtResource( 6 )
 [node name="GridMap" type="GridMap" parent="Map" groups=["wall"]]
 mesh_library = ExtResource( 1 )
 data = {
-"cells": PoolIntArray( 0, 0, 7, 1, 0, 7, 2, 0, 10, 4, 0, 7, 5, 0, 7, 6, 0, 10, 9, 0, 10, 2, 1, 7, 4, 1, 7, 6, 1, 7, 65535, 1, 7, 0, 2, 10, 1, 2, 7, 2, 2, 7, 4, 2, 7, 5, 2, 7, 6, 2, 7, 65535, 2, 7, 2, 3, 7, 5, 3, 9, 6, 3, 0, 4, 4, 7, 5, 4, 10, 6, 4, 7, 10, 4, 10, 2, 5, 7, 5, 5, 7, 2, 6, 7, 3, 6, 7, 6, 6, 7, 7, 6, 9, 65535, 6, 0, 3, 7, 7, 4, 7, 10, 5, 7, 7, 6, 7, 7, 7, 7, 7, 65535, 7, 9, 2, 65533, 9 )
+"cells": PoolIntArray( 10, 0, 1, 1, 1, 1, 2, 1, 6, 3, 1, 2, 4, 1, 2, 5, 1, 6, 6, 1, 2, 3, 2, 2, 2, 3, 2, 3, 3, 2, 6, 3, 2, 2, 4, 6, 3, 4, 2, 6, 4, 2, 65533, 4, 4, 1, 5, 4, 2, 5, 6, 3, 5, 2, 5, 5, 6, 6, 5, 2, 12, 5, 1, 6, 7, 2, 7, 7, 4, 65534, 9, 3, 5, 12, 1, 65532, 65535, 3 )
 }
 __meta__ = {
 "_editor_clip_": 0,
@@ -196,22 +196,13 @@ shadow_enabled = true
 [node name="block" type="Spatial" parent="."]
 
 [node name="block" parent="block" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 3, 11 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 3, 7 )
 
 [node name="block2" parent="block" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 3, 13 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 3, 5 )
 
 [node name="block3" parent="block" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3, 11 )
-
-[node name="block4" parent="block" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3, 7 )
-
-[node name="block5" parent="block" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, 3 )
-
-[node name="block6" parent="block" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3, 1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 3, 11 )
 
 [node name="kamera" type="Spatial" parent="."]
 transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 8.98026, 0, -3.74767 )
@@ -229,16 +220,10 @@ projection = 1
 size = 20.0
 
 [node name="player" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3, 9 )
-
-[node name="buah" parent="." instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3, 5 )
-
-[node name="buah2" parent="." instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 3, 15 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 3, 11 )
 
 [node name="buah3" parent="." instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3, 13 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 3, 15 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 

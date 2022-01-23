@@ -18,7 +18,7 @@ func add_buah():
 	buah_bar.text = "Buah : " + str(buah_added)
 	print("Buah : " + str(buah_added))
 	
-	player.health += 15
+	player.health += 10
 	emit_signal("player_health", (float(player.health) / float(player.health_maks)) * 100)
 
 	if buah_added == buah:
@@ -31,7 +31,7 @@ func add_buah():
 			emit_signal("player_menang")
 			
 		else:
-			MusicController.play_suara_game_over()
+			MusicController.play_suara_final_level()
 			print("Game Over")
 			
 			emit_signal("player_level_tbc")

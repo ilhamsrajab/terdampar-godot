@@ -44,13 +44,5 @@ func shake():
 	$kamera/Camera.rotation_degrees.z = -3
 
 
-func _on_level2_player_health(value):
-	health_bar.value = value
-
-
-#func _on_player_player_health(value):
-#	health_bar.value = value
-
-
 func _on_level_player_health(value):
 	health_bar.value = value
