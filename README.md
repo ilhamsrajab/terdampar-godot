@@ -1,11 +1,11 @@
 <img src="icon.png" align="left" width="64" height="64">
 
 # Game Terdampar
-Game bergenre puzzle. Dibuat dengan menggunakan Godot Engine.
+Game bergenre puzzle. Makan buah untuk tetap hidup. Dibuat dengan menggunakan Godot Engine.
 
-# Mata Kuliah
+## Mata Kuliah
 Mata Kuliah : Pengembangan Aplikasi Game <br>
-Dosen Pengampu : Dewi Tresnawati, S.Pt., M.T. <br>
+Dosen Pengampu : Dewi Tresnawati, S.Si, M.T. <br>
 
 Pembuat : Kelompok 6 <br>
          - Ridwan Muhammad Daud	(1506103) <br>
