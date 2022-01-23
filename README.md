@@ -1,11 +1,12 @@
 <img src="icon.png" align="left" width="64" height="64">
 
 # Game Terdampar
-Game bergenre puzzle. Makan buah untuk tetap hidup. Dibuat dengan menggunakan Godot Engine.
+## Deskripsi
+Game bergenre puzzle. Tujuan utama dari game ini adalah bertahan hidup dan menuju level selanjutnya. Makanlah buah untuk tetap hidup. Game ini dibuat dengan menggunakan Godot Engine.
 
 ## Mata Kuliah
 Mata Kuliah : Pengembangan Aplikasi Game <br>
-Dosen Pengampu : Dewi Tresnawati, S.Si, M.T. <br>
+Dosen Pengampu : Dewi Tresnawati, S.Si., M.T. <br>
 
 Pembuat : Kelompok 6 <br>
          - Ridwan Muhammad Daud	(1506103) <br>
@@ -14,7 +15,10 @@ Pembuat : Kelompok 6 <br>
          - Muhammad Ihsan Riyadhi	(1806046) <br>
          - Ghina Ambarrona Rosita	(1806071) <br> <br>
 
+Institut Teknologi Garut
+Tahun Akademik 2021/2022
 
+## Screenshots
 ### Halaman Awal (Scene Home)
 <img align="center" src="assets/images/home.png">
 
