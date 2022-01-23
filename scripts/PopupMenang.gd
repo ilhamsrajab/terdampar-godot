@@ -18,7 +18,9 @@ func _on_btn_restart_pressed():
 	var _err = get_tree().reload_current_scene()
 
 
-
-
 func _on_level1_player_menang():
 	muncul()
+
+
+func _on_level2_player_menang():
+	muncul() 

@@ -1,14 +1,23 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://mesh/mesh0.meshlib" type="MeshLibrary" id=1]
-[ext_resource path="res://scenes/kelapa.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scripts/PopupTBC.gd" type="Script" id=2]
 [ext_resource path="res://scenes/block.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://terdampar_env.tres" type="Environment" id=5]
 [ext_resource path="res://scripts/Levels/level3.gd" type="Script" id=6]
-[ext_resource path="res://assets/fonts/superstar_memesbruh03.ttf" type="DynamicFontData" id=7]
-[ext_resource path="res://assets/icons/1x/home.png" type="Texture" id=8]
-[ext_resource path="res://assets/icons/1x/return.png" type="Texture" id=9]
+[ext_resource path="res://scripts/ProgressBar.gd" type="Script" id=7]
+[ext_resource path="res://assets/UI/btn/restart.png" type="Texture" id=8]
+[ext_resource path="res://assets/UI/btn/home.png" type="Texture" id=9]
+[ext_resource path="res://scenes/kelapa.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/UI/load_bar/bg.png" type="Texture" id=11]
+[ext_resource path="res://assets/UI/you_win/bg.png" type="Texture" id=12]
+[ext_resource path="res://assets/UI/load_bar/4.png" type="Texture" id=13]
+[ext_resource path="res://assets/fonts/iCielSoupofJustice.ttf" type="DynamicFontData" id=15]
+[ext_resource path="res://scripts/PopupKalah.gd" type="Script" id=16]
+[ext_resource path="res://assets/UI/btn/close.png" type="Texture" id=17]
+[ext_resource path="res://scripts/PopupMenang.gd" type="Script" id=18]
+[ext_resource path="res://assets/UI/btn/next.png" type="Texture" id=19]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_transparent = true
@@ -20,35 +29,26 @@ size = Vector2( 200, 200 )
 
 [sub_resource type="CapsuleMesh" id=3]
 
-[sub_resource type="DynamicFont" id=4]
-size = 20
-font_data = ExtResource( 7 )
+[sub_resource type="DynamicFontData" id=24]
+font_path = "res://assets/fonts/iCielSoupofJustice.ttf"
 
-[sub_resource type="StyleBoxFlat" id=18]
-bg_color = Color( 0.8, 0.192157, 0.192157, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0.8, 0.8, 0.8, 0 )
-corner_radius_top_left = 50
-corner_radius_top_right = 50
-corner_radius_bottom_right = 50
-corner_radius_bottom_left = 50
+[sub_resource type="DynamicFont" id=27]
+size = 24
+font_data = SubResource( 24 )
 
-[sub_resource type="StyleBoxFlat" id=19]
-bg_color = Color( 1, 1, 1, 0.784314 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 1, 1, 1, 0.784314 )
-corner_radius_top_left = 50
-corner_radius_top_right = 50
-corner_radius_bottom_right = 50
-corner_radius_bottom_left = 50
+[sub_resource type="DynamicFont" id=34]
+size = 24
+font_data = ExtResource( 15 )
 
-[sub_resource type="Shader" id=17]
+[sub_resource type="DynamicFont" id=29]
+size = 28
+font_data = ExtResource( 15 )
+
+[sub_resource type="DynamicFont" id=35]
+size = 28
+font_data = ExtResource( 15 )
+
+[sub_resource type="Shader" id=26]
 code = "shader_type canvas_item;
 uniform float factor = 0.5;
 uniform float aspect_ratio = 1.7;
@@ -65,13 +65,13 @@ void fragment() {
 	COLOR = color;  
 }"
 
-[sub_resource type="ShaderMaterial" id=13]
-shader = SubResource( 17 )
+[sub_resource type="ShaderMaterial" id=30]
+shader = SubResource( 26 )
 shader_param/factor = 0.0
 shader_param/aspect_ratio = 1.7
 shader_param/fade_color = null
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=31]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("UI/fade:material:shader_param/factor")
@@ -86,7 +86,7 @@ tracks/0/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=32]
 resource_name = "to_black"
 length = 0.6
 tracks/0/type = "value"
@@ -102,7 +102,7 @@ tracks/0/keys = {
 "values": [ 1.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=33]
 resource_name = "to_zero"
 length = 0.6
 tracks/0/type = "value"
@@ -126,10 +126,11 @@ script = ExtResource( 6 )
 [node name="GridMap" type="GridMap" parent="Map" groups=["wall"]]
 mesh_library = ExtResource( 1 )
 data = {
-"cells": PoolIntArray( 0, 0, 7, 1, 0, 7, 2, 0, 7, 4, 0, 7, 5, 0, 7, 6, 0, 7, 65534, 0, 8, 2, 1, 7, 4, 1, 7, 6, 1, 7, 65535, 1, 7, 0, 2, 7, 1, 2, 7, 2, 2, 7, 3, 2, 9, 4, 2, 7, 5, 2, 7, 6, 2, 7, 65535, 2, 7, 2, 3, 7, 5, 3, 9, 6, 3, 0, 4, 4, 7, 5, 4, 7, 6, 4, 7, 2, 5, 7, 5, 5, 7, 2, 6, 7, 3, 6, 7, 6, 6, 7, 3, 7, 7, 4, 7, 7, 5, 7, 7, 6, 7, 7, 7, 7, 7 )
+"cells": PoolIntArray( 2, 0, 7, 5, 1, 9, 0, 2, 0, 2, 2, 7, 4, 2, 10, 5, 2, 7, 2, 3, 10, 4, 3, 7, 5, 3, 10, 2, 4, 7, 4, 4, 7, 5, 4, 7, 4, 5, 7, 2, 6, 7, 3, 6, 7, 4, 6, 10, 5, 6, 7, 6, 6, 9, 4, 7, 7, 6, 8, 0 )
 }
 __meta__ = {
-"_editor_clip_": 0
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 0, 0 )
 }
 
 [node name="air" type="MeshInstance" parent="Map"]
@@ -150,22 +151,13 @@ shadow_enabled = true
 [node name="block" type="Spatial" parent="."]
 
 [node name="block3" parent="block" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 3, 11 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3, 9 )
 
 [node name="block4" parent="block" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3, 3 )
-
-[node name="block8" parent="block" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, 3 )
-
-[node name="block6" parent="block" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3, 7 )
-
-[node name="block7" parent="block" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3, 11 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3, 11 )
 
 [node name="block5" parent="block" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 3, 13 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3, 5 )
 
 [node name="kamera" type="Spatial" parent="."]
 transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 8.98026, 0, -3.74767 )
@@ -183,11 +175,17 @@ projection = 1
 size = 20.0
 
 [node name="player" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.01936, 3, 9.11815 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3, 5 )
+
+[node name="buah" parent="." instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 3, 9 )
+
+[node name="buah2" parent="." instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3, 1 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI"]
+[node name="Button" type="HBoxContainer" parent="UI"]
 anchor_right = 1.0
 margin_left = 15.0
 margin_top = 15.0
@@ -197,57 +195,90 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="btn_home" type="TextureButton" parent="UI/HBoxContainer"]
+[node name="btn_home" type="TextureButton" parent="UI/Button"]
 margin_right = 50.0
 margin_bottom = 50.0
-texture_normal = ExtResource( 8 )
+rect_min_size = Vector2( 50, 50 )
+texture_normal = ExtResource( 9 )
+texture_pressed = ExtResource( 9 )
+expand = true
+stretch_mode = 4
 
-[node name="Control" type="Control" parent="UI/HBoxContainer"]
+[node name="Control" type="Control" parent="UI/Button"]
 margin_left = 54.0
-margin_right = 452.0
+margin_right = 446.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="label_level" type="Label" parent="UI/HBoxContainer"]
-margin_left = 456.0
-margin_top = 15.0
-margin_right = 537.0
-margin_bottom = 35.0
-custom_fonts/font = SubResource( 4 )
-text = "Level - 3"
+[node name="label_level" type="Label" parent="UI/Button"]
+margin_left = 450.0
+margin_top = 17.0
+margin_right = 543.0
+margin_bottom = 33.0
+custom_fonts/font = SubResource( 27 )
+text = "Level - X"
 align = 1
 
-[node name="Control2" type="Control" parent="UI/HBoxContainer"]
-margin_left = 541.0
+[node name="Control2" type="Control" parent="UI/Button"]
+margin_left = 547.0
 margin_right = 940.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
+
+[node name="btn_retry" type="TextureButton" parent="UI/Button"]
+margin_left = 944.0
+margin_right = 994.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 8 )
+expand = true
+stretch_mode = 4
+
+[node name="HealthBar" type="Control" parent="UI"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -110.0
+margin_top = -32.0
+margin_right = 110.0
+margin_bottom = -20.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="btn_retry" type="TextureButton" parent="UI/HBoxContainer"]
-margin_left = 944.0
-margin_right = 994.0
-margin_bottom = 50.0
-texture_normal = ExtResource( 9 )
+[node name="TextureRect" type="TextureRect" parent="UI/HealthBar"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -110.0
+margin_top = -6.0
+margin_right = 110.0
+margin_bottom = 6.0
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="HealthBar" type="ProgressBar" parent="UI"]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 350.0
-margin_top = -34.0
-margin_right = -350.0
-margin_bottom = -20.0
-custom_styles/fg = SubResource( 18 )
-custom_styles/bg = SubResource( 19 )
-value = 100.0
+[node name="ProgressBar" type="TextureProgress" parent="UI/HealthBar"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -102.0
+margin_top = -4.0
+margin_right = 102.0
+margin_bottom = 4.0
 rounded = true
-percent_visible = false
+texture_progress = ExtResource( 13 )
+nine_patch_stretch = true
+stretch_margin_left = 100
+stretch_margin_right = 100
+script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -255,9 +286,293 @@ __meta__ = {
 [node name="TimerHealth" type="Timer" parent="UI/HealthBar"]
 autostart = true
 
+[node name="BuahBar" type="Control" parent="UI"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -136.0
+margin_top = -88.0
+margin_right = -24.0
+margin_bottom = -24.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label_buah" type="Label" parent="UI/BuahBar"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 8.0
+margin_top = -5.0
+margin_right = 91.0
+margin_bottom = 21.0
+custom_fonts/font = SubResource( 34 )
+text = "Buah : 0"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PopupKalah" type="CenterContainer" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -600.0
+margin_bottom = -600.0
+script = ExtResource( 16 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="UI/PopupKalah"]
+margin_left = 362.0
+margin_top = 200.0
+margin_right = 662.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 300, 200 )
+texture = ExtResource( 12 )
+expand = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PopupKalah"]
+margin_left = 413.0
+margin_top = 247.0
+margin_right = 611.0
+margin_bottom = 353.0
+
+[node name="Label" type="Label" parent="UI/PopupKalah/VBoxContainer"]
+margin_right = 198.0
+margin_bottom = 18.0
+custom_colors/font_color = Color( 0.964706, 0.937255, 0.839216, 1 )
+custom_fonts/font = SubResource( 29 )
+text = "Yah, Game Over"
+
+[node name="Control" type="Control" parent="UI/PopupKalah/VBoxContainer"]
+margin_top = 22.0
+margin_right = 198.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 0, 30 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/PopupKalah/VBoxContainer"]
+margin_top = 56.0
+margin_right = 198.0
+margin_bottom = 106.0
+
+[node name="Control2" type="Control" parent="UI/PopupKalah/VBoxContainer/HBoxContainer"]
+margin_right = 27.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="btn_restart" type="TextureButton" parent="UI/PopupKalah/VBoxContainer/HBoxContainer"]
+margin_left = 31.0
+margin_right = 81.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+texture_normal = ExtResource( 8 )
+expand = true
+
+[node name="Control4" type="Control" parent="UI/PopupKalah/VBoxContainer/HBoxContainer"]
+margin_left = 85.0
+margin_right = 112.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="btn_keluar" type="TextureButton" parent="UI/PopupKalah/VBoxContainer/HBoxContainer"]
+margin_left = 116.0
+margin_right = 166.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+texture_normal = ExtResource( 17 )
+expand = true
+
+[node name="Control3" type="Control" parent="UI/PopupKalah/VBoxContainer/HBoxContainer"]
+margin_left = 170.0
+margin_right = 198.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Tween" type="Tween" parent="UI/PopupKalah"]
+
+[node name="PopupMenang" type="CenterContainer" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -600.0
+margin_bottom = -600.0
+script = ExtResource( 18 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="UI/PopupMenang"]
+margin_left = 362.0
+margin_top = 200.0
+margin_right = 662.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 300, 200 )
+texture = ExtResource( 12 )
+expand = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PopupMenang"]
+margin_left = 419.0
+margin_top = 247.0
+margin_right = 604.0
+margin_bottom = 353.0
+
+[node name="Label" type="Label" parent="UI/PopupMenang/VBoxContainer"]
+margin_right = 185.0
+margin_bottom = 18.0
+custom_colors/font_color = Color( 0.964706, 0.937255, 0.839216, 1 )
+custom_fonts/font = SubResource( 29 )
+text = "Yeay, Berhasil"
+
+[node name="Control" type="Control" parent="UI/PopupMenang/VBoxContainer"]
+margin_top = 22.0
+margin_right = 185.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 0, 30 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/PopupMenang/VBoxContainer"]
+margin_top = 56.0
+margin_right = 185.0
+margin_bottom = 106.0
+
+[node name="Control2" type="Control" parent="UI/PopupMenang/VBoxContainer/HBoxContainer"]
+margin_right = 23.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="btn_restart" type="TextureButton" parent="UI/PopupMenang/VBoxContainer/HBoxContainer"]
+margin_left = 27.0
+margin_right = 77.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+texture_normal = ExtResource( 8 )
+expand = true
+
+[node name="Control4" type="Control" parent="UI/PopupMenang/VBoxContainer/HBoxContainer"]
+margin_left = 81.0
+margin_right = 104.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="btn_next" type="TextureButton" parent="UI/PopupMenang/VBoxContainer/HBoxContainer"]
+margin_left = 108.0
+margin_right = 158.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+texture_normal = ExtResource( 19 )
+expand = true
+
+[node name="Control3" type="Control" parent="UI/PopupMenang/VBoxContainer/HBoxContainer"]
+margin_left = 162.0
+margin_right = 185.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Tween" type="Tween" parent="UI/PopupMenang"]
+
+[node name="PopupTBC" type="CenterContainer" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -600.0
+margin_bottom = -600.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="UI/PopupTBC"]
+margin_left = 262.0
+margin_top = 200.0
+margin_right = 762.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 500, 200 )
+texture = ExtResource( 12 )
+expand = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PopupTBC"]
+margin_left = 334.0
+margin_top = 236.0
+margin_right = 690.0
+margin_bottom = 363.0
+
+[node name="Label" type="Label" parent="UI/PopupTBC/VBoxContainer"]
+margin_right = 356.0
+margin_bottom = 39.0
+custom_colors/font_color = Color( 0.964706, 0.937255, 0.839216, 1 )
+custom_fonts/font = SubResource( 35 )
+text = "Level Telah Selesai
+Tunggu Update Selanjutnya"
+align = 1
+
+[node name="Control" type="Control" parent="UI/PopupTBC/VBoxContainer"]
+margin_top = 43.0
+margin_right = 356.0
+margin_bottom = 73.0
+rect_min_size = Vector2( 0, 30 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/PopupTBC/VBoxContainer"]
+margin_top = 77.0
+margin_right = 356.0
+margin_bottom = 127.0
+
+[node name="Control2" type="Control" parent="UI/PopupTBC/VBoxContainer/HBoxContainer"]
+margin_right = 80.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="btn_restart" type="TextureButton" parent="UI/PopupTBC/VBoxContainer/HBoxContainer"]
+margin_left = 84.0
+margin_right = 134.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+texture_normal = ExtResource( 8 )
+expand = true
+
+[node name="Control4" type="Control" parent="UI/PopupTBC/VBoxContainer/HBoxContainer"]
+margin_left = 138.0
+margin_right = 218.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="btn_keluar" type="TextureButton" parent="UI/PopupTBC/VBoxContainer/HBoxContainer"]
+margin_left = 222.0
+margin_right = 272.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+texture_normal = ExtResource( 17 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control3" type="Control" parent="UI/PopupTBC/VBoxContainer/HBoxContainer"]
+margin_left = 276.0
+margin_right = 356.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Tween" type="Tween" parent="UI/PopupTBC"]
+
 [node name="fade" type="ColorRect" parent="UI"]
 visible = false
-material = SubResource( 13 )
+material = SubResource( 30 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -268,24 +583,23 @@ __meta__ = {
 
 [node name="anim" type="AnimationPlayer" parent="UI"]
 root_node = NodePath("../..")
-anims/RESET = SubResource( 14 )
-anims/to_black = SubResource( 15 )
-anims/to_zero = SubResource( 16 )
+anims/RESET = SubResource( 31 )
+anims/to_black = SubResource( 32 )
+anims/to_zero = SubResource( 33 )
 
-[node name="buah" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 3, 13 )
-
-[node name="buah2" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3, 5 )
-
-[node name="buah3" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 3, 15 )
-
-[node name="buah4" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3, 13 )
-
+[connection signal="player_level_tbc" from="." to="player" method="_on_level2_player_level_tbc"]
+[connection signal="player_level_tbc" from="." to="UI/PopupTBC" method="_on_level2_player_level_tbc"]
+[connection signal="player_mati" from="." to="UI/PopupKalah" method="_on_level2_player_mati"]
+[connection signal="player_menang" from="." to="player" method="_on_level2_player_menang"]
+[connection signal="player_menang" from="." to="UI/PopupMenang" method="_on_level2_player_menang"]
 [connection signal="timeout" from="Map/Timer" to="." method="_on_Timer_timeout"]
 [connection signal="player_health" from="player" to="." method="_on_player_player_health"]
-[connection signal="pressed" from="UI/HBoxContainer/btn_home" to="." method="_on_btn_home_pressed"]
-[connection signal="pressed" from="UI/HBoxContainer/btn_retry" to="." method="_on_btn_retry_pressed"]
+[connection signal="pressed" from="UI/Button/btn_home" to="." method="_on_btn_home_pressed"]
+[connection signal="pressed" from="UI/Button/btn_retry" to="." method="_on_btn_retry_pressed"]
 [connection signal="timeout" from="UI/HealthBar/TimerHealth" to="player" method="_on_TimerHealth_timeout"]
+[connection signal="pressed" from="UI/PopupKalah/VBoxContainer/HBoxContainer/btn_restart" to="UI/PopupKalah" method="_on_btn_restart_pressed"]
+[connection signal="pressed" from="UI/PopupKalah/VBoxContainer/HBoxContainer/btn_keluar" to="UI/PopupKalah" method="_on_btn_keluar_pressed"]
+[connection signal="pressed" from="UI/PopupMenang/VBoxContainer/HBoxContainer/btn_restart" to="UI/PopupMenang" method="_on_btn_restart_pressed"]
+[connection signal="pressed" from="UI/PopupMenang/VBoxContainer/HBoxContainer/btn_next" to="." method="_on_btn_next_pressed"]
+[connection signal="pressed" from="UI/PopupTBC/VBoxContainer/HBoxContainer/btn_restart" to="UI/PopupTBC" method="_on_btn_restart_pressed"]
+[connection signal="pressed" from="UI/PopupTBC/VBoxContainer/HBoxContainer/btn_keluar" to="UI/PopupTBC" method="_on_btn_keluar_pressed"]

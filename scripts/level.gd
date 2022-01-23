@@ -11,6 +11,7 @@ onready var health_bar = $UI/HealthBar/ProgressBar
 
 signal player_menang()
 signal player_mati()
+signal player_level_tbc()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -46,13 +47,3 @@ func _on_player_player_health(value):
 	health_bar.value = value
 
 
-func _on_btn_home_pressed():
-	$UI/anim.play("to_black")
-	yield($UI/anim, "animation_finished")
-	var _err = get_tree().change_scene("res://scenes/levels/menu.tscn")
-
-
-func _on_btn_retry_pressed():
-	$UI/anim.play("to_black")
-	yield($UI/anim, "animation_finished")
-	var _err = get_tree().reload_current_scene()

@@ -7,6 +7,7 @@ var pos1 = Vector2.ZERO
 
 var is_moving = false
 var is_rotating = false
+var sudah_mati = false
 
 var is_wall1 = false
 var is_push1 = false
@@ -187,40 +188,45 @@ func movement(vec:Vector3):
 		yield($tw_m, "tween_all_completed")
 		
 		if $ray_down.is_colliding() == false:
-			var c = b + Vector3.DOWN * 2
-			$AnimationTree.set("parameters/transisi/current", 1)
-			$tw_m.interpolate_property(self, "translation", b, c, 0.15, Tween.TRANS_EXPO, Tween.EASE_OUT)
-			$tw_m.start()
-			
-			MusicController.play_suara_jatuh_air()
-			health = 0 
-			emit_signal("player_health", (float(health) / float(health_maks)) * 100)
-			yield(get_tree().create_timer(1.5), "timeout")
-			
-			MusicController.play_suara_game_over()
-			print("Game Over")
-			
-			get_parent().emit_signal("player_mati")
-			
-#			$fade/anim.play("to_black")
-#			yield($fade/anim, "animation_finished")
-#			var _err = get_tree().reload_current_scene()
+			if not sudah_mati:
+				sudah_mati = true
+				
+				var c = b + Vector3.DOWN * 2
+				$AnimationTree.set("parameters/transisi/current", 1)
+				$tw_m.interpolate_property(self, "translation", b, c, 0.15, Tween.TRANS_EXPO, Tween.EASE_OUT)
+				$tw_m.start()
+				
+				MusicController.play_suara_jatuh_air()
+				health = 0 
+				emit_signal("player_health", (float(health) / float(health_maks)) * 100)
+				yield(get_tree().create_timer(1.5), "timeout")
+				
+				MusicController.play_suara_game_over()
+				print("Game Over")
+				
+				get_parent().emit_signal("player_mati")
+				
+	#			$fade/anim.play("to_black")
+	#			yield($fade/anim, "animation_finished")
+	#			var _err = get_tree().reload_current_scene()
 		
 		is_moving = false
 
 func mati():
-	var a = translation
-	
-	$AnimationTree.set("parameters/transisi/current", 2)
-	$tw_m.interpolate_property(self, "translation", a, a, 0.15, Tween.TRANS_EXPO, Tween.EASE_OUT)
-	$tw_m.start()
-	
-	yield($tw_m, "tween_all_completed")
-	
-	MusicController.play_suara_game_over()
-	print("Game Over")
-	
-	get_parent().emit_signal("player_mati")
+	if not sudah_mati:
+		sudah_mati = true
+		var a = translation
+		
+		$AnimationTree.set("parameters/transisi/current", 2)
+		$tw_m.interpolate_property(self, "translation", a, a, 0.15, Tween.TRANS_EXPO, Tween.EASE_OUT)
+		$tw_m.start()
+		
+		yield($tw_m, "tween_all_completed")
+		
+		MusicController.play_suara_game_over()
+		print("Game Over")
+		
+		get_parent().emit_signal("player_mati")
 	
 #	$fade/anim.play("to_black")
 #	yield($fade/anim, "animation_finished")
@@ -232,4 +238,16 @@ func external_dir(vec:Vector3):
 
 
 func _on_level1_player_menang():
+	get_parent().get_node("UI/HealthBar/TimerHealth").stop()
+
+
+func _on_level1_player_level_tbc():
+	get_parent().get_node("UI/HealthBar/TimerHealth").stop()
+
+
+func _on_level2_player_menang():
+	get_parent().get_node("UI/HealthBar/TimerHealth").stop()
+
+
+func _on_level2_player_level_tbc():
 	get_parent().get_node("UI/HealthBar/TimerHealth").stop()

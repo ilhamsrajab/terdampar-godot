@@ -29,3 +29,10 @@ func _on_level1_player_mati():
 	if not sudah_muncul:
 		sudah_muncul = true
 		muncul()
+
+
+func _on_level2_player_mati():
+	if not sudah_muncul:
+		sudah_muncul = true
+		muncul()
+

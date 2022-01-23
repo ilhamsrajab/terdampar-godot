@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://mesh/mesh0.meshlib" type="MeshLibrary" id=1]
 [ext_resource path="res://scenes/apel.tscn" type="PackedScene" id=2]
@@ -8,7 +8,7 @@
 [ext_resource path="res://scripts/Levels/level1.gd" type="Script" id=6]
 [ext_resource path="res://assets/UI/btn/restart.png" type="Texture" id=7]
 [ext_resource path="res://assets/UI/btn/home.png" type="Texture" id=8]
-[ext_resource path="res://assets/UI/bubble/apel.png" type="Texture" id=9]
+[ext_resource path="res://scripts/PopupTBC.gd" type="Script" id=9]
 [ext_resource path="res://assets/UI/load_bar/bg.png" type="Texture" id=10]
 [ext_resource path="res://assets/UI/load_bar/4.png" type="Texture" id=11]
 [ext_resource path="res://scripts/ProgressBar.gd" type="Script" id=12]
@@ -29,22 +29,26 @@ size = Vector2( 200, 200 )
 
 [sub_resource type="CapsuleMesh" id=3]
 
-[sub_resource type="DynamicFontData" id=24]
+[sub_resource type="DynamicFontData" id=28]
 font_path = "res://assets/fonts/iCielSoupofJustice.ttf"
 
 [sub_resource type="DynamicFont" id=4]
 size = 24
-font_data = SubResource( 24 )
+font_data = SubResource( 28 )
 
 [sub_resource type="DynamicFont" id=23]
-size = 40
+size = 24
 font_data = ExtResource( 13 )
 
 [sub_resource type="DynamicFont" id=25]
 size = 28
 font_data = ExtResource( 13 )
 
-[sub_resource type="Shader" id=26]
+[sub_resource type="DynamicFont" id=30]
+size = 28
+font_data = ExtResource( 13 )
+
+[sub_resource type="Shader" id=29]
 code = "shader_type canvas_item;
 uniform float factor = 0.5;
 uniform float aspect_ratio = 1.7;
@@ -62,7 +66,7 @@ void fragment() {
 }"
 
 [sub_resource type="ShaderMaterial" id=18]
-shader = SubResource( 26 )
+shader = SubResource( 29 )
 shader_param/factor = 0.0
 shader_param/aspect_ratio = 1.7
 shader_param/fade_color = null
@@ -122,7 +126,7 @@ script = ExtResource( 6 )
 [node name="GridMap" type="GridMap" parent="Map" groups=["wall"]]
 mesh_library = ExtResource( 1 )
 data = {
-"cells": PoolIntArray( 1, 1, 2, 2, 1, 2, 3, 1, 2, 4, 1, 2, 1, 2, 2, 4, 2, 2, 7, 2, 2, 1, 3, 2, 3, 3, 2, 4, 3, 2, 0, 4, 1, 1, 4, 2, 2, 4, 2, 3, 4, 2, 4, 4, 2, 5, 4, 2, 6, 4, 2, 7, 4, 2, 8, 4, 1, 4, 5, 2, 7, 5, 2, 4, 6, 2, 7, 6, 2, 4, 7, 2, 5, 7, 2, 6, 7, 2, 7, 7, 2, 4, 8, 0 )
+"cells": PoolIntArray( 1, 1, 7, 2, 1, 7, 3, 1, 7, 4, 1, 10, 7, 1, 10, 1, 2, 10, 4, 2, 7, 7, 2, 7, 1, 3, 7, 3, 3, 10, 4, 3, 7, 0, 4, 9, 1, 4, 7, 2, 4, 7, 3, 4, 7, 4, 4, 7, 5, 4, 7, 6, 4, 7, 7, 4, 7, 8, 4, 9, 4, 5, 7, 7, 5, 10, 4, 6, 7, 7, 6, 7, 1, 7, 10, 4, 7, 7, 5, 7, 10, 6, 7, 7, 7, 7, 7, 4, 8, 9 )
 }
 __meta__ = {
 "_editor_clip_": 0,
@@ -194,21 +198,21 @@ stretch_mode = 4
 
 [node name="Control" type="Control" parent="UI/Button"]
 margin_left = 54.0
-margin_right = 450.0
+margin_right = 446.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 
 [node name="label_level" type="Label" parent="UI/Button"]
-margin_left = 454.0
+margin_left = 450.0
 margin_top = 17.0
-margin_right = 540.0
+margin_right = 543.0
 margin_bottom = 33.0
 custom_fonts/font = SubResource( 4 )
-text = "Level - 1"
+text = "Level - X"
 align = 1
 
 [node name="Control2" type="Control" parent="UI/Button"]
-margin_left = 544.0
+margin_left = 547.0
 margin_right = 940.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
@@ -287,28 +291,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="UI/BuahBar"]
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_left = 24.0
-margin_top = -32.0
-margin_right = 88.0
-margin_bottom = 32.0
-texture = ExtResource( 9 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="label_buah" type="Label" parent="UI/BuahBar"]
 anchor_top = 0.5
 anchor_bottom = 0.5
-margin_left = 88.0
+margin_left = 8.0
 margin_top = -5.0
-margin_right = 109.0
+margin_right = 91.0
 margin_bottom = 21.0
 custom_fonts/font = SubResource( 23 )
-text = "0"
+text = "Buah : 0"
+align = 2
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -482,6 +474,95 @@ size_flags_vertical = 3
 
 [node name="Tween" type="Tween" parent="UI/PopupMenang"]
 
+[node name="PopupTBC" type="CenterContainer" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -600.0
+margin_bottom = -600.0
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="UI/PopupTBC"]
+margin_left = 262.0
+margin_top = 200.0
+margin_right = 762.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 500, 200 )
+texture = ExtResource( 14 )
+expand = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PopupTBC"]
+margin_left = 334.0
+margin_top = 236.0
+margin_right = 690.0
+margin_bottom = 363.0
+
+[node name="Label" type="Label" parent="UI/PopupTBC/VBoxContainer"]
+margin_right = 356.0
+margin_bottom = 39.0
+custom_colors/font_color = Color( 0.964706, 0.937255, 0.839216, 1 )
+custom_fonts/font = SubResource( 30 )
+text = "Level Telah Selesai
+Tunggu Update Selanjutnya"
+align = 1
+
+[node name="Control" type="Control" parent="UI/PopupTBC/VBoxContainer"]
+margin_top = 43.0
+margin_right = 356.0
+margin_bottom = 73.0
+rect_min_size = Vector2( 0, 30 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/PopupTBC/VBoxContainer"]
+margin_top = 77.0
+margin_right = 356.0
+margin_bottom = 127.0
+
+[node name="Control2" type="Control" parent="UI/PopupTBC/VBoxContainer/HBoxContainer"]
+margin_right = 80.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="btn_restart" type="TextureButton" parent="UI/PopupTBC/VBoxContainer/HBoxContainer"]
+margin_left = 84.0
+margin_right = 134.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+texture_normal = ExtResource( 7 )
+expand = true
+
+[node name="Control4" type="Control" parent="UI/PopupTBC/VBoxContainer/HBoxContainer"]
+margin_left = 138.0
+margin_right = 218.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="btn_keluar" type="TextureButton" parent="UI/PopupTBC/VBoxContainer/HBoxContainer"]
+margin_left = 222.0
+margin_right = 272.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+texture_normal = ExtResource( 15 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control3" type="Control" parent="UI/PopupTBC/VBoxContainer/HBoxContainer"]
+margin_left = 276.0
+margin_right = 356.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Tween" type="Tween" parent="UI/PopupTBC"]
+
 [node name="fade" type="ColorRect" parent="UI"]
 visible = false
 material = SubResource( 18 )
@@ -502,6 +583,8 @@ anims/to_zero = SubResource( 21 )
 [node name="apel2" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 3, 5 )
 
+[connection signal="player_level_tbc" from="." to="player" method="_on_level1_player_level_tbc"]
+[connection signal="player_level_tbc" from="." to="UI/PopupTBC" method="_on_level1_player_level_tbc"]
 [connection signal="player_mati" from="." to="UI/PopupKalah" method="_on_level1_player_mati"]
 [connection signal="player_menang" from="." to="player" method="_on_level1_player_menang"]
 [connection signal="player_menang" from="." to="UI/PopupMenang" method="_on_level1_player_menang"]
@@ -514,3 +597,5 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 3, 5 )
 [connection signal="pressed" from="UI/PopupKalah/VBoxContainer/HBoxContainer/btn_keluar" to="UI/PopupKalah" method="_on_btn_keluar_pressed"]
 [connection signal="pressed" from="UI/PopupMenang/VBoxContainer/HBoxContainer/btn_restart" to="UI/PopupMenang" method="_on_btn_restart_pressed"]
 [connection signal="pressed" from="UI/PopupMenang/VBoxContainer/HBoxContainer/btn_next" to="." method="_on_btn_next_pressed"]
+[connection signal="pressed" from="UI/PopupTBC/VBoxContainer/HBoxContainer/btn_restart" to="UI/PopupTBC" method="_on_btn_restart_pressed"]
+[connection signal="pressed" from="UI/PopupTBC/VBoxContainer/HBoxContainer/btn_keluar" to="UI/PopupTBC" method="_on_btn_keluar_pressed"]
