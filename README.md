@@ -2,7 +2,10 @@
 
 # Game Terdampar
 ## Deskripsi
-Game bergenre puzzle. Tujuan utama dari game ini adalah bertahan hidup dan menuju level selanjutnya. Makanlah buah untuk tetap hidup. Game ini dibuat dengan menggunakan Godot Engine.
+Game bergenre puzzle. Tujuan utama dari game ini adalah bertahan hidup dan menuju level selanjutnya. Makanlah buah untuk tetap hidup. Game ini dibuat dengan menggunakan Godot Engine. <br>
+
+## Download
+Link : https://github.com/ilhamsrajab/terdampar-godot/releases
 
 ## Mata Kuliah
 Mata Kuliah : Pengembangan Aplikasi Game <br>
