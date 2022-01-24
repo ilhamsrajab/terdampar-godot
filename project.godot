@@ -22,6 +22,13 @@ config/icon="res://icon.png"
 
 MusicController="*res://scenes/MusicController.tscn"
 
+[display]
+
+window/size/width=2400
+window/size/height=1080
+window/size/test_width=1200
+window/size/test_height=540
+
 [editor_plugins]
 
 enabled=PoolStringArray( "res://addons/MagicaVoxel_Importer_with_Extensions/plugin.cfg" )
@@ -69,5 +76,7 @@ common/enable_pause_aware_picking=true
 [rendering]
 
 quality/directional_shadow/size=2048
+quality/directional_shadow/size.mobile=1024
 quality/shadow_atlas/size=2048
+quality/filters/anisotropic_filter_level=2
 environment/default_environment="res://default_env.tres"

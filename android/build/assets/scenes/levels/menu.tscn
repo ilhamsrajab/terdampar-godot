@@ -88,8 +88,8 @@ border_color = Color( 0.8, 0.8, 0.8, 0.0392157 )
 
 [sub_resource type="Shader" id=7]
 code = "shader_type canvas_item;
-uniform float factor = 0.5;
-uniform float aspect_ratio = 1.7;
+uniform float factor = 1.25;
+uniform float aspect_ratio = 2.23;
 uniform vec4 fade_color:hint_color;
 
 void fragment() {
@@ -106,7 +106,7 @@ void fragment() {
 [sub_resource type="ShaderMaterial" id=8]
 shader = SubResource( 7 )
 shader_param/factor = 0.0
-shader_param/aspect_ratio = 1.7
+shader_param/aspect_ratio = 2.23
 shader_param/fade_color = null
 
 [sub_resource type="Animation" id=9]
@@ -137,7 +137,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 3.605, 3.605 ),
 "update": 0,
-"values": [ 1.0, 0.0 ]
+"values": [ 1.25, 0.0 ]
 }
 
 [sub_resource type="Animation" id=11]
@@ -153,7 +153,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 3.6, 3.6 ),
 "update": 0,
-"values": [ 0.0, 1.0 ]
+"values": [ 0.0, 1.25 ]
 }
 
 [sub_resource type="DynamicFont" id=13]
@@ -175,7 +175,7 @@ script = ExtResource( 4 )
 [node name="GridMap" type="GridMap" parent="Map" groups=["wall"]]
 mesh_library = ExtResource( 1 )
 data = {
-"cells": PoolIntArray( 1, 1, 0, 2, 2, 7, 3, 2, 7, 4, 2, 7, 2, 3, 10, 4, 3, 7, 5, 3, 9, 2, 4, 7, 3, 4, 7, 4, 4, 7, 5, 4, 7, 6, 4, 7, 3, 5, 0, 4, 5, 7, 6, 5, 7, 4, 6, 7, 5, 6, 10, 6, 6, 7 )
+"cells": PoolIntArray( 10, 0, 10, 1, 1, 0, 5, 1, 0, 2, 2, 7, 3, 2, 7, 4, 2, 7, 2, 3, 10, 4, 3, 7, 5, 3, 9, 65530, 3, 10, 65534, 3, 9, 2, 4, 7, 3, 4, 7, 4, 4, 7, 5, 4, 7, 6, 4, 7, 3, 5, 0, 4, 5, 7, 6, 5, 7, 4, 6, 7, 5, 6, 10, 6, 6, 7, 13, 7, 9, 65531, 8, 10, 10, 10, 10, 1, 12, 10, 65534, 65533, 9, 5, 65535, 0 )
 }
 __meta__ = {
 "_editor_clip_": 0,
@@ -234,8 +234,8 @@ __meta__ = {
 
 [node name="TextureRect" type="TextureRect" parent="UI/TiltShift/MarginContainer"]
 material = SubResource( 41 )
-margin_right = 1024.0
-margin_bottom = 600.0
+margin_right = 2400.0
+margin_bottom = 1080.0
 texture = ExtResource( 14 )
 expand = true
 
@@ -383,7 +383,6 @@ margin_bottom = 600.0
 size_flags_vertical = 3
 
 [node name="fade" type="ColorRect" parent="UI"]
-visible = false
 material = SubResource( 8 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -410,8 +409,8 @@ __meta__ = {
 [node name="PopupInfo" type="CenterContainer" parent="UI/Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -600.0
-margin_bottom = -600.0
+margin_top = -1080.0
+margin_bottom = -1080.0
 script = ExtResource( 13 )
 __meta__ = {
 "_edit_group_": true,
@@ -419,19 +418,19 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="UI/Control/PopupInfo"]
-margin_left = 262.0
-margin_top = 50.0
-margin_right = 762.0
-margin_bottom = 550.0
+margin_left = 950.0
+margin_top = 290.0
+margin_right = 1450.0
+margin_bottom = 790.0
 rect_min_size = Vector2( 500, 500 )
 texture = ExtResource( 10 )
 expand = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/PopupInfo"]
-margin_left = 379.0
-margin_top = 119.0
-margin_right = 645.0
-margin_bottom = 481.0
+margin_left = 1067.0
+margin_top = 359.0
+margin_right = 1333.0
+margin_bottom = 721.0
 
 [node name="Label" type="Label" parent="UI/Control/PopupInfo/VBoxContainer"]
 margin_right = 266.0

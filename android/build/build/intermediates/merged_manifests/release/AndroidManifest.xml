@@ -3,7 +3,7 @@
     package="org.godotengine.terdampar"
     android:installLocation="auto"
     android:versionCode="1"
-    android:versionName="1.0" > <!-- glEsVersion is modified by the exporter, changing this value here has no effect. -->
+    android:versionName="1.1" > <!-- glEsVersion is modified by the exporter, changing this value here has no effect. -->
     <uses-sdk
         android:minSdkVersion="19"
         android:targetSdkVersion="28" />
