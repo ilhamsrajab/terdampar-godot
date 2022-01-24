@@ -646,6 +646,7 @@ size_flags_vertical = 3
 [node name="Tween" type="Tween" parent="UI/Popup/PopupTBC"]
 
 [node name="fade" type="ColorRect" parent="UI"]
+visible = false
 material = SubResource( 18 )
 anchor_right = 1.0
 anchor_bottom = 1.0

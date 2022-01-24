@@ -174,7 +174,7 @@ func _on_TimerHealth_timeout():
 
 
 func movement(vec:Vector3):
-	if is_moving == false:
+	if is_moving == false && not sudah_mati:
 		is_moving = true
 		$AnimationTree.set("parameters/jalan/active", true)
 		var a = translation
